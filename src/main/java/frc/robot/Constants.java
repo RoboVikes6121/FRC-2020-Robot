@@ -16,9 +16,16 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    
+
+    //So a note about how this file is laid out...
+    //Constants are supposed to be Constant. In Java, the keyword to do that is 'final'
+    //Such as:
+    public static final int LEFT_DRIVE_MOTOR_1 = 0;
+    //Also, they should be in all caps with underscores, just as a naming convention thing. 
+
+
     //drive moters
-    public static int left_drive_moter_1 = 0;
+    // public static int left_drive_moter_1 = 0;
     public static int left_drive_moter_2 = 1;
     public static int right_drive_moter_1 = 2;
     public static int right_drive_moter_2 = 3;

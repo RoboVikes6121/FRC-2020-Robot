@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+// import com.ctre.phoenix.motorcontrol.can.TalonSRX; //Today I learned that WPI_TalonSRX just extends TalonSRX and adds in the WPI functionality - Andrew 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -19,10 +19,12 @@ public class driveTrain extends SubsystemBase {
    */
 
   // Creates moter
-  WPI_TalonSRX leftMaster = new WPI_TalonSRX(Constants.left_drive_moter_1);
+  //motor?
+  WPI_TalonSRX leftMaster = new WPI_TalonSRX(Constants.LEFT_DRIVE_MOTOR_1);
   WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.left_drive_moter_2);
   WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.right_drive_moter_1);
   WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.right_drive_moter_2);
+
 
   // Creates Differential Drive
   final DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
