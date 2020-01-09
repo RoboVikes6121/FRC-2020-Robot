@@ -23,12 +23,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final driveTrain mdriveTrain = new driveTrain(); 
+  public final static driveTrain m_driveTrain = new driveTrain(); 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  private final XboxController drivController = new XboxController(Constants.drive_controller);
+  private final XboxController drivController = new XboxController(Constants.DRIVE_CONTROLER);
 
-  public double GetDriveRawAxis(final int axis) {
+  public double GetDriveRawAxis(int axis) {
     return drivController.getRawAxis(axis);
   }
 
@@ -44,6 +44,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    
   }
 
 

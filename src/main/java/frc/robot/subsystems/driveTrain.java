@@ -18,12 +18,11 @@ public class driveTrain extends SubsystemBase {
    * Creates a new ExampleSubsystem.
    */
 
-  // Creates moter
-  //motor?
+  // Creates motor
   WPI_TalonSRX leftMaster = new WPI_TalonSRX(Constants.LEFT_DRIVE_MOTOR_1);
-  WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.left_drive_moter_2);
-  WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.right_drive_moter_1);
-  WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.right_drive_moter_2);
+  WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.LEFT_DRIVE_MOTOR_1);
+  WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.RIGHT_DRIVE_MOTOR_1);
+  WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.RIGHT_DRIVE_MOTOR_1);
 
 
   // Creates Differential Drive
@@ -36,12 +35,12 @@ public class driveTrain extends SubsystemBase {
   }
 
   public void manualDrive(double move, double turn){
-    if(move > Constants.max_move_speed) move = Constants.max_move_speed;
-    if(move < Constants.min_move_speed) move = Constants.min_move_speed;
-    if(move > Constants.max_move_speed) move = Constants.max_move_speed;
-    if(move < Constants.min_move_speed) move = Constants.min_move_speed;
+    if(move > Constants.MAX_MOVE_SPEED) move = Constants.MAX_MOVE_SPEED;
+    if(move < Constants.MIN_MOVE_SPEED) move = Constants.MIN_MOVE_SPEED;
+    if(turn > Constants.MAX_MOVE_SPEED) turn = Constants.MAX_MOVE_SPEED;
+    if(turn < Constants.MIN_MOVE_SPEED) turn = Constants.MIN_MOVE_SPEED;
 
-    drive.arcadeDrive(move, turn);
+    drive.arcadeDrive( move, turn);
   }
 
   @Override
