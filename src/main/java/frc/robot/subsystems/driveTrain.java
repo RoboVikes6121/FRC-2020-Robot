@@ -12,6 +12,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
+import frc.robot.commands.driveManule;
 
 public class driveTrain extends SubsystemBase {
   /**
@@ -20,9 +22,9 @@ public class driveTrain extends SubsystemBase {
 
   // Creates motor
   WPI_TalonSRX leftMaster = new WPI_TalonSRX(Constants.LEFT_DRIVE_MOTOR_1);
-  WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.LEFT_DRIVE_MOTOR_1);
+  WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.LEFT_DRIVE_MOTOR_2);
   WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.RIGHT_DRIVE_MOTOR_1);
-  WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.RIGHT_DRIVE_MOTOR_1);
+  WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.RIGHT_DRIVE_MOTOR_2);
 
 
   // Creates Differential Drive
@@ -40,11 +42,11 @@ public class driveTrain extends SubsystemBase {
     if(turn > Constants.MAX_MOVE_SPEED) turn = Constants.MAX_MOVE_SPEED;
     if(turn < Constants.MIN_MOVE_SPEED) turn = Constants.MIN_MOVE_SPEED;
 
-    drive.arcadeDrive( move, turn);
+    drive.arcadeDrive(move, turn);
   }
 
   @Override
   public void periodic() {
-  
+    setDefaultCommand(new driveManule(RobotContainer.m_driveTrain));
   }
 }

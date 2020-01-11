@@ -38,6 +38,6 @@ public final class Constants {
     public static final int LEFT_STICK_X = 0;
 
     //moter speeds
-    public static final double MAX_MOVE_SPEED = .5;
-    public static final double MIN_MOVE_SPEED = .5;
+    public static final double MAX_MOVE_SPEED = .75;
+    public static final double MIN_MOVE_SPEED = -.75;
 }

@@ -48,8 +48,8 @@ public class driveManule extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double move = Robot.m_robotContainer.GetDriveRawAxis(Constants.LEFT_STICK_X);
-    double turn = Robot.m_robotContainer.GetDriveRawAxis(Constants.LEFT_STICK_Y);
+    double move = Robot.m_robotContainer.GetDriveRawAxis(Constants.LEFT_STICK_Y);
+    double turn = Robot.m_robotContainer.GetDriveRawAxis(Constants.LEFT_STICK_X);
     RobotContainer.m_driveTrain.manualDrive(move, turn);
   }
 
