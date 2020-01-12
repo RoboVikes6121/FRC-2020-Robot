@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
     driveTrain.RIGHTMASTER.setSensorPhase(false);
   }
 
-  public double[] GetEncoder(){
+  public static double[] GetEncoder(){
     double[] ENCODER_LIST = new double[5];
     
     //encoider leftMaster or 0

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.commands.driveManual;
+import frc.robot.Robot;
 
 public class driveTrain extends SubsystemBase {
 
@@ -27,16 +28,23 @@ public class driveTrain extends SubsystemBase {
 
   public void manualDrive(double MOVE, double TURN, boolean PRECISION_BUTTON_IS_PRESSED){
     // setting min and max speed
-    if(PRECISION_BUTTON_IS_PRESSED == true){
+    if(PRECISION_BUTTON_IS_PRESSED == true){ // setting speeds when the button is pressed
       if(MOVE > Constants.PRECISION_MAX_MOVE_SPEED) MOVE = Constants.PRECISION_MAX_MOVE_SPEED;
       if(MOVE < Constants.PRECISION_MIN_MOVE_SPEED) MOVE = Constants.PRECISION_MIN_MOVE_SPEED;
       if(TURN > Constants.PRECISION_MAX_MOVE_SPEED) TURN = Constants.PRECISION_MAX_MOVE_SPEED;
       if(TURN < Constants.PRECISION_MIN_MOVE_SPEED) TURN = Constants.PRECISION_MIN_MOVE_SPEED;
-    }else{
+    }else{ // setting speeds when the button is not pushed   
       if(MOVE > Constants.MAX_MOVE_SPEED) MOVE = Constants.MAX_MOVE_SPEED;
       if(MOVE < Constants.MIN_MOVE_SPEED) MOVE = Constants.MIN_MOVE_SPEED;
       if(TURN > Constants.MAX_MOVE_SPEED) TURN = Constants.MAX_MOVE_SPEED;
       if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
+      //this is code it implent tyhe encoders into the drive train but i  have it comentted till we test getting information from the encoders 
+      /*if(TURN == 0){ //implemting the encoders into the drive train 
+        double[] ENCODER_LIST = Robot.GetEncoder();
+        if(ENCODER_LIST[0] > ENCODER_LIST[3]) TURN = .1;
+        if(ENCODER_LIST[0] < ENCODER_LIST[3]) TURN = -.1;
+      }
+      */
     }
     drive.arcadeDrive(MOVE, TURN);
   }
