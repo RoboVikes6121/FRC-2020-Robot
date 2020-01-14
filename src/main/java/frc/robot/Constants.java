@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
+
 public final class Constants {
 
     //So a note about how this file is laid out...
@@ -13,18 +15,32 @@ public final class Constants {
     public static final int RIGHT_DRIVE_MOTOR_1 = 2;
     public static final int RIGHT_DRIVE_MOTOR_2 = 3;
 
+    //pto moters 
+    public static final int MASTER_PTO_MOTOR = 4;
+    public static final int SLAVE_PTO_MOTOR = 5;
+
+    //intack and index moters 
+    public static final int INTACK_MOTOR = 6;
+    public static final int INDEX_MOTOR = 7;
+
     //joystices
     public static final int DRIVE_CONTROLER = 0;
+    public static final int SEC_CONTROLER = 1;
 
 
     //Button / axis for jostick 1 (port 0)
     public static final int LEFT_STICK_Y = 1;
     public static final int LEFT_STICK_X = 0;
-    public static final int PRECISION_BUTTON = 5;
+    public static final int PRECISION_BUTTON = 5; // left trigger 
+    public static final int SHOTER_BUTTON = 3; // x
+    public static final int INTACK_BUTTON = 4; // y 
 
     //moter speeds
     public static final double MAX_MOVE_SPEED = 1;
     public static final double MIN_MOVE_SPEED = -1;
     public static final double PRECISION_MAX_MOVE_SPEED = .5;
     public static final double PRECISION_MIN_MOVE_SPEED = -.5;
+    public static final double SHOTER_SPEED = 1;
+    public static final double HIGH_GOAL_SPEED = 0; // dont know speed yet
+    public static final double INDEX_SPEED = .75; 
 }
