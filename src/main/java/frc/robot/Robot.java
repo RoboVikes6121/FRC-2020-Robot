@@ -38,12 +38,12 @@ public class Robot extends TimedRobot {
     //encoider leftMaster or 0
     ENCODER_LIST[0] = driveTrain.LEFTMASTER.getSelectedSensorVelocity();
     ENCODER_LIST[1] = driveTrain.LEFTMASTER.getSelectedSensorPosition();
-    ENCODER_LIST[2] = driveTrain.LEFTMASTER.getMotorOutputPercent();
+    //ENCODER_LIST[2] = driveTrain.LEFTMASTER.getMotorOutputPercent();
 
     //encoider rightMaster or 1
     ENCODER_LIST[3] = driveTrain.RIGHTMASTER.getSelectedSensorVelocity();
     ENCODER_LIST[4] = driveTrain.RIGHTMASTER.getSelectedSensorPosition();
-    ENCODER_LIST[5] = driveTrain.RIGHTMASTER.getMotorOutputPercent();
+    //ENCODER_LIST[5] = driveTrain.RIGHTMASTER.getMotorOutputPercent();
     return ENCODER_LIST;
   } 
 
@@ -55,12 +55,12 @@ public class Robot extends TimedRobot {
     //printing to SmartDashBoard
     //left motor set
     SmartDashboard.putNumber("LEFT ENCODER VOL", ENCODER_LIST[0]);
-    SmartDashboard.putNumber("LEFT ENCODER POS", ENCODER_LIST[1]);
-    SmartDashboard.putNumber("LEFT MOTOR %", ENCODER_LIST[2]);
-    //right motor set
     SmartDashboard.putNumber("RIGHT ENCODER VOL", ENCODER_LIST[3]);
+    //SmartDashboard.putNumber("LEFT MOTOR %", ENCODER_LIST[2]);
+    //right motor set
+    SmartDashboard.putNumber("LEFT ENCODER POS", ENCODER_LIST[1]);
     SmartDashboard.putNumber("RIGHT ENCODER POS", ENCODER_LIST[4]);
-    SmartDashboard.putNumber("RIGHT MOTER %", ENCODER_LIST[5]);
+    //SmartDashboard.putNumber("RIGHT MOTER %", ENCODER_LIST[5]);
 
     CommandScheduler.getInstance().run();
   }

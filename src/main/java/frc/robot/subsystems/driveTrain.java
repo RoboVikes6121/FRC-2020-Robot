@@ -5,9 +5,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.commands.driveManual;
-import frc.robot.Robot;
 
 public class driveTrain extends SubsystemBase {
 
@@ -38,13 +38,24 @@ public class driveTrain extends SubsystemBase {
       if(MOVE < Constants.MIN_MOVE_SPEED) MOVE = Constants.MIN_MOVE_SPEED;
       if(TURN > Constants.MAX_MOVE_SPEED) TURN = Constants.MAX_MOVE_SPEED;
       if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
+      
       //this is code it implent tyhe encoders into the drive train but i  have it comentted till we test getting information from the encoders 
       /*if(TURN == 0){ //implemting the encoders into the drive train 
         double[] ENCODER_LIST = Robot.GetEncoder();
-        if(ENCODER_LIST[0] > ENCODER_LIST[3]) TURN = .1;
-        if(ENCODER_LIST[0] < ENCODER_LIST[3]) TURN = -.1;
-      }
-      */
+        double dif;
+        if(ENCODER_LIST[0] > ENCODER_LIST[3]){ 
+          dif = ENCODER_LIST[0] - ENCODER_LIST[3];
+          TURN = dif;
+          if(TURN > Constants.MAX_MOVE_SPEED) TURN = Constants.MAX_MOVE_SPEED;
+          if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
+        }
+        if(ENCODER_LIST[0] < ENCODER_LIST[3]){
+          dif = ENCODER_LIST[0] - ENCODER_LIST[3];
+          TURN = dif;
+          if(TURN > Constants.MAX_MOVE_SPEED) TURN = Constants.MAX_MOVE_SPEED;
+          if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
+        }
+      } */
     }
     drive.arcadeDrive(MOVE, TURN);
   }
