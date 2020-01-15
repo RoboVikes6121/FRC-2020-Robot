@@ -31,8 +31,8 @@ public class driveTrain extends SubsystemBase {
     if(PRECISION_BUTTON_IS_PRESSED == true){ // setting speeds when the button is pressed
       if(MOVE > Constants.PRECISION_MAX_MOVE_SPEED) MOVE = Constants.PRECISION_MAX_MOVE_SPEED;
       if(MOVE < Constants.PRECISION_MIN_MOVE_SPEED) MOVE = Constants.PRECISION_MIN_MOVE_SPEED;
-      if(TURN > Constants.PRECISION_MAX_MOVE_SPEED) TURN = Constants.PRECISION_MAX_MOVE_SPEED;
-      if(TURN < Constants.PRECISION_MIN_MOVE_SPEED) TURN = Constants.PRECISION_MIN_MOVE_SPEED;
+      if(TURN > Constants.PRECISION_MAX_MOVE_SPEED) TURN = Constants.PRECISION_MAX_MOVE_SPEED+.15;
+      if(TURN < Constants.PRECISION_MIN_MOVE_SPEED) TURN = Constants.PRECISION_MIN_MOVE_SPEED-.15;
     }else{ // setting speeds when the button is not pushed   
       if(MOVE > Constants.MAX_MOVE_SPEED) MOVE = Constants.MAX_MOVE_SPEED;
       if(MOVE < Constants.MIN_MOVE_SPEED) MOVE = Constants.MIN_MOVE_SPEED;
@@ -40,7 +40,7 @@ public class driveTrain extends SubsystemBase {
       if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
       
       //this is code it implent tyhe encoders into the drive train but i  have it comentted till we test getting information from the encoders 
-      /*if(TURN == 0){ //implemting the encoders into the drive train 
+      if(TURN == 0){ //implemting the encoders into the drive train 
         double[] ENCODER_LIST = Robot.GetEncoder();
         double dif;
         if(ENCODER_LIST[0] > ENCODER_LIST[3]){ 
@@ -55,7 +55,7 @@ public class driveTrain extends SubsystemBase {
           if(TURN > Constants.MAX_MOVE_SPEED) TURN = Constants.MAX_MOVE_SPEED;
           if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
         }
-      } */
+      } 
     }
     drive.arcadeDrive(MOVE, TURN);
   }
