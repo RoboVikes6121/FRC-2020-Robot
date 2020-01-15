@@ -40,7 +40,7 @@ public final class Constants {
     public static final double MIN_MOVE_SPEED = -1;
     public static final double PRECISION_MAX_MOVE_SPEED = .5;
     public static final double PRECISION_MIN_MOVE_SPEED = -.5;
-    public static final double SHOTER_SPEED = 1;
+    public static final double SHOOTER_SPEED = 1;
     public static final double HIGH_GOAL_SPEED = 0; // dont know speed yet
-    public static final double INDEX_SPEED = .75; 
+    public static final double INDEX_SPEED = .35; 
 }

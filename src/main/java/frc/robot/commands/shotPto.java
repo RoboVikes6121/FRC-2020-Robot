@@ -36,6 +36,7 @@ public class shotPto extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     pto.INITL = 0;
+    pto.end();
   }
 
   // Returns true when the command should end.

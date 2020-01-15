@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.shotPto;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -17,7 +18,7 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   private final XboxController DRIVE_CONTRALER = new XboxController(Constants.DRIVE_CONTROLER);
-  private final XboxController SEC_CONTROLER = new XboxController(Constants.SEC_CONTROLER); 
+  //private final XboxController SEC_CONTROLER = new XboxController(Constants.SEC_CONTROLER); 
 
   public double GetDriveRawAxis(int axis) {
     return DRIVE_CONTRALER.getRawAxis(axis);
@@ -27,8 +28,8 @@ public class RobotContainer {
     return DRIVE_CONTRALER.getRawButton(pressed);
   }
 
-  public final JoystickButton DRIVER_X = new JoystickButton(SEC_CONTROLER, Constants.SHOTER_BUTTON);
-  public final JoystickButton DRIVER_y = new JoystickButton(SEC_CONTROLER, Constants.INTACK_BUTTON);
+  public JoystickButton DRIVER_X = new JoystickButton(DRIVE_CONTRALER, Constants.SHOTER_BUTTON);
+  //public final JoystickButton DRIVER_y = new JoystickButton(DRIVE_CONTRALER, Constants.INTACK_BUTTON);
 
   public RobotContainer() {
     // Configure the button bindings

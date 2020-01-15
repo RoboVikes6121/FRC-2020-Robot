@@ -18,34 +18,43 @@ import frc.robot.Robot;
 
 public class pto extends SubsystemBase {
   
-  public static WPI_TalonSRX SHOTER_MASTER = new WPI_TalonSRX(Constants.MASTER_PTO_MOTOR); 
-  WPI_TalonSRX SHOTER_SLAVE = new WPI_TalonSRX(Constants.SLAVE_PTO_MOTOR);
+  public static WPI_TalonSRX SHOOTER_MASTER = new WPI_TalonSRX(Constants.MASTER_PTO_MOTOR); 
+  WPI_TalonSRX SHOOTER_SLAVE = new WPI_TalonSRX(Constants.SLAVE_PTO_MOTOR);
   public static WPI_VictorSPX INDEX = new WPI_VictorSPX(Constants.INDEX_MOTOR);
 
   public static int INITL = 0;
 
   public pto() {
-    SHOTER_SLAVE.follow(SHOTER_MASTER);
+    SHOOTER_SLAVE.follow(SHOOTER_MASTER);
   }
 
   public void shot(){
+
+    INDEX.set(ControlMode.PercentOutput, Constants.INDEX_SPEED);
     //double[] ENCODER_LIST = Robot.GetEncoder();
     
+    /*
     if(INITL == 0){ 
-      SHOTER_MASTER.set(ControlMode.PercentOutput, -Constants.SHOTER_SPEED);
+      SHOOTER_MASTER.set(ControlMode.PercentOutput, -Constants.SHOOTER_SPEED);
       Timer.delay(.5);
       INITL++;
-    }//else if(ENCODER_LIST[1] >= Constants.HIGH_GOAL_SPEED){
-      //SHOTER_MASTER.set(ControlMode.PercentOutput, Constants.SHOTER_SPEED);
-      //INDEX.set(ControlMode.PercentOutput, Constants.INDEX_SPEED);
-    //}
-    else{
-      SHOTER_MASTER.set(ControlMode.PercentOutput, Constants.SHOTER_SPEED);
+    }else if(ENCODER_LIST[1] >= Constants.HIGH_GOAL_SPEED){
+      SHOOTER_MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
+      INDEX.set(ControlMode.PercentOutput, Constants.INDEX_SPEED);
     }
+    else{
+      SHOOTER_MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
+    }
+    */
   }
 
   public void climb(){
+    
+  }
 
+  public static void end(){
+    INDEX.set(ControlMode.PercentOutput, 0);
+    SHOOTER_MASTER.set(ControlMode.PercentOutput, 0);
   }
 
   @Override
