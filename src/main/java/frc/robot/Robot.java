@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.driveTrain;
+import edu.wpi.first.wpilibj.Encoder;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -46,6 +47,11 @@ public class Robot extends TimedRobot {
     //ENCODER_LIST[5] = driveTrain.RIGHTMASTER.getMotorOutputPercent();
     return ENCODER_LIST;
   } 
+
+  public static void resetEncoder(){
+    driveTrain.LEFTMASTER.setSelectedSensorPosition(0, 0, 10);
+    driveTrain.RIGHTMASTER.setSelectedSensorPosition(0, 0, 10);
+  }
 
 
   @Override
