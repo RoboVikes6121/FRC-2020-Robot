@@ -31,12 +31,13 @@ public class pto extends SubsystemBase {
   public void shot(){
 
     INDEX.set(ControlMode.PercentOutput, Constants.INDEX_SPEED);
+    Robot.resetEncoder();
     //double[] ENCODER_LIST = Robot.GetEncoder();
-    
     /*
     if(INITL == 0){ 
-      SHOOTER_MASTER.set(ControlMode.PercentOutput, -Constants.SHOOTER_SPEED);
-      Timer.delay(.5);
+      while(ENCODER_LIST[] >= 5){
+        INDEX.set(ControlMode.PercentOutput, -Constants.INDEX_SPEED);
+      }
       INITL++;
     }else if(ENCODER_LIST[1] >= Constants.HIGH_GOAL_SPEED){
       SHOOTER_MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
