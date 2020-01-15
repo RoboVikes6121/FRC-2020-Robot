@@ -17,9 +17,12 @@ public class Intake extends SubsystemBase {
   WPI_VictorSPX intakeMotor = new WPI_VictorSPX(Constants.INTAKE_MOTOR);
   
   public void intakeIN() {
-   intakeMotor.set(ControlMode.PercentOutput, Constants.INTAKE_MOTOR);
+   intakeMotor.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED);
   }
 
+  public void intakeOut() {
+    intakeMotor.set(ControlMode.PercentOutput, -Constants.INTAKE_SPEED);
+  }
   
 
   @Override
