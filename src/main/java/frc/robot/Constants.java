@@ -20,7 +20,7 @@ public final class Constants {
     public static final int SLAVE_PTO_MOTOR = 5;
 
     //intack and index moters 
-    public static final int INTACK_MOTOR = 6;
+    public static final int INTAKE_MOTOR = 6;
     public static final int INDEX_MOTOR = 7;
 
     //joystices
@@ -42,5 +42,6 @@ public final class Constants {
     public static final double PRECISION_MIN_MOVE_SPEED = -.5;
     public static final double SHOOTER_SPEED = 1;
     public static final double HIGH_GOAL_SPEED = 0; // dont know speed yet
-    public static final double INDEX_SPEED = .35; 
+    public static final double INDEX_SPEED = .35;
+    public static final double INTAKE_SPEED = .75; 
 }
