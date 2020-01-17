@@ -64,10 +64,29 @@ public class Robot extends TimedRobot {
     return COLOR;
   }
 
-  public static double getIR(){
-    double IR = m_colorSensor.getIR();
-    return IR;
+  public static double[] getIRProx(){
+    double[] IRProx = new double[2];
+    IRProx[0] = m_colorSensor.getIR();
+    IRProx[1] = m_colorSensor.getProximity();
+    return IRProx;
   }
+  
+  public static String getColorString(Color COLOR){
+    String COLOR_STRING; 
+    if(COLOR.red > .50 && COLOR.green < .40 && COLOR.blue < .40){
+      COLOR_STRING = "RED";
+    }else if(COLOR.green > .50 && COLOR.red < .30 && COLOR.blue < .20){
+      COLOR_STRING = "GREEN";
+    }else if(COLOR.blue > .30 && COLOR.red < .30 && COLOR.green < .50){
+      COLOR_STRING = "BLUE";
+    }else if(COLOR.green > .40 && COLOR.red > .40 && COLOR.blue < .20){
+      COLOR_STRING = "YELLOW";
+    }else{
+      COLOR_STRING = "ERROR";
+    }
+
+    return COLOR_STRING;
+  }  
 
 
   @Override
@@ -86,12 +105,16 @@ public class Robot extends TimedRobot {
 
     //getting color
     Color COLOR = getColor();
-    double IR = getIR();
+    double[] IRProx = getIRProx();
+    String STRING_COLOR = getColorString(COLOR);
     //printing colors 
     SmartDashboard.putNumber("Red", COLOR.red);
     SmartDashboard.putNumber("Green", COLOR.green);
     SmartDashboard.putNumber("Blue", COLOR.blue);
-    SmartDashboard.putNumber("IR", IR);
+    SmartDashboard.putNumber("IR", IRProx[0]); 
+    SmartDashboard.putNumber("Prox", IRProx[1]);
+
+    SmartDashboard.putString("color", STRING_COLOR);
 
     CommandScheduler.getInstance().run();
   }
