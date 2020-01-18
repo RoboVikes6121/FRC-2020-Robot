@@ -12,11 +12,22 @@ import frc.robot.subsystems.driveTrain;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static RobotContainer m_robotContainer;
   private final static I2C.Port i2cPort = I2C.Port.kOnboard;
   private final static ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+
+  private static final double kValueToInches = 0.125;
+  private static final int kUltrasonicPort = 0;
+  private final AnalogInput m_ultrasonic = new AnalogInput(kUltrasonicPort);
+
+ 
+public double getUltrasonic(){
+  return m_ultrasonic.getValue() * kValueToInches;
+}
 
   Faults faults = new Faults();
 
@@ -153,7 +164,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-  
+  SmartDashboard.putNumber("Distance", getUltrasonic());
   }
 
   @Override
