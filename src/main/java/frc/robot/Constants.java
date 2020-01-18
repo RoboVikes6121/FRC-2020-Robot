@@ -43,7 +43,7 @@ public final class Constants {
     public static final double SHOOTER_SPEED = 1;
     public static final double HIGH_GOAL_SPEED = 0; // dont know speed yet
     public static final double LOW_GOAL_SPEED = 0; // dont know speed yet
-    public static final double INDEX_SPEED = .35;
+    public static final double INDEX_SPEED = .75;
     public static final double INTAKE_SPEED = .75; 
     public static final double CLIMB_SPEED = .75;
 }
