@@ -9,16 +9,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.pto;
+import frc.robot.subsystems.Index;
 
-public class shotPto extends CommandBase {
+public class indexOut extends CommandBase {
   
-  private final pto m_pto;
+  public final Index m_Index;
 
-  public shotPto(pto pto) {
+  public indexOut(Index Index) {
+    m_Index = Index;
+    addRequirements(m_Index);
     // Use addRequirements() here to declare subsystem dependencies.
-    m_pto = pto;
-    addRequirements(m_pto);
   }
 
   // Called when the command is initially scheduled.
@@ -29,14 +29,13 @@ public class shotPto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_pto.shot();
+    RobotContainer.m_Index.indexOut();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    pto.INITL = 0;
-    pto.end();
+    RobotContainer.m_Index.indexStop();
   }
 
   // Returns true when the command should end.

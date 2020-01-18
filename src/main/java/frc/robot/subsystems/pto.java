@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -18,8 +19,8 @@ import frc.robot.Robot;
 
 public class pto extends SubsystemBase {
   
-  public static WPI_TalonSRX SHOOTER_MASTER = new WPI_TalonSRX(Constants.MASTER_PTO_MOTOR); 
-  WPI_TalonSRX SHOOTER_SLAVE = new WPI_TalonSRX(Constants.SLAVE_PTO_MOTOR);
+  public static WPI_TalonFX SHOOTER_MASTER = new WPI_TalonFX(Constants.MASTER_PTO_MOTOR); 
+  WPI_TalonFX SHOOTER_SLAVE = new WPI_TalonFX(Constants.SLAVE_PTO_MOTOR);
   public static WPI_VictorSPX INDEX = new WPI_VictorSPX(Constants.INDEX_MOTOR);
 
   public static int INITL = 0;
@@ -28,7 +29,7 @@ public class pto extends SubsystemBase {
     SHOOTER_SLAVE.follow(SHOOTER_MASTER);
   }
 
-  public void shot(){
+  public void shoot(){
 
     INDEX.set(ControlMode.PercentOutput, Constants.INDEX_SPEED);
     Robot.resetEncoder();
@@ -50,7 +51,7 @@ public class pto extends SubsystemBase {
   }
 
   public void climb(){
-    
+    SHOOTER_MASTER.set(ControlMode.PercentOutput, Constants.CLIMB_SPEED);
   }
 
   public static void end(){

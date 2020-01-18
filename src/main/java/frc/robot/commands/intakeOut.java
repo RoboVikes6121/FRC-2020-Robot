@@ -9,16 +9,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.pto;
+import frc.robot.subsystems.Intake;
 
-public class climbPto extends CommandBase {
+public class intakeOut extends CommandBase {
+  
+  private final Intake m_Intake;
 
-  private final pto m_pto;
-
-  public climbPto(pto pto) {
+  public intakeOut(Intake Intake) {
+    m_Intake = Intake;
+    addRequirements(m_Intake);
     // Use addRequirements() here to declare subsystem dependencies.
-    m_pto = pto;
-    addRequirements(m_pto);
   }
 
   // Called when the command is initially scheduled.
@@ -29,13 +29,13 @@ public class climbPto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_pto.climb(); 
+    RobotContainer.m_Intake.intakeOut();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    pto.end();
+    RobotContainer.m_Intake.intakeStop();
   }
 
   // Returns true when the command should end.

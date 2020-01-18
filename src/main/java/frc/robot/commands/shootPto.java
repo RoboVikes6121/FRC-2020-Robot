@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.pto;
 
-public class climbPto extends CommandBase {
-
+public class shootPto extends CommandBase {
+  
   private final pto m_pto;
 
-  public climbPto(pto pto) {
+  public shootPto(pto pto) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_pto = pto;
     addRequirements(m_pto);
@@ -29,12 +29,13 @@ public class climbPto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_pto.climb(); 
+    RobotContainer.m_pto.shoot();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    pto.INITL = 0;
     pto.end();
   }
 

@@ -7,14 +7,23 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Index extends SubsystemBase {
-  /**
-   * Creates a new Index.
-   */
-  public Index() {
-    
+ WPI_TalonSRX indexMotor = new WPI_TalonSRX(Constants.INDEX_MOTOR);
+
+  public void indexIn() {
+    indexMotor.set(ControlMode.PercentOutput, Constants.INDEX_SPEED);
+  }
+  public void indexOut(){
+    indexMotor.set(ControlMode.PercentOutput, -Constants.INDEX_SPEED);
+  }
+  public void indexStop(){
+    indexMotor.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

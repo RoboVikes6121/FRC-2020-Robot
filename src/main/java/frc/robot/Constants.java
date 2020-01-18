@@ -32,7 +32,7 @@ public final class Constants {
     public static final int LEFT_STICK_Y = 1;
     public static final int LEFT_STICK_X = 0;
     public static final int PRECISION_BUTTON = 5; // left trigger 
-    public static final int SHOTER_BUTTON = 3; // x
+    public static final int shootER_BUTTON = 3; // x
     public static final int INTACK_BUTTON = 4; // y 
 
     //moter speeds
@@ -42,6 +42,8 @@ public final class Constants {
     public static final double PRECISION_MIN_MOVE_SPEED = -.5;
     public static final double SHOOTER_SPEED = 1;
     public static final double HIGH_GOAL_SPEED = 0; // dont know speed yet
+    public static final double LOW_GOAL_SPEED = 0; // dont know speed yet
     public static final double INDEX_SPEED = .35;
     public static final double INTAKE_SPEED = .75; 
+    public static final double CLIMB_SPEED = .75;
 }
