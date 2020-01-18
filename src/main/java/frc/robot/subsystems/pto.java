@@ -19,14 +19,14 @@ import frc.robot.Robot;
 
 public class pto extends SubsystemBase {
   
-  public static WPI_TalonFX SHOOTER_MASTER = new WPI_TalonFX(Constants.MASTER_PTO_MOTOR); 
-  WPI_TalonFX SHOOTER_SLAVE = new WPI_TalonFX(Constants.SLAVE_PTO_MOTOR);
+  public static WPI_TalonFX MASTER = new WPI_TalonFX(Constants.MASTER_PTO_MOTOR); 
+  WPI_TalonFX SLAVE = new WPI_TalonFX(Constants.SLAVE_PTO_MOTOR);
   public static WPI_VictorSPX INDEX = new WPI_VictorSPX(Constants.INDEX_MOTOR);
 
   public static int INITL = 0;
 
   public pto() {
-    SHOOTER_SLAVE.follow(SHOOTER_MASTER);
+    SLAVE.follow(MASTER);
   }
 
   public void shoot(){
@@ -41,22 +41,23 @@ public class pto extends SubsystemBase {
       }
       INITL++;
     }else if(ENCODER_LIST[1] >= Constants.HIGH_GOAL_SPEED){
-      SHOOTER_MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
+      MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
       INDEX.set(ControlMode.PercentOutput, Constants.INDEX_SPEED);
     }
     else{
-      SHOOTER_MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
+      MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
     }
     */
   }
 
   public void climb(){
-    SHOOTER_MASTER.set(ControlMode.PercentOutput, Constants.CLIMB_SPEED);
+    MASTER.set(ControlMode.PercentOutput, Constants.CLIMB_SPEED);
   }
 
   public static void end(){
+    INITL = 0;
     INDEX.set(ControlMode.PercentOutput, 0);
-    SHOOTER_MASTER.set(ControlMode.PercentOutput, 0);
+    MASTER.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

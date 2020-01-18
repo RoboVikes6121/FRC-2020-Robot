@@ -21,9 +21,19 @@ public class driveTrain extends SubsystemBase {
   final DifferentialDrive drive = new DifferentialDrive(LEFTMASTER, RIGHTMASTER);
   
   public driveTrain() {
-      //Sets the slave to follow master
-      LEFTSLAVE.follow(LEFTMASTER);
-      RIGHTSLAVE.follow(RIGHTMASTER);
+    //Sets the slave to follow master
+    LEFTSLAVE.follow(LEFTMASTER);
+    RIGHTSLAVE.follow(RIGHTMASTER);
+
+    //set up encoders  
+    driveTrain.LEFTMASTER.configFactoryDefault();
+    driveTrain.RIGHTMASTER.configFactoryDefault();
+
+    driveTrain.LEFTMASTER.setInverted(false);
+    driveTrain.RIGHTMASTER.setInverted(false);
+
+    driveTrain.LEFTMASTER.setSensorPhase(false);
+    driveTrain.RIGHTMASTER.setSensorPhase(false);
   }
 
   public void manualDrive(double MOVE, double TURN, boolean PRECISION_BUTTON_IS_PRESSED){

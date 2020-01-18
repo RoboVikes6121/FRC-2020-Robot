@@ -1,6 +1,8 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.Faults;
+import com.revrobotics.ColorMatch;
+import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -9,14 +11,17 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.driveTrain;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static RobotContainer m_robotContainer;
   private final static I2C.Port i2cPort = I2C.Port.kOnboard;
+  
   private final static ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+  private final static ColorMatch m_colorMatcher = new ColorMatch();
+
 
   Faults faults = new Faults();
 
@@ -27,16 +32,14 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
+    //adding color match
+    m_colorMatcher.addColorMatch(Constants.RED_TARGET);
+    m_colorMatcher.addColorMatch(Constants.GREEN_TARGET);
+    m_colorMatcher.addColorMatch(Constants.BLUE_TARGET);
+    m_colorMatcher.addColorMatch(Constants.YELLOW_TARGET);
+
     // set up for encoders
-    //
-    driveTrain.LEFTMASTER.configFactoryDefault();
-    driveTrain.RIGHTMASTER.configFactoryDefault();
-
-    driveTrain.LEFTMASTER.setInverted(false);
-    driveTrain.RIGHTMASTER.setInverted(false);
-
-    driveTrain.LEFTMASTER.setSensorPhase(false);
-    driveTrain.RIGHTMASTER.setSensorPhase(false);
+    resetEncoder();
   }
 
   public static double[] GetEncoder() {
@@ -70,16 +73,34 @@ public class Robot extends TimedRobot {
     IRProx[1] = m_colorSensor.getProximity();
     return IRProx;
   }
+
+  public static char gameData(){
+    String DATA = DriverStation.getInstance().getGameSpecificMessage();
+
+    if(DATA.charAt(0) == 'R' ){
+      return 'R';
+    }else if(DATA.charAt(0) == 'G'){
+      return 'G';
+    }else if(DATA.charAt(0) == 'B'){
+      return 'B';
+    }else if(DATA.charAt(0) == 'Y'){
+      return 'Y';
+    }else{
+      return 'n';
+    }
+  }
   
   public static String getColorString(Color COLOR){
-    String COLOR_STRING; 
-    if(COLOR.red > .50 && COLOR.green < .40 && COLOR.blue < .40){
+    String COLOR_STRING;
+    ColorMatchResult MATCH = m_colorMatcher.matchClosestColor(COLOR);
+
+    if(MATCH.color == Constants.RED_TARGET){
       COLOR_STRING = "RED";
-    }else if(COLOR.green > .50 && COLOR.red < .30 && COLOR.blue < .20){
+    }else if(MATCH.color == Constants.GREEN_TARGET){
       COLOR_STRING = "GREEN";
-    }else if(COLOR.blue > .30 && COLOR.red < .30 && COLOR.green < .50){
+    }else if(MATCH.color == Constants.BLUE_TARGET){
       COLOR_STRING = "BLUE";
-    }else if(COLOR.green > .40 && COLOR.red > .40 && COLOR.blue < .20){
+    }else if(MATCH.color == Constants.YELLOW_TARGET){
       COLOR_STRING = "YELLOW";
     }else{
       COLOR_STRING = "ERROR";
