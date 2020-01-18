@@ -8,16 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.Index;
 
-public class indexOut extends CommandBase {
-  
-  public final Index m_Index;
-
-  public indexOut(Index Index) {
-    m_Index = Index;
-    addRequirements(m_Index);
+public class wofManual extends CommandBase {
+  /**
+   * Creates a new wofManual.
+   */
+  public wofManual() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,13 +25,12 @@ public class indexOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_Index.indexOut();
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Index.end();
   }
 
   // Returns true when the command should end.

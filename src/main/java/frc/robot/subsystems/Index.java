@@ -22,7 +22,7 @@ public class Index extends SubsystemBase {
   public void indexOut(){
     indexMotor.set(ControlMode.PercentOutput, -Constants.INDEX_SPEED);
   }
-  public void indexStop(){
+  public void end(){
     indexMotor.set(ControlMode.PercentOutput, 0);
   }
 

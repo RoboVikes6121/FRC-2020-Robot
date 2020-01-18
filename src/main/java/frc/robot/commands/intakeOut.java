@@ -35,7 +35,7 @@ public class intakeOut extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Intake.intakeStop();
+    RobotContainer.m_Intake.end();
   }
 
   // Returns true when the command should end.

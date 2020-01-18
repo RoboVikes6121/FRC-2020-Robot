@@ -1,14 +1,13 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.robot.commands.intakeIn;
 import frc.robot.commands.shootPto;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.driveTrain;
 import frc.robot.subsystems.pto;
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.wof;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
@@ -17,9 +16,10 @@ public class RobotContainer {
   public final static pto m_pto = new pto();
   public final static Intake m_Intake = new Intake();
   public final static Index m_Index = new Index();
+  public final static wof m_wof = new wof();
 
   private final XboxController DRIVE_CONTRALER = new XboxController(Constants.DRIVE_CONTROLER);
-  //private final XboxController SEC_CONTROLER = new XboxController(Constants.SEC_CONTROLER); 
+  private final Joystick SEC_CONTROLER = new Joystick(Constants.SEC_CONTROLER); 
 
   public double GetDriveRawAxis(int axis) {
     return DRIVE_CONTRALER.getRawAxis(axis);
@@ -30,7 +30,7 @@ public class RobotContainer {
   }
 
   public JoystickButton DRIVER_X = new JoystickButton(DRIVE_CONTRALER, Constants.shootER_BUTTON);
-  //public final JoystickButton DRIVER_y = new JoystickButton(DRIVE_CONTRALER, Constants.INTACK_BUTTON);
+  public final JoystickButton DRIVER_y = new JoystickButton(DRIVE_CONTRALER, Constants.INTACK_BUTTON);
 
   public RobotContainer() {
     // Configure the button bindings

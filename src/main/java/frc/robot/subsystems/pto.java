@@ -9,10 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -33,10 +30,10 @@ public class pto extends SubsystemBase {
 
     INDEX.set(ControlMode.PercentOutput, Constants.INDEX_SPEED);
     Robot.resetEncoder();
-    //double[] ENCODER_LIST = Robot.GetEncoder();
-    /*
+    double[] ENCODER_LIST = Robot.GetEncoder();
+
     if(INITL == 0){ 
-      while(ENCODER_LIST[] >= 5){
+      while(ENCODER_LIST[8] >= 5){
         INDEX.set(ControlMode.PercentOutput, -Constants.INDEX_SPEED);
       }
       INITL++;
@@ -47,7 +44,6 @@ public class pto extends SubsystemBase {
     else{
       MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
     }
-    */
   }
 
   public void climb(){

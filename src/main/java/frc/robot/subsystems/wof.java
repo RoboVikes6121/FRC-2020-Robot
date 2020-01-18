@@ -54,6 +54,10 @@ public class wof extends SubsystemBase {
     }
   }
 
+  public void manualSpin(){
+    WOF.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
+  }
+
   public void end() {
     WOF.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
     counter = 0;
