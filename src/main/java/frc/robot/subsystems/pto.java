@@ -32,7 +32,7 @@ public class pto extends SubsystemBase {
     Robot.resetEncoder();
     double[] ENCODER_LIST = Robot.GetEncoder();
 
-    if(INITL == 0){ 
+    /*if(INITL == 0){ 
       while(ENCODER_LIST[8] >= 5){
         INDEX.set(ControlMode.PercentOutput, -Constants.INDEX_SPEED);
       }
@@ -43,7 +43,7 @@ public class pto extends SubsystemBase {
     }
     else{
       MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
-    }
+    }*/
   }
 
   public void climb(){

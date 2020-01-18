@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 // import com.ctre.phoenix.motorcontrol.can.TalonSRX; //Today I learned that WPI_TalonSRX just extends TalonSRX and adds in the WPI functionality - Andrew 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -16,7 +18,6 @@ public class driveTrain extends SubsystemBase {
   public static WPI_TalonSRX RIGHTMASTER = new WPI_TalonSRX(Constants.RIGHT_DRIVE_MOTOR_1);
   WPI_TalonSRX RIGHTSLAVE = new WPI_TalonSRX(Constants.RIGHT_DRIVE_MOTOR_2);
 
-
   // Creates Differential Drive
   final DifferentialDrive drive = new DifferentialDrive(LEFTMASTER, RIGHTMASTER);
   
@@ -24,6 +25,12 @@ public class driveTrain extends SubsystemBase {
     //Sets the slave to follow master
     LEFTSLAVE.follow(LEFTMASTER);
     RIGHTSLAVE.follow(RIGHTMASTER);
+
+    //set motor prefrence
+    LEFTMASTER.setNeutralMode(NeutralMode.Brake);
+    LEFTSLAVE.setNeutralMode(NeutralMode.Brake);
+    RIGHTMASTER.setNeutralMode(NeutralMode.Brake);
+    RIGHTMASTER.setNeutralMode(NeutralMode.Brake);
 
     //set up encoders  
     driveTrain.LEFTMASTER.configFactoryDefault();
@@ -68,6 +75,16 @@ public class driveTrain extends SubsystemBase {
       } 
     }
     drive.arcadeDrive(MOVE, TURN);
+  }
+
+  public void autonDrive(double RIGHT_SPEED, double LEFT_SPEED){
+    LEFTMASTER.set(ControlMode.PercentOutput, -LEFT_SPEED);
+    RIGHTMASTER.set(ControlMode.PercentOutput, -RIGHT_SPEED);
+  }
+
+  public void autonEnd(){
+    LEFTMASTER.set(ControlMode.PercentOutput, 0);
+    RIGHTMASTER.set(ControlMode.PercentOutput, 0);
   }
 
   @Override
