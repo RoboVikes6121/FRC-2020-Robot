@@ -128,21 +128,21 @@ public static void snapShot(int s) {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(s);
 }
 
+public static double m_LimeLightDriveCommand = 0.0;
+public static double m_LimeLightSteerCommand = 0.0;
+public static boolean m_LimeLightHasValidtarget = false;
+
 public static void updateLimeLightTracking() {
 
     final double STEER_K = Constants.STEER_K; // how hard to turn toward the target
     final double DRIVE_K = Constants.DRIVE_K; // how hard to drive fwd toward the target
     final double DESIRED_TARGET_AREA = Constants.DESIRED_TARGET_AREA; // Area of the target when the robot reaches
-                                                                      // the wall
     final double MAX_DRIVE = Constants.MAX_DRIVE; // Simple speed limit so we don't drive too fast
+   
 
-    boolean m_LimeLightHasValidtarget = false;
-    double m_LimeLightDriveCommand = 0.0;
-    double m_LimeLightSteerCommand = 0.0;
-
-    boolean tv = targetValue();
+    // boolean tv = targetValue();
     double tx = horizontalX();
-    double ty = horizontalY();
+    // double ty = horizontalY();
     double ta = targetArea();
 
     if(!targetValue())

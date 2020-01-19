@@ -1,7 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-
 public final class Constants {
 
     //So a note about how this file is laid out...

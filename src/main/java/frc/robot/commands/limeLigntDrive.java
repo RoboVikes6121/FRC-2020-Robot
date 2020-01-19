@@ -18,10 +18,12 @@ public class limeLigntDrive extends CommandBase {
   /**
    * Creates a new limeLigntDrive.
    */
-  public limeLigntDrive(driveTrain drive, LimeLight m_LimeLight) {
+  public limeLigntDrive(driveTrain drive, LimeLight b_limeLight) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_drive = drive;
     addRequirements(m_drive);
+    m_LimeLight = b_limeLight;
+    addRequirements(m_LimeLight);
   }
 
   // Called when the command is initially scheduled.
@@ -32,7 +34,7 @@ public class limeLigntDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_driveTrain.limeLightDrive(m_LimeLightDriveCommand, m_LimeLightSteerCommand);
+    RobotContainer.m_driveTrain.limeLightDrive(LimeLight.m_LimeLightDriveCommand, LimeLight.m_LimeLightSteerCommand);
     // m_drive.limeLightDrive(m_LimeLightDriveCommand, m_LimeLightSteerCommand);
   }
 
