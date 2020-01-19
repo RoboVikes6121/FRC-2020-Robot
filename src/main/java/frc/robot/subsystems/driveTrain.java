@@ -20,7 +20,8 @@ public class driveTrain extends SubsystemBase {
   // Creates Differential Drive
   final DifferentialDrive drive = new DifferentialDrive(LEFTMASTER, RIGHTMASTER);
   
-  public driveTrain() {
+  public driveTrain() 
+  {
       //Sets the slave to follow master
       LEFTSLAVE.follow(LEFTMASTER);
       RIGHTSLAVE.follow(RIGHTMASTER);
@@ -39,7 +40,7 @@ public class driveTrain extends SubsystemBase {
       if(TURN > Constants.MAX_MOVE_SPEED) TURN = Constants.MAX_MOVE_SPEED;
       if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
       
-      //this is code it implent tyhe encoders into the drive train but i  have it comentted till we test getting information from the encoders 
+      //this is code it implent tyhe encoders into the drive train but I have it comentted till we test getting information from the encoders 
       if(TURN == 0){ //implemting the encoders into the drive train 
         double[] ENCODER_LIST = Robot.GetEncoder();
         double dif;
@@ -60,6 +61,13 @@ public class driveTrain extends SubsystemBase {
     drive.arcadeDrive(MOVE, TURN);
   }
 
+  public void limeLightDrive(double m_LimeLightDriveCommand, double  m_LimeLightSteerCommand){
+    frc.robot.subsystems.LimeLight.updateLimeLightTracking();
+    drive.arcadeDrive(m_LimeLightDriveCommand, m_LimeLightSteerCommand);
+  }
+
+  
+  
   @Override
   public void periodic() {
     setDefaultCommand(new driveManual(RobotContainer.m_driveTrain));

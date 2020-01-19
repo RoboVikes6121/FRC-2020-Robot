@@ -6,6 +6,7 @@ import frc.robot.commands.intakeIn;
 import frc.robot.commands.shootPto;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.driveTrain;
 import frc.robot.subsystems.pto;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -17,6 +18,7 @@ public class RobotContainer {
   public final static pto m_pto = new pto();
   public final static Intake m_Intake = new Intake();
   public final static Index m_Index = new Index();
+  public final static LimeLight m_LimeLight = new LimeLight();
 
   private final XboxController DRIVE_CONTRALER = new XboxController(Constants.DRIVE_CONTROLER);
   //private final XboxController SEC_CONTROLER = new XboxController(Constants.SEC_CONTROLER); 

@@ -46,4 +46,10 @@ public final class Constants {
     public static final double INDEX_SPEED = .75;
     public static final double INTAKE_SPEED = .75; 
     public static final double CLIMB_SPEED = .75;
+
+    // limeLight aim high goal
+    public static final double STEER_K = 0.03;
+    public static final double DRIVE_K = 0.26;
+    public static final double DESIRED_TARGET_AREA = 13.0;
+    public static final double MAX_DRIVE = 0.7;
 }
