@@ -160,7 +160,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-    Auton auton = new Auton(RobotContainer.m_driveTrain, 50, 50);
+    new Auton(RobotContainer.m_driveTrain, 10, 10);
   }
 
   @Override
@@ -176,7 +176,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-  
   }
 
   @Override
