@@ -15,7 +15,6 @@ public class driveTrain extends SubsystemBase {
   WPI_TalonSRX LEFTSLAVE = new WPI_TalonSRX(Constants.LEFT_DRIVE_MOTOR_2);
   public static WPI_TalonSRX RIGHTMASTER = new WPI_TalonSRX(Constants.RIGHT_DRIVE_MOTOR_1);
   WPI_TalonSRX RIGHTSLAVE = new WPI_TalonSRX(Constants.RIGHT_DRIVE_MOTOR_2);
-  //WPI_TalonSRX.enableBrakeMode(true);
 
 
   // Creates Differential Drive

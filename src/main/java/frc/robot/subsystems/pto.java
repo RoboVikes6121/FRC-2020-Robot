@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -22,6 +23,7 @@ public class pto extends SubsystemBase {
   public static WPI_TalonFX SHOOTER_MASTER = new WPI_TalonFX(Constants.MASTER_PTO_MOTOR); 
   WPI_TalonFX SHOOTER_SLAVE = new WPI_TalonFX(Constants.SLAVE_PTO_MOTOR);
   public static WPI_VictorSPX INDEX = new WPI_VictorSPX(Constants.INDEX_MOTOR);
+  Solenoid PTO_SOUL = new Solenoid(Constants.PTO_SOUL);
 
   public static int INITL = 0;
 
@@ -52,6 +54,14 @@ public class pto extends SubsystemBase {
 
   public void climb(){
     SHOOTER_MASTER.set(ControlMode.PercentOutput, Constants.CLIMB_SPEED);
+  }
+
+  public void switchPTO(){
+    if(PTO_SOUL.get() == true){
+      PTO_SOUL.set(false);
+    }else{
+      PTO_SOUL.set(true);
+    }
   }
 
   public static void end(){

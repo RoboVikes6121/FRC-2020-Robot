@@ -164,20 +164,20 @@ public double getUltrasonic(){
     }
   }
 
-  @Override
-  public void teleopPeriodic() {
-  SmartDashboard.putNumber("Distance", getUltrasonic());
-  if (getUltrasonic() >= 75){
-    driveTrain.LEFTMASTER.set(ControlMode.PercentOutput, .4);
-    driveTrain.RIGHTMASTER.set(ControlMode.PercentOutput, -.4);
-    SmartDashboard.putString("moving", "moving");
-  }
-   else{
-    driveTrain.LEFTMASTER.set(ControlMode.PercentOutput, 0);
-    driveTrain.RIGHTMASTER.set(ControlMode.PercentOutput, 0);
-    SmartDashboard.putString("moving", "stop");
-}
-  }//this ends teleop period
+ // @Override
+  //public void teleopPeriodic() {
+  //SmartDashboard.putNumber("Distance", getUltrasonic());
+  //if (getUltrasonic() >= 75){
+    //driveTrain.LEFTMASTER.set(ControlMode.PercentOutput, .9);
+    //driveTrain.RIGHTMASTER.set(ControlMode.PercentOutput, -.9);
+    //SmartDashboard.putString("moving", "moving");
+  //}
+   //else{
+    //driveTrain.LEFTMASTER.set(ControlMode.PercentOutput, 0);
+    //driveTrain.RIGHTMASTER.set(ControlMode.PercentOutput, 0);
+    //SmartDashboard.putString("moving", "stop");
+  //}
+  //}//this ends teleop period
 
   @Override
   public void testInit() {
