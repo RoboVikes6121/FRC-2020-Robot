@@ -10,6 +10,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+<<<<<<< HEAD
+=======
+
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
+>>>>>>> Brady
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -19,6 +25,7 @@ public class pto extends SubsystemBase {
   public static WPI_TalonFX MASTER = new WPI_TalonFX(Constants.MASTER_PTO_MOTOR); 
   WPI_TalonFX SLAVE = new WPI_TalonFX(Constants.SLAVE_PTO_MOTOR);
   public static WPI_VictorSPX INDEX = new WPI_VictorSPX(Constants.INDEX_MOTOR);
+  Solenoid PTO_SOUL = new Solenoid(Constants.PTO_SOUL);
 
   public static int INITL = 0;
 
@@ -48,6 +55,14 @@ public class pto extends SubsystemBase {
 
   public void climb(){
     MASTER.set(ControlMode.PercentOutput, Constants.CLIMB_SPEED);
+  }
+
+  public void switchPTO(){
+    if(PTO_SOUL.get() == true){
+      PTO_SOUL.set(false);
+    }else{
+      PTO_SOUL.set(true);
+    }
   }
 
   public static void end(){

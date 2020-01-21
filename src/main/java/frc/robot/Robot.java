@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.Faults;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
@@ -15,6 +16,8 @@ import frc.robot.subsystems.driveTrain;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static RobotContainer m_robotContainer;
@@ -24,6 +27,15 @@ public class Robot extends TimedRobot {
   private final static ColorMatch m_colorMatcher = new ColorMatch();
 
 
+  private static final double kValueToInches = 0.125;
+  private static final int kUltrasonicPort = 0;
+  private final AnalogInput m_ultrasonic = new AnalogInput(kUltrasonicPort);
+
+ 
+public double getUltrasonic(){
+  return m_ultrasonic.getValue() * kValueToInches;
+}
+
   Faults faults = new Faults();
 
   @Override
@@ -31,7 +43,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+    // m_robotContainer = new RobotContainer();
 
     //adding color match
     m_colorMatcher.addColorMatch(Constants.RED_TARGET);
@@ -164,7 +176,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
+<<<<<<< HEAD
 
+=======
+  SmartDashboard.putNumber("Distance", getUltrasonic());
+>>>>>>> Brady
   }
 
   @Override
@@ -178,9 +194,26 @@ public class Robot extends TimedRobot {
     }
   }
 
+<<<<<<< HEAD
   @Override
   public void teleopPeriodic() {
   }
+=======
+ // @Override
+  //public void teleopPeriodic() {
+  //SmartDashboard.putNumber("Distance", getUltrasonic());
+  //if (getUltrasonic() >= 75){
+    //driveTrain.LEFTMASTER.set(ControlMode.PercentOutput, .9);
+    //driveTrain.RIGHTMASTER.set(ControlMode.PercentOutput, -.9);
+    //SmartDashboard.putString("moving", "moving");
+  //}
+   //else{
+    //driveTrain.LEFTMASTER.set(ControlMode.PercentOutput, 0);
+    //driveTrain.RIGHTMASTER.set(ControlMode.PercentOutput, 0);
+    //SmartDashboard.putString("moving", "stop");
+  //}
+  //}//this ends teleop period
+>>>>>>> Brady
 
   @Override
   public void testInit() {

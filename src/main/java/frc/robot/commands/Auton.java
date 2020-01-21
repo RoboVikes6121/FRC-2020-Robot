@@ -25,8 +25,8 @@ public class Auton extends CommandBase {
     Robot.resetEncoder();
     ENCODER_LIST = Robot.GetEncoder();
 
-    TARGET_LEFT = LEFT*21;
-    TARGET_RIGHT = RIGHT*21;
+    TARGET_LEFT = LEFT*22;
+    TARGET_RIGHT = RIGHT*22;
 
     if(RIGHT == LEFT){
       RIGHT_SPEED = 1;
