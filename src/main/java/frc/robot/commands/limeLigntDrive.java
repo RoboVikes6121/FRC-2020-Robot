@@ -48,13 +48,13 @@ public class limeLigntDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   double right = m_LimeLight.getTX()*m_steeringKP; // Right Y
-   double left  = (m_targetArea-m_LimeLight.getTA())*m_driveKP; // Left X
+   double MOVE = m_LimeLight.getTX()*m_steeringKP; // Right Y
+   double TURN  = (m_targetArea-m_LimeLight.getTA())*m_driveKP; // Left X
     SmartDashboard.putNumber("target area", m_targetArea);
 
     if (m_LimeLight.isTargetValid()) {
       
-      m_DriveTrain.manualDrive(left, right, false); // Drive until the target is at desired distance
+      m_DriveTrain.manualDrive(MOVE, TURN, false); // Drive until the target is at desired distance
     } else {
       m_DriveTrain.manualDrive(0, 0, false);
     }
