@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.Faults;
 import com.revrobotics.ColorSensorV3;
 
@@ -36,7 +37,7 @@ public double getUltrasonic(){
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+    // m_robotContainer = new RobotContainer();
 
     // set up for encoders
     //
@@ -149,6 +150,7 @@ public double getUltrasonic(){
 
   @Override
   public void autonomousPeriodic() {
+  SmartDashboard.putNumber("Distance", getUltrasonic());
   }
 
   @Override
@@ -165,7 +167,17 @@ public double getUltrasonic(){
   @Override
   public void teleopPeriodic() {
   SmartDashboard.putNumber("Distance", getUltrasonic());
+  if (getUltrasonic() >= 75){
+    driveTrain.LEFTMASTER.set(ControlMode.PercentOutput, .4);
+    driveTrain.RIGHTMASTER.set(ControlMode.PercentOutput, -.4);
+    SmartDashboard.putString("moving", "moving");
   }
+   else{
+    driveTrain.LEFTMASTER.set(ControlMode.PercentOutput, 0);
+    driveTrain.RIGHTMASTER.set(ControlMode.PercentOutput, 0);
+    SmartDashboard.putString("moving", "stop");
+}
+  }//this ends teleop period
 
   @Override
   public void testInit() {
