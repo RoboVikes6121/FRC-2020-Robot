@@ -22,14 +22,10 @@ public final class Constants {
     public static final int SLAVE_PTO_MOTOR = 5;
     public static final int PTO_SOUL = 0;
 
-<<<<<<< HEAD
     //WOF
     public static final int WOF_MOTOR = 8;
 
     //intack and index moters 
-=======
-    //intake and index motors 
->>>>>>> Brady
     public static final int INTAKE_MOTOR = 6;
     public static final int INDEX_MOTOR = 7;
 
@@ -37,12 +33,7 @@ public final class Constants {
     public static final int DRIVE_CONTROLER = 0;
     public static final int SEC_CONTROLER = 1;
 
-<<<<<<< HEAD
     //Button / axis for jostick 1 (port 0)
-=======
-
-    //Button / axis for joystick 1 (port 0)
->>>>>>> Brady
     public static final int LEFT_STICK_Y = 1;
     public static final int LEFT_STICK_X = 0;
     public static final int PRECISION_BUTTON = 5; // left trigger 
@@ -70,7 +61,6 @@ public final class Constants {
     public static final double INDEX_SPEED = .70;
     public static final double INTAKE_SPEED = .75; 
     public static final double CLIMB_SPEED = .75;
-<<<<<<< HEAD
     public static final double WOF_SPEED = .25; // dont know speed yet
      
 
@@ -79,8 +69,5 @@ public final class Constants {
     public static final Color GREEN_TARGET = ColorMatch.makeColor(.197, .561, .240);
     public static final Color BLUE_TARGET = ColorMatch.makeColor(.143, .427, .429);
     public static final Color YELLOW_TARGET = ColorMatch.makeColor(.361, .524, .113);
-=======
->>>>>>> Brady
 
 }
-
