@@ -29,9 +29,11 @@ public final class Constants {
     //Button / axis for jostick 1 (port 0)
     public static final int LEFT_STICK_Y = 1;
     public static final int LEFT_STICK_X = 0;
+    public static final int LEFT_BUTTON_B = 2;
+    public static final int LEFT_BUTTON_A = 1;
+
     public static final int PRECISION_BUTTON = 5; // left trigger 
-    public static final int shootER_BUTTON = 3; // x
-    public static final int INTACK_BUTTON = 4; // y 
+   
 
     //moter speeds
     public static final double MAX_MOVE_SPEED = 1;

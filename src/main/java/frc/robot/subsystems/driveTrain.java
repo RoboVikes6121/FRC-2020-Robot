@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 // import com.ctre.phoenix.motorcontrol.can.TalonSRX; //Today I learned that WPI_TalonSRX just extends TalonSRX and adds in the WPI functionality - Andrew 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -25,6 +26,11 @@ public class driveTrain extends SubsystemBase {
       //Sets the slave to follow master
       LEFTSLAVE.follow(LEFTMASTER);
       RIGHTSLAVE.follow(RIGHTMASTER);
+
+      LEFTMASTER.setNeutralMode(NeutralMode.Brake);
+      LEFTSLAVE.setNeutralMode(NeutralMode.Brake);
+      RIGHTMASTER.setNeutralMode(NeutralMode.Brake);
+      RIGHTSLAVE.setNeutralMode(NeutralMode.Brake);
   }
 
   public void manualDrive(double MOVE, double TURN, boolean PRECISION_BUTTON_IS_PRESSED){
@@ -62,8 +68,7 @@ public class driveTrain extends SubsystemBase {
   }
 
   public void limeLightDrive(double m_LimeLightDriveCommand, double  m_LimeLightSteerCommand){
-    frc.robot.subsystems.LimeLight.updateLimeLightTracking();
-    drive.arcadeDrive(m_LimeLightDriveCommand, m_LimeLightSteerCommand);
+    
   }
 
   

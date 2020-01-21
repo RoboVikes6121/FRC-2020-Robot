@@ -1,7 +1,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.shootPto;
+import frc.robot.commands.limeLigntDrive;
+// import frc.robot.commands.shootPto;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LimeLight;
@@ -29,14 +30,17 @@ public class RobotContainer {
     return DRIVE_CONTRALER.getRawButton(pressed);
   }
 
-  public JoystickButton DRIVER_X = new JoystickButton(DRIVE_CONTRALER, Constants.shootER_BUTTON);
+  //public JoystickButton DRIVER_X = new JoystickButton(DRIVE_CONTRALER, Constants.LEFT_STICK_X);
+  public JoystickButton DRIVER_A = new JoystickButton(DRIVE_CONTRALER, Constants.LEFT_BUTTON_A);
   //public final JoystickButton DRIVER_y = new JoystickButton(DRIVE_CONTRALER, Constants.INTACK_BUTTON);
 
   public RobotContainer() {
     // Configure the button bindings
-    DRIVER_X.whileHeld(new shootPto(m_pto));
+    //DRIVER_X.whileHeld(new shootPto(m_pto));
+    DRIVER_A.whileHeld(new limeLigntDrive(m_driveTrain, m_LimeLight));
     configureButtonBindings();
   }
+  
 
   private void configureButtonBindings() {
     
