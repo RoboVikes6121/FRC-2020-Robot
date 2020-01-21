@@ -150,7 +150,11 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousInit() {
+  public void autonomousInit() {  // autou is in inches 
+    int flag = 0;
+    if(flag == 0){
+      m_autonomousCommand = new Auton(RobotContainer.m_driveTrain, 12, 12);
+    }
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -160,7 +164,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-    new Auton(RobotContainer.m_driveTrain, 10, 10);
+
   }
 
   @Override

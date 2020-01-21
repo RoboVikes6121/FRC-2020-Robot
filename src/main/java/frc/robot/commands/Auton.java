@@ -21,11 +21,13 @@ public class Auton extends CommandBase {
 
   private driveTrain m_drive;
   public Auton(driveTrain drive, int RIGHT, int LEFT) {
+    
     Robot.resetEncoder();
     ENCODER_LIST = Robot.GetEncoder();
 
-    TARGET_LEFT = LEFT;
-    TARGET_RIGHT = RIGHT;
+    TARGET_LEFT = LEFT*21;
+    TARGET_RIGHT = RIGHT*21;
+
     if(RIGHT == LEFT){
       RIGHT_SPEED = 1;
       LEFT_SPEED = 1;
@@ -49,7 +51,15 @@ public class Auton extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    ENCODER_LIST = Robot.GetEncoder();
     RobotContainer.m_driveTrain.autonDrive(RIGHT_SPEED, LEFT_SPEED);
+    if(ENCODER_LIST[1] >= TARGET_LEFT){
+      end(true);
+    }
+    if(ENCODER_LIST[4] >= TARGET_RIGHT){
+      end(true);
+    }
+
   }
 
   // Called once the command ends or is interrupted.
@@ -65,13 +75,6 @@ public class Auton extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ENCODER_LIST[1] >= TARGET_LEFT){
-      return true;
-    }
-    if(ENCODER_LIST[4] >= TARGET_RIGHT){
-      return true;
-    }
-
     return false;
   }
 }

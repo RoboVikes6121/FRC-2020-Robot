@@ -30,7 +30,7 @@ public class driveTrain extends SubsystemBase {
     LEFTMASTER.setNeutralMode(NeutralMode.Brake);
     LEFTSLAVE.setNeutralMode(NeutralMode.Brake);
     RIGHTMASTER.setNeutralMode(NeutralMode.Brake);
-    RIGHTMASTER.setNeutralMode(NeutralMode.Brake);
+    RIGHTSLAVE.setNeutralMode(NeutralMode.Brake);
 
     //set up encoders  
     driveTrain.LEFTMASTER.configFactoryDefault();
@@ -78,7 +78,7 @@ public class driveTrain extends SubsystemBase {
   }
 
   public void autonDrive(double RIGHT_SPEED, double LEFT_SPEED){
-    LEFTMASTER.set(ControlMode.PercentOutput, -LEFT_SPEED);
+    LEFTMASTER.set(ControlMode.PercentOutput, LEFT_SPEED);
     RIGHTMASTER.set(ControlMode.PercentOutput, -RIGHT_SPEED);
   }
 
