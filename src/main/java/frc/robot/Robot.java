@@ -1,6 +1,5 @@
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.Faults;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
@@ -43,7 +42,7 @@ public double getUltrasonic(){
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
-    // m_robotContainer = new RobotContainer();
+    m_robotContainer = new RobotContainer();
 
     //adding color match
     m_colorMatcher.addColorMatch(Constants.RED_TARGET);
@@ -162,11 +161,8 @@ public double getUltrasonic(){
   }
 
   @Override
-  public void autonomousInit() {  // autou is in inches 
-    int flag = 0;
-    if(flag == 0){
+  public void autonomousInit() {  // auton is in inches
       m_autonomousCommand = new Auton(RobotContainer.m_driveTrain, 12, 12);
-    }
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -176,11 +172,30 @@ public double getUltrasonic(){
 
   @Override
   public void autonomousPeriodic() {
-<<<<<<< HEAD
+    //getting encoders 
+    double[] ENCODER_LIST = GetEncoder(); 
+    //printing to SmartDashBoard
+    //left motor set
+    SmartDashboard.putNumber("LEFT ENCODER VOL", ENCODER_LIST[0]);
+    SmartDashboard.putNumber("RIGHT ENCODER VOL", ENCODER_LIST[3]);
+    //SmartDashboard.putNumber("LEFT MOTOR %", ENCODER_LIST[2]);
+    //right motor set
+    SmartDashboard.putNumber("LEFT ENCODER POS", ENCODER_LIST[1]);
+    SmartDashboard.putNumber("RIGHT ENCODER POS", ENCODER_LIST[4]);
+    //SmartDashboard.putNumber("RIGHT MOTER %", ENCODER_LIST[5]);
 
-=======
-  SmartDashboard.putNumber("Distance", getUltrasonic());
->>>>>>> Brady
+    //getting color
+    Color COLOR = getColor();
+    double[] IRProx = getIRProx();
+    String STRING_COLOR = getColorString(COLOR);
+    //printing colors 
+    SmartDashboard.putNumber("Red", COLOR.red);
+    SmartDashboard.putNumber("Green", COLOR.green);
+    SmartDashboard.putNumber("Blue", COLOR.blue);
+    SmartDashboard.putNumber("IR", IRProx[0]); 
+    SmartDashboard.putNumber("Prox", IRProx[1]);
+
+    SmartDashboard.putString("color", STRING_COLOR);
   }
 
   @Override
@@ -194,11 +209,10 @@ public double getUltrasonic(){
     }
   }
 
-<<<<<<< HEAD
   @Override
   public void teleopPeriodic() {
   }
-=======
+  
  // @Override
   //public void teleopPeriodic() {
   //SmartDashboard.putNumber("Distance", getUltrasonic());
@@ -213,7 +227,6 @@ public double getUltrasonic(){
     //SmartDashboard.putString("moving", "stop");
   //}
   //}//this ends teleop period
->>>>>>> Brady
 
   @Override
   public void testInit() {
