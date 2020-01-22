@@ -17,7 +17,7 @@ public class limeLigntDrive extends CommandBase {
   private final LimeLight m_LimeLight;
 
   // Constants: tune driving and steering control constants
-  private double m_steeringKP = 0.03;
+  private double m_steeringKP = 0.1;
   private double m_targetArea = 3;
   private double m_driveKP = 0.26;
 
@@ -30,33 +30,31 @@ public class limeLigntDrive extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_DriveTrain, m_LimeLight);
 
-    SmartDashboard.putNumber("Steering KP", .05);
+    SmartDashboard.putNumber("Steering KP", -.03);
     SmartDashboard.putNumber("min TA", 3);
-    SmartDashboard.putNumber("Driving KP", 0.26);
+    SmartDashboard.putNumber("Driving KP", .26);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
-    m_targetArea = SmartDashboard.getNumber("min TA", 0.0);
-    m_driveKP = SmartDashboard.getNumber("Driving KP", 0.0);
-
+    m_LimeLight.enable();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   double MOVE = m_LimeLight.getTX()*m_steeringKP; // Right Y
-   double TURN  = (m_targetArea-m_LimeLight.getTA())*m_driveKP; // Left X
+   double TURN = m_LimeLight.getTX()*m_steeringKP; // Right Y
+   double MOVE  = (m_targetArea-m_LimeLight.getTA())*m_driveKP; // Left X
     SmartDashboard.putNumber("target area", m_targetArea);
-
-    if (m_LimeLight.isTargetValid()) {
-      
-      m_DriveTrain.manualDrive(MOVE, TURN, false); // Drive until the target is at desired distance
+    m_targetArea = SmartDashboard.getNumber("min TA", 0.0);
+    m_driveKP = SmartDashboard.getNumber("Driving KP", 0.0);
+    m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
+    if (!m_LimeLight.isTargetValid()) {
+      m_DriveTrain.limeLightDrive(MOVE, (TURN+.2)*-1); // Drive until the target is at desired distance
     } else {
-      m_DriveTrain.manualDrive(0, 0, false);
+      m_DriveTrain.limeLightDrive(0, 0);
     }
     
   }
@@ -64,13 +62,15 @@ public class limeLigntDrive extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_DriveTrain.manualDrive(0, 0, interrupted); // set left and right values to 0
+    // m_LimeLight.disable();
+    m_DriveTrain.limeLightDrive(0, 0); // set left and right values to 0
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     // don't return true ever, command will end after button is released
+    
     return false;
   }
 }

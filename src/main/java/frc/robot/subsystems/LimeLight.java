@@ -19,13 +19,24 @@ public class LimeLight extends SubsystemBase {
   private double tv, tx, ta;
   private ArrayList<Double> m_targetList;
   private final int MAX_ENTRIES = 10;
+  private static final String LED_MODE = "ledMode";
+  private static final String CAM_MODE = "camMode";
 
   /**
    * Creates a new Vision.
    */
-  public LimeLight() {
+   public LimeLight() {
     m_limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
     m_targetList = new ArrayList<Double>(MAX_ENTRIES);
+  }
+
+  public void disable() {
+    m_limelightTable.getEntry(LED_MODE).setDouble(1.0); // force off
+        // m_limelightTable.getEntry(CAM_MODE).setDouble(1.0); // driver camera (stops vision processing)
+    }
+    public void enable() {
+      m_limelightTable.getEntry(LED_MODE).setDouble(3.0); // set to current pipeline mode
+      m_limelightTable.getEntry(CAM_MODE).setDouble(0.0); // set to vision mode
   }
 
   @Override

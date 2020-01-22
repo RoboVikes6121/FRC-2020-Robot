@@ -1,8 +1,6 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.Faults;
-import com.revrobotics.ColorMatch;
-import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -10,30 +8,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.Auton;
 import frc.robot.subsystems.driveTrain;
-import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
-
-import edu.wpi.first.wpilibj.AnalogInput;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static RobotContainer m_robotContainer;
   private final static I2C.Port i2cPort = I2C.Port.kOnboard;
-  
   private final static ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
-  private final static ColorMatch m_colorMatcher = new ColorMatch();
-
-
-  private static final double kValueToInches = 0.125;
-  private static final int kUltrasonicPort = 0;
-  private final AnalogInput m_ultrasonic = new AnalogInput(kUltrasonicPort);
-
- 
-public double getUltrasonic(){
-  return m_ultrasonic.getValue() * kValueToInches;
-}
 
   Faults faults = new Faults();
 
@@ -44,14 +27,18 @@ public double getUltrasonic(){
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    //adding color match
-    m_colorMatcher.addColorMatch(Constants.RED_TARGET);
-    m_colorMatcher.addColorMatch(Constants.GREEN_TARGET);
-    m_colorMatcher.addColorMatch(Constants.BLUE_TARGET);
-    m_colorMatcher.addColorMatch(Constants.YELLOW_TARGET);
-
     // set up for encoders
-    resetEncoder();
+    //
+    driveTrain.LEFTMASTER.configFactoryDefault();
+    driveTrain.RIGHTMASTER.configFactoryDefault();
+
+    driveTrain.LEFTMASTER.setInverted(false);
+    driveTrain.RIGHTMASTER.setInverted(false);
+
+    driveTrain.LEFTMASTER.setSensorPhase(false);
+    driveTrain.RIGHTMASTER.setSensorPhase(false);
+
+    RobotContainer.m_LimeLight.disable();
   }
 
   public static double[] GetEncoder() {
@@ -85,34 +72,16 @@ public double getUltrasonic(){
     IRProx[1] = m_colorSensor.getProximity();
     return IRProx;
   }
-
-  public static char gameData(){
-    String DATA = DriverStation.getInstance().getGameSpecificMessage();
-
-    if(DATA.charAt(0) == 'R' ){
-      return 'R';
-    }else if(DATA.charAt(0) == 'G'){
-      return 'G';
-    }else if(DATA.charAt(0) == 'B'){
-      return 'B';
-    }else if(DATA.charAt(0) == 'Y'){
-      return 'Y';
-    }else{
-      return 'n';
-    }
-  }
   
   public static String getColorString(Color COLOR){
-    String COLOR_STRING;
-    ColorMatchResult MATCH = m_colorMatcher.matchClosestColor(COLOR);
-
-    if(MATCH.color == Constants.RED_TARGET){
+    String COLOR_STRING; 
+    if(COLOR.red > .50 && COLOR.green < .40 && COLOR.blue < .40){
       COLOR_STRING = "RED";
-    }else if(MATCH.color == Constants.GREEN_TARGET){
+    }else if(COLOR.green > .50 && COLOR.red < .30 && COLOR.blue < .20){
       COLOR_STRING = "GREEN";
-    }else if(MATCH.color == Constants.BLUE_TARGET){
+    }else if(COLOR.blue > .30 && COLOR.red < .30 && COLOR.green < .50){
       COLOR_STRING = "BLUE";
-    }else if(MATCH.color == Constants.YELLOW_TARGET){
+    }else if(COLOR.green > .40 && COLOR.red > .40 && COLOR.blue < .20){
       COLOR_STRING = "YELLOW";
     }else{
       COLOR_STRING = "ERROR";
@@ -150,7 +119,6 @@ public double getUltrasonic(){
     SmartDashboard.putString("color", STRING_COLOR);
 
     CommandScheduler.getInstance().run();
-
   }
 
   @Override
@@ -162,8 +130,7 @@ public double getUltrasonic(){
   }
 
   @Override
-  public void autonomousInit() {  // auton is in inches
-      m_autonomousCommand = new Auton(RobotContainer.m_driveTrain, 12, 12);
+  public void autonomousInit() {
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
@@ -173,30 +140,6 @@ public double getUltrasonic(){
 
   @Override
   public void autonomousPeriodic() {
-    //getting encoders 
-    double[] ENCODER_LIST = GetEncoder(); 
-    //printing to SmartDashBoard
-    //left motor set
-    SmartDashboard.putNumber("LEFT ENCODER VOL", ENCODER_LIST[0]);
-    SmartDashboard.putNumber("RIGHT ENCODER VOL", ENCODER_LIST[3]);
-    //SmartDashboard.putNumber("LEFT MOTOR %", ENCODER_LIST[2]);
-    //right motor set
-    SmartDashboard.putNumber("LEFT ENCODER POS", ENCODER_LIST[1]);
-    SmartDashboard.putNumber("RIGHT ENCODER POS", ENCODER_LIST[4]);
-    //SmartDashboard.putNumber("RIGHT MOTER %", ENCODER_LIST[5]);
-
-    //getting color
-    Color COLOR = getColor();
-    double[] IRProx = getIRProx();
-    String STRING_COLOR = getColorString(COLOR);
-    //printing colors 
-    SmartDashboard.putNumber("Red", COLOR.red);
-    SmartDashboard.putNumber("Green", COLOR.green);
-    SmartDashboard.putNumber("Blue", COLOR.blue);
-    SmartDashboard.putNumber("IR", IRProx[0]); 
-    SmartDashboard.putNumber("Prox", IRProx[1]);
-
-    SmartDashboard.putString("color", STRING_COLOR);
   }
 
   @Override
@@ -212,22 +155,8 @@ public double getUltrasonic(){
 
   @Override
   public void teleopPeriodic() {
-  }
   
- // @Override
-  //public void teleopPeriodic() {
-  //SmartDashboard.putNumber("Distance", getUltrasonic());
-  //if (getUltrasonic() >= 75){
-    //driveTrain.LEFTMASTER.set(ControlMode.PercentOutput, .9);
-    //driveTrain.RIGHTMASTER.set(ControlMode.PercentOutput, -.9);
-    //SmartDashboard.putString("moving", "moving");
-  //}
-   //else{
-    //driveTrain.LEFTMASTER.set(ControlMode.PercentOutput, 0);
-    //driveTrain.RIGHTMASTER.set(ControlMode.PercentOutput, 0);
-    //SmartDashboard.putString("moving", "stop");
-  //}
-  //}//this ends teleop period
+  }
 
   @Override
   public void testInit() {
