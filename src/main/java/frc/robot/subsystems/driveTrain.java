@@ -1,6 +1,9 @@
 package frc.robot.subsystems;
 
+<<<<<<< Updated upstream
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+=======
+>>>>>>> Stashed changes
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 // import com.ctre.phoenix.motorcontrol.can.TalonSRX; //Today I learned that WPI_TalonSRX just extends TalonSRX and adds in the WPI functionality - Andrew 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -21,6 +24,7 @@ public class driveTrain extends SubsystemBase {
   // Creates Differential Drive
   final DifferentialDrive drive = new DifferentialDrive(LEFTMASTER, RIGHTMASTER);
   
+<<<<<<< Updated upstream
   public driveTrain() 
   {
       //Sets the slave to follow master
@@ -31,6 +35,12 @@ public class driveTrain extends SubsystemBase {
       LEFTSLAVE.setNeutralMode(NeutralMode.Brake);
       RIGHTMASTER.setNeutralMode(NeutralMode.Brake);
       RIGHTSLAVE.setNeutralMode(NeutralMode.Brake);
+=======
+  public driveTrain() {
+      //Sets the slave to follow master
+      LEFTSLAVE.follow(LEFTMASTER);
+      RIGHTSLAVE.follow(RIGHTMASTER);
+>>>>>>> Stashed changes
   }
 
   public void manualDrive(double MOVE, double TURN, boolean PRECISION_BUTTON_IS_PRESSED){
@@ -46,7 +56,7 @@ public class driveTrain extends SubsystemBase {
       if(TURN > Constants.MAX_MOVE_SPEED) TURN = Constants.MAX_MOVE_SPEED;
       if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
       
-      //this is code it implent tyhe encoders into the drive train but I have it comentted till we test getting information from the encoders 
+      //this is code it implent tyhe encoders into the drive train but i  have it comentted till we test getting information from the encoders 
       if(TURN == 0){ //implemting the encoders into the drive train 
         double[] ENCODER_LIST = Robot.GetEncoder();
         double dif;
@@ -67,12 +77,24 @@ public class driveTrain extends SubsystemBase {
     drive.arcadeDrive(MOVE, TURN);
   }
 
+<<<<<<< Updated upstream
   public void limeLightDrive(double m_LimeLightDriveCommand, double  m_LimeLightSteerCommand){
     
+=======
+<<<<<<< Updated upstream
+=======
+  public void limeLightDrive(double MOVE, double TURN){
+      if(MOVE > Constants.LIMELIGHT_SPEED_MAX) MOVE = Constants.LIMELIGHT_SPEED_MAX;
+      if(MOVE < Constants.LIMELIGHT_SPEED_MIN) MOVE = Constants.LIMELIGHT_SPEED_MIN;
+      if(TURN > Constants.LIMELIGHT_SPEED_MAX) TURN = Constants.LIMELIGHT_SPEED_MAX;
+      if(TURN < Constants.LIMELIGHT_SPEED_MIN) TURN = Constants.LIMELIGHT_SPEED_MIN;
+    drive.arcadeDrive(MOVE, TURN);
+>>>>>>> Stashed changes
   }
 
   
   
+>>>>>>> Stashed changes
   @Override
   public void periodic() {
     setDefaultCommand(new driveManual(RobotContainer.m_driveTrain));
