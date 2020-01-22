@@ -32,9 +32,14 @@ public class RobotContainer {
     return DRIVE_CONTRALER.getRawButton(pressed);
   }
 
+  //not used
   public final JoystickButton DRIVER_X = new JoystickButton(DRIVE_CONTRALER, Constants.BUTTON_X);
-  public final JoystickButton DRIVER_y = new JoystickButton(DRIVE_CONTRALER, Constants.BUTTON_B);
-  public final JoystickButton DRIVER_A = new JoystickButton(DRIVE_CONTRALER, Constants.BUTTON_A);
+  public final JoystickButton DRIVER_B = new JoystickButton(DRIVE_CONTRALER, Constants.BUTTON_B);
+  public final JoystickButton DRIVER_Y = new JoystickButton(DRIVE_CONTRALER, Constants.BUTTON_Y);
+
+  public 
+  //used 
+  public final JoystickButton DRIVER_A = new JoystickButton(DRIVE_CONTRALER, Constants.BUTTON_LIME_AUTON);
 
   public RobotContainer() {
     // Configure the button bindings

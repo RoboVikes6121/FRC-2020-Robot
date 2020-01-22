@@ -37,21 +37,22 @@ public final class Constants {
     public static final int LEFT_STICK_Y = 1;
     public static final int LEFT_STICK_X = 0;
     public static final int BUTTON_B = 2;
-    public static final int BUTTON_A = 1;
+    public static final int BUTTON_LIME_AUTON = 1; // a button
     public static final int BUTTON_X = 3;
+    public static final int BUTTON_Y = 0;
 
     public static final int PRECISION_BUTTON = 5; // left trigger 
-   
+    
 
     //Secondary controller (Thrustmaster)
-    public static final int SHOOTER_IN = 1;
-    public static final int SHOOTER_OUT = 2;
-    public static final int INTAKE_IN = 3;
-    public static final int INTAKE_OUT = 4;
-    public static final int CLIMB_PULL = 5;
-    public static final int CLIMB_PUSH = 6;
-    public static final int SHOOTER_LEVEL_ONE = 7;
-    public static final int SHOOTER_LEVEL_TWO = 8;
+    public static final int BUTTON_SHOOTER_IN = 1;
+    public static final int BUTTON_SHOOTER_OUT = 2;
+    public static final int BUTTON_INTAKE_IN = 3;
+    public static final int BUTTON_INTAKE_OUT = 4;
+    public static final int BUTTON_CLIMB_PULL = 5;
+    public static final int BUTTON_CLIMB_PUSH = 6;
+    public static final int BUTTON_SHOOTER_LEVEL_ONE = 7;
+    public static final int BUTTON_SHOOTER_LEVEL_TWO = 8;
 
     //motor speeds
     public static final double MAX_MOVE_SPEED = 1;
