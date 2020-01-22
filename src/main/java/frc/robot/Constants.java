@@ -5,10 +5,6 @@ import com.revrobotics.ColorMatch;
 import edu.wpi.first.wpilibj.util.Color;
 
 public final class Constants {
-
-    //So a note about how this file is laid out...
-    //Constants are supposed to be Constant. In Java, the keyword to do that is 'final'
-    
     //Also, they should be in all caps with underscores, just as a naming convention thing. 
 
     //drive motors
@@ -20,14 +16,21 @@ public final class Constants {
     //pto motors 
     public static final int MASTER_PTO_MOTOR = 4;
     public static final int SLAVE_PTO_MOTOR = 5;
+
     public static final int PTO_SOUL = 0;
 
     //WOF
     public static final int WOF_MOTOR = 8;
 
+    public static final int WOF_OUT_SOUL = 1;
+    public static final int WOF_IN_SOUL = 2;
+
     //intack and index moters 
     public static final int INTAKE_MOTOR = 6;
     public static final int INDEX_MOTOR = 7;
+
+    public static final int INTAKE_OUT_SOUL = 3;
+    public static final int INTAKE_IN_SOUL = 4;
 
     //joysticks
     public static final int DRIVE_CONTROLER = 0;
@@ -37,7 +40,7 @@ public final class Constants {
     public static final int LEFT_STICK_Y = 1;
     public static final int LEFT_STICK_X = 0;
     public static final int BUTTON_B = 2;
-    public static final int BUTTON_LIME_AUTON = 1; // a button
+    public static final int BUTTON_LIME_AUTON = 1; // A button
     public static final int BUTTON_X = 3;
     public static final int BUTTON_Y = 0;
 
@@ -66,7 +69,8 @@ public final class Constants {
     public static final double INTAKE_SPEED = .75; 
     public static final double CLIMB_SPEED = .75;
     public static final double WOF_SPEED = .25; // dont know speed yet
-     
+    public static final double LIMELIGHT_SPEED_MAX = .75;
+    public static final double LIMELIGHT_SPEED_MIN = -.75; 
 
     //colors (r, g, b)
     public static final Color RED_TARGET = ColorMatch.makeColor(.561, .232, .114);
