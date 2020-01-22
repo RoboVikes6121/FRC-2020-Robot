@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.driveTrain;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
 
@@ -88,7 +89,23 @@ public class Robot extends TimedRobot {
     }
 
     return COLOR_STRING;
-  }  
+  } 
+
+  public static char gameData(){
+    String DATA = DriverStation.getInstance().getGameSpecificMessage();
+
+    if(DATA.charAt(0) == 'R' ){
+      return 'R';
+    }else if(DATA.charAt(0) == 'G'){
+      return 'G';
+    }else if(DATA.charAt(0) == 'B'){
+      return 'B';
+    }else if(DATA.charAt(0) == 'Y'){
+      return 'Y';
+    }else{
+      return 'n';
+    }
+  }
 
 
   @Override

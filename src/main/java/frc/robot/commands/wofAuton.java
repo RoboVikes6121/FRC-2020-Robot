@@ -13,12 +13,12 @@ import frc.robot.subsystems.wof;
 
 public class wofAuton extends CommandBase {
 
-  private wof m_wof;
+  private wof m_WOF;
 
   public wofAuton(wof wof) {
 
-    m_wof = wof;
-    addRequirements(m_wof);
+    m_WOF = wof;
+    addRequirements(m_WOF);
     // Use addRequirements() here to declare subsystem dependencies.
 
   }

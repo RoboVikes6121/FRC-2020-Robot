@@ -1,14 +1,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.robot.commands.intakeIn;
 import frc.robot.commands.shootPto;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.driveTrain;
 import frc.robot.subsystems.pto;
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.wof;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
@@ -17,9 +16,11 @@ public class RobotContainer {
   public final static pto m_pto = new pto();
   public final static Intake m_Intake = new Intake();
   public final static Index m_Index = new Index();
+  public final static LimeLight m_LimeLight = new LimeLight();
+  public static wof m_wof = new wof();
 
   private final XboxController DRIVE_CONTRALER = new XboxController(Constants.DRIVE_CONTROLER);
-  //private final XboxController SEC_CONTROLER = new XboxController(Constants.SEC_CONTROLER); 
+  private final XboxController SEC_CONTROLER = new XboxController(Constants.SEC_CONTROLER); 
 
   public double GetDriveRawAxis(int axis) {
     return DRIVE_CONTRALER.getRawAxis(axis);
@@ -29,10 +30,6 @@ public class RobotContainer {
     return DRIVE_CONTRALER.getRawButton(pressed);
   }
 
-<<<<<<< HEAD
-  public JoystickButton DRIVER_X = new JoystickButton(DRIVE_CONTRALER, Constants.shootER_BUTTON);
-  //public final JoystickButton DRIVER_y = new JoystickButton(DRIVE_CONTRALER, Constants.INTACK_BUTTON);
-=======
   //not used
   public final JoystickButton DRIVER_X = new JoystickButton(DRIVE_CONTRALER, Constants.BUTTON_X);
   public final JoystickButton DRIVER_B = new JoystickButton(DRIVE_CONTRALER, Constants.BUTTON_B);
@@ -48,7 +45,6 @@ public class RobotContainer {
 
   //used 
   public final JoystickButton DRIVER_A = new JoystickButton(DRIVE_CONTRALER, Constants.BUTTON_LIME_AUTON);
->>>>>>> f0f7d66a32bfb41b6babff4ad86dbcbc28ed1884
 
   public RobotContainer() {
     // Configure the button bindings
