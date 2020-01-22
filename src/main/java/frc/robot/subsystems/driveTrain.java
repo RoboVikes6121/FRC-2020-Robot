@@ -56,7 +56,7 @@ public class driveTrain extends SubsystemBase {
       if(TURN > Constants.MAX_MOVE_SPEED) TURN = Constants.MAX_MOVE_SPEED;
       if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
       
-      //this is code it implent tyhe encoders into the drive train but I have it comentted till we test getting information from the encoders 
+      //this is code it implent tyhe encoders into the drive train but i  have it comentted till we test getting information from the encoders 
       if(TURN == 0){ //implemting the encoders into the drive train 
         double[] ENCODER_LIST = Robot.GetEncoder();
         double dif;
@@ -86,13 +86,15 @@ public class driveTrain extends SubsystemBase {
     LEFTMASTER.set(ControlMode.PercentOutput, 0);
     RIGHTMASTER.set(ControlMode.PercentOutput, 0);
   }
-
-  public void limeLightDrive(double m_LimeLightDriveCommand, double  m_LimeLightSteerCommand){
-    
+  
+  public void limeLightDrive(double MOVE, double TURN){
+      if(MOVE > Constants.LIMELIGHT_SPEED_MAX) MOVE = Constants.LIMELIGHT_SPEED_MAX;
+      if(MOVE < Constants.LIMELIGHT_SPEED_MIN) MOVE = Constants.LIMELIGHT_SPEED_MIN;
+      if(TURN > Constants.LIMELIGHT_SPEED_MAX) TURN = Constants.LIMELIGHT_SPEED_MAX;
+      if(TURN < Constants.LIMELIGHT_SPEED_MIN) TURN = Constants.LIMELIGHT_SPEED_MIN;
+    drive.arcadeDrive(MOVE, TURN);
   }
 
-  
-  
   @Override
   public void periodic() {
     setDefaultCommand(new driveManual(RobotContainer.m_driveTrain));
