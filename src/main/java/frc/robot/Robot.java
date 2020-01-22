@@ -150,6 +150,7 @@ public double getUltrasonic(){
     SmartDashboard.putString("color", STRING_COLOR);
 
     CommandScheduler.getInstance().run();
+
   }
 
   @Override

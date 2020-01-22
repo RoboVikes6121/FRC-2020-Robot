@@ -36,9 +36,12 @@ public final class Constants {
     //Button / axis for jostick 1 (port 0)
     public static final int LEFT_STICK_Y = 1;
     public static final int LEFT_STICK_X = 0;
+    public static final int BUTTON_B = 2;
+    public static final int BUTTON_A = 1;
+    public static final int BUTTON_X = 3;
+
     public static final int PRECISION_BUTTON = 5; // left trigger 
-    public static final int shootER_BUTTON = 3; // x
-    public static final int INTACK_BUTTON = 4; // y 
+   
 
     //Secondary controller (Thrustmaster)
     public static final int SHOOTER_IN = 1;
@@ -70,4 +73,9 @@ public final class Constants {
     public static final Color BLUE_TARGET = ColorMatch.makeColor(.143, .427, .429);
     public static final Color YELLOW_TARGET = ColorMatch.makeColor(.361, .524, .113);
 
+    // limeLight aim high goal
+    public static final double STEER_K = 0.03;
+    public static final double DRIVE_K = 0.26;
+    public static final double DESIRED_TARGET_AREA = 13.0;
+    public static final double MAX_DRIVE = 0.7;
 }
