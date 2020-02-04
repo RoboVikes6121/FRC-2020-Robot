@@ -39,6 +39,8 @@ public class Auton extends CommandBase {
       LEFT_SPEED = RIGHT/LEFT;
     }
 
+    System.out.println("SETUP");
+
     m_drive = drive;
     addRequirements(m_drive);
   }

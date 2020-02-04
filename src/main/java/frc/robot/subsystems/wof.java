@@ -9,19 +9,20 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class wof extends SubsystemBase {
-  public static VictorSPX WOF = new VictorSPX(Constants.WOF_MOTOR);
+  public static VictorSPX MASTER = new VictorSPX(Constants.WOF_MOTOR);
+  DoubleSolenoid UPDOWN = new DoubleSolenoid(Constants.WOF_IN_SOUL, Constants.WOF_OUT_SOUL);
 
   public int counter = 0;
   public int flag = 0;
 
-  public wof() {
-     
-  }
+  boolean WOFSTATE = false; 
 
   public void spin(){
     char INPUT = Robot.gameData();
@@ -31,7 +32,7 @@ public class wof extends SubsystemBase {
     flag = 0;
 
     if(INPUT == 'n'){
-      WOF.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
+      MASTER.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
 
       if(flag == 0){
         if (Robot.getColorString(Robot.getColor()) != COLOR_ONE) flag = 1;
@@ -47,19 +48,27 @@ public class wof extends SubsystemBase {
       }
 
     }else{
-      WOF.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
+      MASTER.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
       if(COLOR == INPUT){
-        WOF.set(ControlMode.PercentOutput, 0);
+        MASTER.set(ControlMode.PercentOutput, 0);
       }
     }
   }
 
   public void manualSpin(){
-    WOF.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
+    MASTER.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
+  }
+
+  public void upDown(){
+    if(WOFSTATE == true){
+      UPDOWN.set(DoubleSolenoid.Value.kForward);
+    }else{
+      UPDOWN.set(DoubleSolenoid.Value.kReverse);
+    }
   }
 
   public void end() {
-    WOF.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
+    MASTER.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
     counter = 0;
     flag = 0;
   }

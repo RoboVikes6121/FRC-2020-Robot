@@ -5,32 +5,51 @@ import com.revrobotics.ColorMatch;
 import edu.wpi.first.wpilibj.util.Color;
 
 public final class Constants {
-    //Also, they should be in all caps with underscores, just as a naming convention thing. 
 
-    //drive motors
+    //drive                                                      SUB - DONE   COMMAND - DONE   AUTO - DONE
     public static final int LEFT_DRIVE_MOTOR_1 = 0;
     public static final int LEFT_DRIVE_MOTOR_2 = 1;
     public static final int RIGHT_DRIVE_MOTOR_1 = 2;
     public static final int RIGHT_DRIVE_MOTOR_2 = 3;
 
-    //pto motors 
+    public static final double MAX_MOVE_SPEED = 1;
+    public static final double MIN_MOVE_SPEED = -1;
+    public static final double PRECISION_MAX_MOVE_SPEED = .5;
+    public static final double PRECISION_MIN_MOVE_SPEED = -.5;
+
+    //pto                                                         SUB - DONE
     public static final int MASTER_PTO_MOTOR = 4;
     public static final int SLAVE_PTO_MOTOR = 5;
 
     public static final int PTO_SOUL = 0;
 
-    //WOF
-    public static final int WOF_MOTOR = 8;
+    public static final double CLIMB_SPEED = .25; // dont know speed yet
+    public static final double ELIVATOR_SPEED = .25; // dont know speed yet
+    public static final double ELIVATOR_POS = 1000; // dont know speed yet
+    public static final double CLIMB_POS = 1000; // dont know speed yet
+
+    //WOF                                                         SUB - DONE
+    public static final int WOF_MOTOR = 7;
 
     public static final int WOF_OUT_SOUL = 1;
     public static final int WOF_IN_SOUL = 2;
 
-    //intack and index moters 
+    public static final double WOF_SPEED = .25; // dont know speed yet
+
+    //intack                                                      SUB - DONE
     public static final int INTAKE_MOTOR = 6;
-    public static final int INDEX_MOTOR = 7;
 
     public static final int INTAKE_OUT_SOUL = 3;
     public static final int INTAKE_IN_SOUL = 4;
+
+    public static final double INDEX_SPEED = .70; // dont know speed yet
+    public static final double INTAKE_SPEED = .75; // dont know speed yet
+
+    //shooter                                             SUB - DONE
+    public static final int SHOOTER_MOTOR = 8;
+
+    public static final double SHOOTER_SPEED = 1;
+    public static final double SHOOTER_SPEED_VOL = 10000; // dont know speed yet
 
     //joysticks
     public static final int DRIVE_CONTROLER = 0;
@@ -48,27 +67,14 @@ public final class Constants {
     
 
     //Secondary controller (Thrustmaster)
-    public static final int BUTTON_SHOOTER_IN = 1;
-    public static final int BUTTON_SHOOTER_OUT = 2;
-    public static final int BUTTON_INTAKE_IN = 3;
-    public static final int BUTTON_INTAKE_OUT = 4;
-    public static final int BUTTON_CLIMB_PULL = 5;
-    public static final int BUTTON_CLIMB_PUSH = 6;
-    public static final int BUTTON_SHOOTER_LEVEL_ONE = 7;
-    public static final int BUTTON_SHOOTER_LEVEL_TWO = 8;
+    public static final int BUTTON_SHOOTER = 1;
+    public static final int BUTTON_INTAKE_IN = 2;
+    public static final int BUTTON_INTAKE_OUT = 3;
+    public static final int BUTTON_CLIMB = 4;
+    public static final int BUTTON_ELIVATOR_UP = 5;
+    public static final int BUTTON_ELIVATOR_DOWN = 6;
 
-    //motor speeds
-    public static final double MAX_MOVE_SPEED = 1;
-    public static final double MIN_MOVE_SPEED = -1;
-    public static final double PRECISION_MAX_MOVE_SPEED = .5;
-    public static final double PRECISION_MIN_MOVE_SPEED = -.5;
-    public static final double SHOOTER_SPEED = 1;
-    public static final double HIGH_GOAL_SPEED = 0; // dont know speed yet
-    public static final double LOW_GOAL_SPEED = 0; // dont know speed yet
-    public static final double INDEX_SPEED = .70;
-    public static final double INTAKE_SPEED = .75; 
-    public static final double CLIMB_SPEED = .75;
-    public static final double WOF_SPEED = .25; // dont know speed yet
+    //limeLight
     public static final double LIMELIGHT_SPEED_MAX = .75;
     public static final double LIMELIGHT_SPEED_MIN = -.75; 
 

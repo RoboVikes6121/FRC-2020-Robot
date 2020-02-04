@@ -8,26 +8,33 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Intake extends SubsystemBase {
-  WPI_VictorSPX intakeMotor = new WPI_VictorSPX(Constants.INTAKE_MOTOR);
-  
-  public void intakeIN() {
-   intakeMotor.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED);
+public class Intack extends SubsystemBase {
+  VictorSPX MASTER = new VictorSPX(Constants.INTAKE_MOTOR);
+  DoubleSolenoid MAIN = new DoubleSolenoid(Constants.INTAKE_OUT_SOUL, Constants.INTAKE_IN_SOUL);
+
+  boolean IntackState = true;
+
+  public void intack(){
+    MASTER.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED);
   }
 
-  public void intakeOut() {
-    intakeMotor.set(ControlMode.PercentOutput, -Constants.INTAKE_SPEED);
+  public void intackUpDown(){
+    if(IntackState == true){
+      MAIN.set(DoubleSolenoid.Value.kForward);
+    }else{
+      MAIN.set(DoubleSolenoid.Value.kReverse);
+    }
   }
 
-  public void intakeStop () {
-    intakeMotor.set(ControlMode.PercentOutput, 0);
+  public void end(){
+    MASTER.set(ControlMode.PercentOutput, 0);
   }
-  
 
   @Override
   public void periodic() {

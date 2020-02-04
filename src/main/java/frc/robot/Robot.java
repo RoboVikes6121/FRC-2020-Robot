@@ -8,9 +8,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.Auton;
+import frc.robot.commands.limeLigntDrive;
 import frc.robot.subsystems.driveTrain;
+import frc.robot.subsystems.pto;
+import frc.robot.subsystems.shooter;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.I2C;
 
 public class Robot extends TimedRobot {
@@ -28,38 +31,36 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    // set up for encoders
-    //
-    driveTrain.LEFTMASTER.configFactoryDefault();
-    driveTrain.RIGHTMASTER.configFactoryDefault();
-
-    driveTrain.LEFTMASTER.setInverted(false);
-    driveTrain.RIGHTMASTER.setInverted(false);
-
-    driveTrain.LEFTMASTER.setSensorPhase(false);
-    driveTrain.RIGHTMASTER.setSensorPhase(false);
-
     RobotContainer.m_LimeLight.disable();
   }
 
   public static double[] GetEncoder() {
-    double[] ENCODER_LIST = new double[5];
+    double[] ENCODER_LIST = new double[6];
 
-    // encoider leftMaster or 0
+    // encoider leftMaster or 0,1
     ENCODER_LIST[0] = driveTrain.LEFTMASTER.getSelectedSensorVelocity();
     ENCODER_LIST[1] = driveTrain.LEFTMASTER.getSelectedSensorPosition();
-    // ENCODER_LIST[2] = driveTrain.LEFTMASTER.getMotorOutputPercent();
 
-    // encoider rightMaster or 1
-    ENCODER_LIST[3] = driveTrain.RIGHTMASTER.getSelectedSensorVelocity();
-    ENCODER_LIST[4] = driveTrain.RIGHTMASTER.getSelectedSensorPosition();
-    // ENCODER_LIST[5] = driveTrain.RIGHTMASTER.getMotorOutputPercent();
+    // encoider rightMaster or 2,3
+    ENCODER_LIST[2] = driveTrain.RIGHTMASTER.getSelectedSensorVelocity();
+    ENCODER_LIST[3] = driveTrain.RIGHTMASTER.getSelectedSensorPosition();
+
+    // encoider PTO master or 4,5
+    ENCODER_LIST[4] = pto.MASTER.getSelectedSensorVelocity();
+    ENCODER_LIST[5] = pto.MASTER.getSelectedSensorPosition();
+
+    // encoder Shooter master or 6,7
+    ENCODER_LIST[6] = shooter.MASTER.getSelectedSensorVelocity();
+    ENCODER_LIST[7] = shooter.MASTER.getSelectedSensorPosition();
+
     return ENCODER_LIST;
   }
 
   public static void resetEncoder() {
     driveTrain.LEFTMASTER.setSelectedSensorPosition(0, 0, 10);
     driveTrain.RIGHTMASTER.setSelectedSensorPosition(0, 0, 10);
+    pto.MASTER.setSelectedSensorPosition(0, 0, 10);
+    shooter.MASTER.setSelectedSensorPosition(0, 0, 10);
   }
 
   public static Color getColor() {
@@ -148,7 +149,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-
+    
+    m_autonomousCommand = new Auton(RobotContainer.m_driveTrain, 36, -36);
+    System.out.println("RUN");
+    m_autonomousCommand = new limeLigntDrive(RobotContainer.m_driveTrain, RobotContainer.m_LimeLight);
+    System.out.println("RUN2");
+    
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -157,14 +163,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
+
   }
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
