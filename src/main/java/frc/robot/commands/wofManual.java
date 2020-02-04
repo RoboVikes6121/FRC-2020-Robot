@@ -9,13 +9,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.wof;
 
 public class wofManual extends CommandBase {
-  /**
-   * Creates a new wofManual.
-   */
-  public wofManual() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  
+  private final wof m_wof; 
+
+  public wofManual(wof wof) {
+    m_wof = wof;
+    addRequirements(m_wof);
   }
 
   // Called when the command is initially scheduled.

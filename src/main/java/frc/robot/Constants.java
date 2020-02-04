@@ -73,6 +73,9 @@ public final class Constants {
     public static final int BUTTON_CLIMB = 4;
     public static final int BUTTON_ELIVATOR_UP = 5;
     public static final int BUTTON_ELIVATOR_DOWN = 6;
+    public static final int BUTTON_WOF_UPDOWN = 7;
+    public static final int BUTTON_WOF = 8;
+    public static final int BUTTON_WOF_MANUAL = 9;
 
     //limeLight
     public static final double LIMELIGHT_SPEED_MAX = .75;

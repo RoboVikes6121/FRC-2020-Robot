@@ -8,19 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.wof;
 
-public class wofAuton extends CommandBase {
-
-  private wof m_wof;
-
-  public wofAuton(wof wof) {
-
-    m_wof = wof;
-    addRequirements(m_wof);
+public class IntackIn extends CommandBase {
+  /**
+   * Creates a new IntackIn.
+   */
+  public IntackIn() {
     // Use addRequirements() here to declare subsystem dependencies.
-
   }
 
   // Called when the command is initially scheduled.
@@ -31,13 +25,11 @@ public class wofAuton extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_wof.spin();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_wof.end();
   }
 
   // Returns true when the command should end.

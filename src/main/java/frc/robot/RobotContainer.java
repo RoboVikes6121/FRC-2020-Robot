@@ -2,6 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.limeLigntDrive;
+import frc.robot.commands.wofAuton;
+import frc.robot.commands.wofUpDown;
 import frc.robot.subsystems.Intack;
 import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.driveTrain;
@@ -40,6 +42,9 @@ public class RobotContainer {
   public final JoystickButton SEC_4 = new JoystickButton(SEC_CONTROLER, Constants.BUTTON_ELIVATOR_UP);
   public final JoystickButton SEC_5 = new JoystickButton(SEC_CONTROLER, Constants.BUTTON_ELIVATOR_DOWN);
   public final JoystickButton SEC_6 = new JoystickButton(SEC_CONTROLER, Constants.BUTTON_CLIMB);
+  public final JoystickButton SEC_7 = new JoystickButton(SEC_CONTROLER, Constants.BUTTON_WOF_UPDOWN);
+  public final JoystickButton SEC_8 = new JoystickButton(SEC_CONTROLER, Constants.BUTTON_WOF);
+  public final JoystickButton SEC_9 = new JoystickButton(SEC_CONTROLER, Constants.BUTTON_WOF_MANUAL);
 
   //used 
   public final JoystickButton DRIVER_A = new JoystickButton(DRIVE_CONTRALER, Constants.BUTTON_LIME_AUTON);
@@ -48,6 +53,9 @@ public class RobotContainer {
     // Configure the button bindings
     DRIVER_A.whileHeld(new limeLigntDrive(m_driveTrain, m_LimeLight));
 
+    SEC_7.whenPressed(new wof);
+    SEC_8.whenPressed(new wofAuton(m_wof));
+    
     configureButtonBindings();
   }
 

@@ -11,16 +11,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.wof;
 
-public class wofAuton extends CommandBase {
+public class wofUpDown extends CommandBase {
+  
+  private final wof m_wof; 
 
-  private wof m_wof;
-
-  public wofAuton(wof wof) {
-
+  public wofUpDown(wof wof) {
     m_wof = wof;
     addRequirements(m_wof);
-    // Use addRequirements() here to declare subsystem dependencies.
-
   }
 
   // Called when the command is initially scheduled.
@@ -31,9 +28,8 @@ public class wofAuton extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_wof.spin();
+    RobotContainer.m_wof.upDown();
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
