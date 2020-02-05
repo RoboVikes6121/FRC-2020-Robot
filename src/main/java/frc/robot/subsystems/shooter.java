@@ -39,6 +39,7 @@ public class shooter extends SubsystemBase {
   public boolean shoot(){
     double[] ENCODER_LIST = Robot.GetEncoder();
 
+    /*
     double error = Constants.SHOOTER_SPEED_VOL - ENCODER_LIST[6];
     sumError += error/.02;
     deri = (error-priError)/.02;
@@ -46,6 +47,9 @@ public class shooter extends SubsystemBase {
 
     MASTER.set(ControlMode.PercentOutput, OUTPUT);
     priError = error;
+    */
+
+    MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
 
     if(ENCODER_LIST[6] >= Constants.SHOOTER_SPEED_VOL){
       return true;

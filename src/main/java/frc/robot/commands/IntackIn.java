@@ -8,13 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.Intack;
 
 public class IntackIn extends CommandBase {
-  /**
-   * Creates a new IntackIn.
-   */
-  public IntackIn() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  
+  private Intack m_Intack;
+
+  public IntackIn(Intack Intack) {
+    m_Intack = Intack;
+    
+    addRequirements(m_Intack);
   }
 
   // Called when the command is initially scheduled.
@@ -25,11 +29,13 @@ public class IntackIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    RobotContainer.m_Intack.intackIn();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.m_Intack.end();
   }
 
   // Returns true when the command should end.

@@ -56,7 +56,9 @@ public class pto extends SubsystemBase {
   public void elvUp(){
     if(ERESETFLAG == false){
       Robot.resetEncoder();
+      ERESETFLAG = true;
     }
+
     MAIN.set(false);
 
     double[] ENCODER_LIST = Robot.GetEncoder();
@@ -69,8 +71,10 @@ public class pto extends SubsystemBase {
   }
 
   public void elvDown(){
-    double[] ENCODER_LIST = Robot.GetEncoder();
+    MAIN.set(true);
     
+    double[] ENCODER_LIST = Robot.GetEncoder();
+
     if(ENCODER_LIST[5] >= 0){
       MASTER.set(ControlMode.PercentOutput, Constants.ELIVATOR_SPEED);
     }else{

@@ -35,23 +35,23 @@ public class Robot extends TimedRobot {
   }
 
   public static double[] GetEncoder() {
-    double[] ENCODER_LIST = new double[6];
+    double[] ENCODER_LIST = new double[9];
 
     // encoider leftMaster or 0,1
-    ENCODER_LIST[0] = driveTrain.LEFTMASTER.getSelectedSensorVelocity();
-    ENCODER_LIST[1] = driveTrain.LEFTMASTER.getSelectedSensorPosition();
+    //ENCODER_LIST[0] = driveTrain.LEFTMASTER.getSelectedSensorVelocity();
+   //ENCODER_LIST[1] = driveTrain.LEFTMASTER.getSelectedSensorPosition();
 
     // encoider rightMaster or 2,3
-    ENCODER_LIST[2] = driveTrain.RIGHTMASTER.getSelectedSensorVelocity();
-    ENCODER_LIST[3] = driveTrain.RIGHTMASTER.getSelectedSensorPosition();
+    //ENCODER_LIST[2] = driveTrain.RIGHTMASTER.getSelectedSensorVelocity();
+    //ENCODER_LIST[3] = driveTrain.RIGHTMASTER.getSelectedSensorPosition();
 
     // encoider PTO master or 4,5
-    ENCODER_LIST[4] = pto.MASTER.getSelectedSensorVelocity();
-    ENCODER_LIST[5] = pto.MASTER.getSelectedSensorPosition();
+    //ENCODER_LIST[4] = pto.MASTER.getSelectedSensorVelocity();
+    //ENCODER_LIST[5] = pto.MASTER.getSelectedSensorPosition();
 
     // encoder Shooter master or 6,7
-    ENCODER_LIST[6] = shooter.MASTER.getSelectedSensorVelocity();
-    ENCODER_LIST[7] = shooter.MASTER.getSelectedSensorPosition();
+    //ENCODER_LIST[6] = shooter.MASTER.getSelectedSensorVelocity();
+    //ENCODER_LIST[7] = shooter.MASTER.getSelectedSensorPosition();
 
     return ENCODER_LIST;
   }

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.util.Color;
 
 public final class Constants {
 
-    //drive                                                      SUB - DONE   COMMAND - DONE   AUTO - DONE
+    //drive                                                      SUB - DONE   COMMAND - DONE   AUTO - DONE 
     public static final int LEFT_DRIVE_MOTOR_1 = 0;
     public static final int LEFT_DRIVE_MOTOR_2 = 1;
     public static final int RIGHT_DRIVE_MOTOR_1 = 2;
@@ -17,7 +17,7 @@ public final class Constants {
     public static final double PRECISION_MAX_MOVE_SPEED = .5;
     public static final double PRECISION_MIN_MOVE_SPEED = -.5;
 
-    //pto                                                         SUB - DONE
+    //pto                                                         SUB - DONE 
     public static final int MASTER_PTO_MOTOR = 4;
     public static final int SLAVE_PTO_MOTOR = 5;
 
@@ -28,7 +28,7 @@ public final class Constants {
     public static final double ELIVATOR_POS = 1000; // dont know speed yet
     public static final double CLIMB_POS = 1000; // dont know speed yet
 
-    //WOF                                                         SUB - DONE
+    //WOF                                                         SUB - DONE   COMMAND - DONE   AUTO - none 
     public static final int WOF_MOTOR = 7;
 
     public static final int WOF_OUT_SOUL = 1;
@@ -36,7 +36,7 @@ public final class Constants {
 
     public static final double WOF_SPEED = .25; // dont know speed yet
 
-    //intack                                                      SUB - DONE
+    //intack                                                      SUB - DONE   COMMAND - DONE 
     public static final int INTAKE_MOTOR = 6;
 
     public static final int INTAKE_OUT_SOUL = 3;
@@ -45,10 +45,10 @@ public final class Constants {
     public static final double INDEX_SPEED = .70; // dont know speed yet
     public static final double INTAKE_SPEED = .75; // dont know speed yet
 
-    //shooter                                             SUB - DONE
+    //shooter                                             SUB - DONE   COMMAND - DONE 
     public static final int SHOOTER_MOTOR = 8;
 
-    public static final double SHOOTER_SPEED = .10;
+    public static final double SHOOTER_SPEED = .50;
     public static final double SHOOTER_SPEED_VOL = 21000; // dont know speed yet
 
     //joysticks
