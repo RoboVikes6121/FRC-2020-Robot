@@ -9,16 +9,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Intack;
+import frc.robot.subsystems.intake;
 import frc.robot.subsystems.shooter;
 
 public class shoot extends CommandBase {
   private shooter m_shooter;
-  private Intack m_Intake;
+  private intake m_Intake;
 
-  public shoot(shooter shooter, Intack Intack) {
+  public shoot(shooter shooter, intake intake) {
     m_shooter = shooter;
-    m_Intake = Intack;
+    m_Intake = intake;
 
     addRequirements(m_shooter);
     addRequirements(m_Intake);
@@ -32,20 +32,20 @@ public class shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotContainer.m_Intack.INTAKESTATE == false) {
-      RobotContainer.m_Intack.intackUpDown();
+    if(RobotContainer.m_intake.INTAKESTATE == false) {
+      RobotContainer.m_intake.intakeUpDown();
     }
 
     boolean FLAG = RobotContainer.m_shooter.shoot();
     if(FLAG == true){
-      RobotContainer.m_Intack.intackIn();
+      RobotContainer.m_intake.intakeIn();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Intack.end();
+    RobotContainer.m_intake.end();
     RobotContainer.m_shooter.end();
   }
 

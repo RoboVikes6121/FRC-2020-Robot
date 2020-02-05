@@ -9,16 +9,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Intack;
+import frc.robot.subsystems.intake;
 
-public class IntackOut extends CommandBase {
+public class intakeIn extends CommandBase {
   
-  private Intack m_Intack;
+  private intake m_intake;
 
-  public IntackOut(Intack Intack) {
-    m_Intack = Intack;
-
-    addRequirements(m_Intack);
+  public intakeIn(intake intake) {
+    m_intake = intake;
+    
+    addRequirements(m_intake);
   }
 
   // Called when the command is initially scheduled.
@@ -29,13 +29,13 @@ public class IntackOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_Intack.intackOut();
+    RobotContainer.m_intake.intakeIn();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_Intack.end();
+    RobotContainer.m_intake.end();
   }
 
   // Returns true when the command should end.
