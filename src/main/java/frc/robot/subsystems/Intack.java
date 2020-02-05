@@ -18,14 +18,18 @@ public class Intack extends SubsystemBase {
   VictorSPX MASTER = new VictorSPX(Constants.INTAKE_MOTOR);
   DoubleSolenoid MAIN = new DoubleSolenoid(Constants.INTAKE_OUT_SOUL, Constants.INTAKE_IN_SOUL);
 
-  boolean IntackState = true;
+  public boolean INTAKESTATE = true;
 
-  public void intack(){
+  public void intackIn(){
     MASTER.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED);
   }
 
+  public void intackOut(){
+    MASTER.set(ControlMode.PercentOutput, -Constants.INTAKE_SPEED);
+  }
+
   public void intackUpDown(){
-    if(IntackState == true){
+    if(INTAKESTATE == false){
       MAIN.set(DoubleSolenoid.Value.kForward);
     }else{
       MAIN.set(DoubleSolenoid.Value.kReverse);
