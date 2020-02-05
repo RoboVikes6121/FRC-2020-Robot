@@ -53,7 +53,7 @@ public class RobotContainer {
     // Configure the button bindings
     DRIVER_A.whileHeld(new limeLigntDrive(m_driveTrain, m_LimeLight));
 
-    SEC_7.whenPressed(new wof);
+    // SEC_7.whenPressed(new wof);
     SEC_8.whenPressed(new wofAuton(m_wof));
     
     configureButtonBindings();
