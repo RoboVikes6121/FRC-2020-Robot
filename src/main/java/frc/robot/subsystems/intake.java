@@ -14,21 +14,21 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Intack extends SubsystemBase {
+public class intake extends SubsystemBase {
   VictorSPX MASTER = new VictorSPX(Constants.INTAKE_MOTOR);
   DoubleSolenoid MAIN = new DoubleSolenoid(Constants.INTAKE_OUT_SOUL, Constants.INTAKE_IN_SOUL);
 
   public boolean INTAKESTATE = true;
 
-  public void intackIn(){
+  public void intakeIn(){
     MASTER.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED);
   }
 
-  public void intackOut(){
+  public void intakeOut(){
     MASTER.set(ControlMode.PercentOutput, -Constants.INTAKE_SPEED);
   }
 
-  public void intackUpDown(){
+  public void intakeUpDown(){
     if(INTAKESTATE == false){
       MAIN.set(DoubleSolenoid.Value.kForward);
     }else{

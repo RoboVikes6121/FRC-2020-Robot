@@ -18,9 +18,11 @@ import frc.robot.Robot;
 public class shooter extends SubsystemBase {
   public static TalonFX MASTER = new TalonFX(Constants.SHOOTER_MOTOR);  // encoders 6,7
 
-  double P = 1;
-  double I = 1;
-  double D = 1;
+  private final double kP = 0.15;
+	private final double kI = 0.0;
+	private final double kD = 1.0;
+  private final double kF = 0.0;
+  private final int kTimeoutMs = 30;
 
   public shooter() {
     MASTER.setNeutralMode(NeutralMode.Brake);
@@ -30,6 +32,11 @@ public class shooter extends SubsystemBase {
     MASTER.setInverted(false);
 
     MASTER.setSensorPhase(false);
+
+    MASTER.config_kP(1, kP, kTimeoutMs);
+    MASTER.config_kI(0, kI, kTimeoutMs);
+    MASTER.config_kD(0, kD, kTimeoutMs);
+    MASTER.config_kF(0, kF, kTimeoutMs);
   }
 
   double sumError = 0;
@@ -42,7 +49,7 @@ public class shooter extends SubsystemBase {
     double error = Constants.SHOOTER_SPEED_VOL - ENCODER_LIST[6];
     sumError += error/.02;
     deri = (error-priError)/.02;
-    double OUTPUT = (P*error) + (I*sumError) + (D*deri);
+    double OUTPUT = (kP*error) + (kI*sumError) + (kD*deri);
 
     MASTER.set(ControlMode.PercentOutput, OUTPUT);
     priError = error;

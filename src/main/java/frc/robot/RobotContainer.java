@@ -1,8 +1,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.IntackIn;
-import frc.robot.commands.IntackOut;
+import frc.robot.commands.intakeIn;
+import frc.robot.commands.intakeOut;
 import frc.robot.commands.clime;
 import frc.robot.commands.elvDown;
 import frc.robot.commands.elvUp;
@@ -11,7 +11,7 @@ import frc.robot.commands.shoot;
 import frc.robot.commands.wofAuton;
 import frc.robot.commands.wofManual;
 import frc.robot.commands.wofUpDown;
-import frc.robot.subsystems.Intack;
+import frc.robot.subsystems.intake;
 import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.driveTrain;
 import frc.robot.subsystems.gyro;
@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final static driveTrain m_driveTrain = new driveTrain();
-  public final static Intack m_Intack = new Intack();
+  public final static intake m_intake = new intake();
   public final static LimeLight m_LimeLight = new LimeLight();
   public final static pto m_pto = new pto();
   public final static shooter m_shooter = new shooter();
@@ -63,11 +63,11 @@ public class RobotContainer {
     DRIVER_A.whileHeld(new limeLightDrive(m_driveTrain, m_LimeLight));
 
     // shooter
-    SEC_1.whenHeld(new shoot(m_shooter, m_Intack));
+    SEC_1.whenHeld(new shoot(m_shooter, m_intake));
 
-    // intack
-    SEC_2.whenHeld(new IntackIn(m_Intack));
-    SEC_3.whenHeld(new IntackOut(m_Intack));
+    // intake
+    SEC_2.whenHeld(new intakeIn(m_intake));
+    SEC_3.whenHeld(new intakeOut(m_intake));
 
     //elivator
     SEC_4.whenHeld(new elvUp(m_pto));
@@ -81,7 +81,6 @@ public class RobotContainer {
     
     configureButtonBindings();
   }
-
   private void configureButtonBindings() {
     
   }
