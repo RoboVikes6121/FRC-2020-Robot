@@ -10,9 +10,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.driveTrain;
+import frc.robot.Constants;
 import frc.robot.subsystems.LimeLight;;
 
-public class limeLigntDrive extends CommandBase {
+public class limeLightDrive extends CommandBase {
   private final driveTrain m_DriveTrain;
   private final LimeLight m_LimeLight;
 
@@ -24,15 +25,15 @@ public class limeLigntDrive extends CommandBase {
   /**
    * Creates a new AlignWithVision.
    */
-  public limeLigntDrive(driveTrain driveTrain, LimeLight limeLight) {
+  public limeLightDrive(driveTrain driveTrain, LimeLight limeLight) {
     m_DriveTrain = driveTrain;
     m_LimeLight = limeLight;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_DriveTrain, m_LimeLight);
 
-    SmartDashboard.putNumber("Steering KP", -.03);
-    SmartDashboard.putNumber("min TA", 3);
-    SmartDashboard.putNumber("Driving KP", .26);
+    SmartDashboard.putNumber("Steering KP", Constants.STREEING_KP);
+    SmartDashboard.putNumber("min TA", Constants.MIN_TARGET_AREA);
+    SmartDashboard.putNumber("Driving KP", Constants.DRIVER_KP);
 
   }
 

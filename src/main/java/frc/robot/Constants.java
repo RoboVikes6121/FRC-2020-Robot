@@ -80,6 +80,10 @@ public final class Constants {
     //limeLight
     public static final double LIMELIGHT_SPEED_MAX = .75;
     public static final double LIMELIGHT_SPEED_MIN = -.75; 
+    public static final double STREEING_KP = -.03;
+    public static final double MIN_TARGET_AREA = 3;
+    public static final double DRIVER_KP = .26;
+    public static final double MAX_DRIVE = 0.7;
 
     //colors (r, g, b)
     public static final Color RED_TARGET = ColorMatch.makeColor(.561, .232, .114);
@@ -87,9 +91,6 @@ public final class Constants {
     public static final Color BLUE_TARGET = ColorMatch.makeColor(.143, .427, .429);
     public static final Color YELLOW_TARGET = ColorMatch.makeColor(.361, .524, .113);
 
-    // limeLight aim high goal
-    public static final double STEER_K = 0.03;
-    public static final double DRIVE_K = 0.26;
-    public static final double DESIRED_TARGET_AREA = 13.0;
-    public static final double MAX_DRIVE = 0.7;
+    //gyro
+    public static final int GYROPORT = 0;
 }

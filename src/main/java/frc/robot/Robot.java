@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.Auton;
-import frc.robot.commands.limeLigntDrive;
+import frc.robot.commands.turnAuton;
 import frc.robot.subsystems.driveTrain;
+import frc.robot.subsystems.gyro;
 import frc.robot.subsystems.pto;
 import frc.robot.subsystems.shooter;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
 
     // encoider leftMaster or 0,1
     //ENCODER_LIST[0] = driveTrain.LEFTMASTER.getSelectedSensorVelocity();
-   //ENCODER_LIST[1] = driveTrain.LEFTMASTER.getSelectedSensorPosition();
+    //ENCODER_LIST[1] = driveTrain.LEFTMASTER.getSelectedSensorPosition();
 
     // encoider rightMaster or 2,3
     //ENCODER_LIST[2] = driveTrain.RIGHTMASTER.getSelectedSensorVelocity();
@@ -136,6 +136,8 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putString("color", STRING_COLOR);
 
+    SmartDashboard.putNumber("Gyro", RobotContainer.m_gyro.getAngle());
+
     CommandScheduler.getInstance().run();
   }
 
@@ -149,11 +151,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    
-    m_autonomousCommand = new Auton(RobotContainer.m_driveTrain, 36, -36);
-    System.out.println("RUN");
-    m_autonomousCommand = new limeLigntDrive(RobotContainer.m_driveTrain, RobotContainer.m_LimeLight);
-    System.out.println("RUN2");
+    m_autonomousCommand = new turnAuton(RobotContainer.m_driveTrain, RobotContainer.m_gyro, 90);
     
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

@@ -8,41 +8,32 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.driveTrain;
+import frc.robot.subsystems.gyro;
 
-public class Auton extends CommandBase {
-  double[] ENCODER_LIST;
-  public static int TARGET_RIGHT;
-  public static int TARGET_LEFT;
-  public static double RIGHT_SPEED;
-  public static double LEFT_SPEED;
+public class turnAuton extends CommandBase {
+  private driveTrain m_driveTairn;
+  private gyro m_gyro; 
 
-  private driveTrain m_drive;
-  public Auton(driveTrain drive, int RIGHT, int LEFT) {
-    
-    Robot.resetEncoder();
-    ENCODER_LIST = Robot.GetEncoder();
+  int Angle = 0;
+  boolean forward;
 
-    TARGET_LEFT = LEFT*22;
-    TARGET_RIGHT = RIGHT*22;
-
-    if(RIGHT == LEFT){
-      RIGHT_SPEED = 1;
-      LEFT_SPEED = 1;
-    }else if(RIGHT > LEFT){
-      LEFT_SPEED = 1;
-      RIGHT_SPEED = LEFT/RIGHT;
-    }else if(LEFT > RIGHT){
-      RIGHT_SPEED = 1;
-      LEFT_SPEED = RIGHT/LEFT;
+  public turnAuton(driveTrain driveTrain, gyro gyro, int angle) {
+   
+    if(angle > 0){
+      forward = true;
+    }else{
+      forward = false;
     }
+    
+    Angle = angle;
 
-    System.out.println("SETUP");
+    m_gyro = gyro;
+    addRequirements(m_gyro);
 
-    m_drive = drive;
-    addRequirements(m_drive);
+    m_driveTairn = driveTrain;
+    addRequirements(m_driveTairn);
   }
 
   // Called when the command is initially scheduled.
@@ -53,25 +44,15 @@ public class Auton extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ENCODER_LIST = Robot.GetEncoder();
-    RobotContainer.m_driveTrain.autonDrive(RIGHT_SPEED, LEFT_SPEED);
-    if(ENCODER_LIST[1] >= TARGET_LEFT){
+    m_driveTairn.autonDriveTurn(forward);
+    if(m_gyro.getAngle() >= Angle){
       end(true);
     }
-    if(ENCODER_LIST[4] >= TARGET_RIGHT){
-      end(true);
-    }
-
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_driveTrain.autonEnd();
-    TARGET_LEFT = 0;
-    TARGET_RIGHT = 0;
-    RIGHT_SPEED = 0;
-    LEFT_SPEED = 0;
   }
 
   // Returns true when the command should end.

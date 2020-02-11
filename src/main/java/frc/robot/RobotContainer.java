@@ -6,7 +6,7 @@ import frc.robot.commands.IntackOut;
 import frc.robot.commands.clime;
 import frc.robot.commands.elvDown;
 import frc.robot.commands.elvUp;
-import frc.robot.commands.limeLigntDrive;
+import frc.robot.commands.limeLightDrive;
 import frc.robot.commands.shoot;
 import frc.robot.commands.wofAuton;
 import frc.robot.commands.wofManual;
@@ -14,6 +14,7 @@ import frc.robot.commands.wofUpDown;
 import frc.robot.subsystems.Intack;
 import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.driveTrain;
+import frc.robot.subsystems.gyro;
 import frc.robot.subsystems.pto;
 import frc.robot.subsystems.shooter;
 import frc.robot.subsystems.wof;
@@ -27,6 +28,7 @@ public class RobotContainer {
   public final static pto m_pto = new pto();
   public final static shooter m_shooter = new shooter();
   public final static wof m_wof = new wof();
+  public final static gyro m_gyro = new gyro();
 
   private final XboxController DRIVE_CONTRALER = new XboxController(Constants.DRIVE_CONTROLER);
   private final XboxController SEC_CONTROLER = new XboxController(Constants.SEC_CONTROLER);
@@ -58,7 +60,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     // Configure the button bindings
-    DRIVER_A.whileHeld(new limeLigntDrive(m_driveTrain, m_LimeLight));
+    DRIVER_A.whileHeld(new limeLightDrive(m_driveTrain, m_LimeLight));
 
     // shooter
     SEC_1.whenHeld(new shoot(m_shooter, m_Intack));

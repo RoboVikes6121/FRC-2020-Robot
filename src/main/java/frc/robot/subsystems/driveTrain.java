@@ -77,9 +77,24 @@ public class driveTrain extends SubsystemBase {
     drive.arcadeDrive(MOVE, TURN);
   }
 
-  public void autonDrive(double RIGHT_SPEED, double LEFT_SPEED){
-    LEFTMASTER.set(ControlMode.PercentOutput, LEFT_SPEED);
-    RIGHTMASTER.set(ControlMode.PercentOutput, -RIGHT_SPEED);
+  public void autonDrive(boolean forward){
+    if(forward == true){
+      LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
+      RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
+    }else{
+      LEFTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
+      RIGHTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
+    }
+  }
+
+  public void autonDriveTurn(boolean forward){
+    if(forward == true){
+      LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
+      RIGHTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
+    }else{
+      LEFTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
+      RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
+    }
   }
 
   public void autonEnd(){
