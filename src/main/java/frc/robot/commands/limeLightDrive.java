@@ -18,7 +18,7 @@ public class limeLightDrive extends CommandBase {
   private final LimeLight m_LimeLight;
 
   // Constants: tune driving and steering control constants
-  private double m_steeringKP = 0.1;
+  private double m_steeringKP = 0.5;
   private double m_targetArea = 3;
   private double m_driveKP = 0.26;
 
@@ -53,7 +53,7 @@ public class limeLightDrive extends CommandBase {
     m_driveKP = SmartDashboard.getNumber("Driving KP", 0.0);
     m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
     if (!m_LimeLight.isTargetValid()) {
-      m_DriveTrain.limeLightDrive(MOVE, (TURN+.2)*-1); // Drive until the target is at desired distance
+      m_DriveTrain.limeLightDrive(MOVE, (TURN+.3)*-1); // Drive until the target is at desired distance
     } else {
       m_DriveTrain.limeLightDrive(0, 0);
     }
@@ -63,7 +63,7 @@ public class limeLightDrive extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // m_LimeLight.disable();
+    m_LimeLight.disable();
     m_DriveTrain.limeLightDrive(0, 0); // set left and right values to 0
   }
 
