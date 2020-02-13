@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.turnAuton;
+import frc.robot.subsystems.LimeLight;
 import frc.robot.subsystems.driveTrain;
 import frc.robot.subsystems.gyro;
 import frc.robot.subsystems.pto;
@@ -166,6 +167,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    RobotContainer.m_LimeLight.disable();
+    RobotContainer.m_gyro.reset();
+    resetEncoder();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
