@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.driveTrain;
+import frc.robot.Constants;
 import frc.robot.subsystems.LimeLight;;
 
 public class limeLightAuton extends CommandBase {
@@ -17,9 +18,9 @@ public class limeLightAuton extends CommandBase {
   private final LimeLight m_LimeLight;
 
   // Constants: tune driving and steering control constants
-  private double m_steeringKP = 0.1;
-  private double m_targetArea = 3;
-  private double m_driveKP = 0.26;
+  private double m_steeringKP = Constants.STREEING_KP;
+  private double m_targetArea = Constants.MIN_TARGET_AREA;
+  private double m_driveKP = Constants.DRIVER_KP;
 
   public boolean FLAG;
 
@@ -32,9 +33,9 @@ public class limeLightAuton extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_DriveTrain, m_LimeLight);
 
-    SmartDashboard.putNumber("Steering KP", -.03);
-    SmartDashboard.putNumber("min TA", 3);
-    SmartDashboard.putNumber("Driving KP", .26);
+    SmartDashboard.putNumber("Steering KP", Constants.STREEING_KP);
+    SmartDashboard.putNumber("min TA", Constants.MIN_TARGET_AREA);
+    SmartDashboard.putNumber("Driving KP", Constants.DRIVER_KP);
 
     FLAG = false;
   }
@@ -55,7 +56,7 @@ public class limeLightAuton extends CommandBase {
     m_driveKP = SmartDashboard.getNumber("Driving KP", 0.0);
     m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
     if (!m_LimeLight.isTargetValid()) {
-      m_DriveTrain.limeLightDrive(MOVE, (TURN+.2)*-1); // Drive until the target is at desired distance
+      m_DriveTrain.limeLightDrive(MOVE, TURN); // Drive until the target is at desired distance
     } else {
       m_DriveTrain.limeLightDrive(0, 0);
       FLAG = true;

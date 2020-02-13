@@ -18,9 +18,9 @@ public class limeLightDrive extends CommandBase {
   private final LimeLight m_LimeLight;
 
   // Constants: tune driving and steering control constants
-  private double m_steeringKP = 0.5;
-  private double m_targetArea = 3;
-  private double m_driveKP = 0.26;
+  private double m_steeringKP = Constants.STREEING_KP;
+  private double m_targetArea = Constants.MIN_TARGET_AREA;
+  private double m_driveKP = Constants.DRIVER_KP;
 
   /**
    * Creates a new AlignWithVision.
@@ -53,7 +53,7 @@ public class limeLightDrive extends CommandBase {
     m_driveKP = SmartDashboard.getNumber("Driving KP", 0.0);
     m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
     if (!m_LimeLight.isTargetValid()) {
-      m_DriveTrain.limeLightDrive(MOVE, (TURN+.3)*-1); // Drive until the target is at desired distance
+      m_DriveTrain.limeLightDrive(MOVE, (TURN*-1)); // Drive until the target is at desired distance
     } else {
       m_DriveTrain.limeLightDrive(0, 0);
     }
