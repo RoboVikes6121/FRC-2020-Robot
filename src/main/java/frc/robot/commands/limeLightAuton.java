@@ -23,6 +23,7 @@ public class limeLightAuton extends CommandBase {
   private double m_driveKP = Constants.DRIVER_KP;
 
   public boolean FLAG;
+  public int FLAGCOUNT;
 
   /**
    * Creates a new AlignWithVision.
@@ -38,6 +39,7 @@ public class limeLightAuton extends CommandBase {
     SmartDashboard.putNumber("Driving KP", Constants.DRIVER_KP);
 
     FLAG = false;
+    FLAGCOUNT = 0;
   }
 
   // Called when the command is initially scheduled.
@@ -55,11 +57,26 @@ public class limeLightAuton extends CommandBase {
     m_targetArea = SmartDashboard.getNumber("min TA", 0.0);
     m_driveKP = SmartDashboard.getNumber("Driving KP", 0.0);
     m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
+
     if (!m_LimeLight.isTargetValid()) {
+<<<<<<< HEAD
+      m_DriveTrain.limeLightDrive(MOVE, TURN*-1); // Drive until the target is at desired distance
+=======
       m_DriveTrain.limeLightDrive(MOVE, TURN); // Drive until the target is at desired distance
+>>>>>>> 7cc794b7f845e917afb5bf7fe0cf411b4c316a22
     } else {
       m_DriveTrain.limeLightDrive(0, 0);
+      FLAGCOUNT++;
+    }
+
+    if(FLAGCOUNT == Constants.FLAG_COUNT_MAX){
       FLAG = true;
+    }
+    SmartDashboard.putBoolean("FLAG", FLAG);
+    
+    if(FLAG == true){
+      end(true);
+      System.out.println("ITS DONE YOU MORON");
     }
     
   }
@@ -69,10 +86,6 @@ public class limeLightAuton extends CommandBase {
   public void end(boolean interrupted) {
     // m_LimeLight.disable();
     m_DriveTrain.limeLightDrive(0, 0); // set left and right values to 0
-    if(FLAG == true){
-      end(true);
-      System.out.println("ITS DONE YOU MORON");
-    }
   }
  
   // Returns true when the command should end.

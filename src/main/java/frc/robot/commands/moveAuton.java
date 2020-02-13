@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.driveTrain;
 
 public class moveAuton extends CommandBase {
@@ -17,14 +16,18 @@ public class moveAuton extends CommandBase {
   double MOVE;
   boolean forword;
 
+  boolean isDone;
 
   private driveTrain m_drive;
+
   public moveAuton(driveTrain drive, int move) {
-    
+   System.out.println("STARTING MOVING");
+    isDone = false;
+
     Robot.resetEncoder();
     ENCODER_LIST = Robot.GetEncoder();
 
-    MOVE = move*22;
+    MOVE = move*90;
     if(MOVE > 0){
       forword = false;
     }else{
@@ -44,8 +47,8 @@ public class moveAuton extends CommandBase {
   @Override
   public void execute() {
     ENCODER_LIST = Robot.GetEncoder();
-    RobotContainer.m_driveTrain.autonDrive(forword);
-    if(ENCODER_LIST[1] >= MOVE  ||  ENCODER_LIST[4] >= MOVE){
+    driveTrain.autonDrive(forword);
+    if(Math.abs(ENCODER_LIST[1]) >= MOVE  ||  Math.abs(ENCODER_LIST[3]) >= MOVE){
       end(true);
     }
   }
@@ -53,13 +56,15 @@ public class moveAuton extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_driveTrain.autonEnd();
-    MOVE = 0;
+    driveTrain.autonEnd();
+    System.out.println("YOU ARE DONE DUMB DUMB");
+    Robot.resetEncoder();
+    isDone = true;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }

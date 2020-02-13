@@ -77,27 +77,27 @@ public class driveTrain extends SubsystemBase {
     drive.arcadeDrive(MOVE, TURN);
   }
 
-  public void autonDrive(boolean forward){
+  public static void autonDrive(boolean forward){
     if(forward == true){
-      LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
-      RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
-    }else{
       LEFTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
       RIGHTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
+    }else{
+      LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
+      RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
     }
   }
 
   public void autonDriveTurn(boolean forward){
     if(forward == true){
-      LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
-      RIGHTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
+      LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED+.2);
+      RIGHTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED+.2);
     }else{
-      LEFTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
-      RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
+      LEFTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED-.2);
+      RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED-.2);
     }
   }
 
-  public void autonEnd(){
+  public static void autonEnd(){
     LEFTMASTER.set(ControlMode.PercentOutput, 0);
     RIGHTMASTER.set(ControlMode.PercentOutput, 0);
   }

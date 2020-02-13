@@ -49,11 +49,19 @@ public class limeLightDrive extends CommandBase {
    double TURN = m_LimeLight.getTX()*m_steeringKP; // Right Y
    double MOVE  = (m_targetArea-m_LimeLight.getTA())*m_driveKP; // Left X
     SmartDashboard.putNumber("target area", m_targetArea);
+
     m_targetArea = SmartDashboard.getNumber("min TA", 0.0);
     m_driveKP = SmartDashboard.getNumber("Driving KP", 0.0);
     m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
+    
+    
+
     if (!m_LimeLight.isTargetValid()) {
+<<<<<<< HEAD
+      m_DriveTrain.limeLightDrive(MOVE, TURN*-1); // Drive until the target is at desired distance
+=======
       m_DriveTrain.limeLightDrive(MOVE, (TURN*-1)); // Drive until the target is at desired distance
+>>>>>>> 7cc794b7f845e917afb5bf7fe0cf411b4c316a22
     } else {
       m_DriveTrain.limeLightDrive(0, 0);
     }

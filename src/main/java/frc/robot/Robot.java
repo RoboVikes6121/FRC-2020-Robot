@@ -8,10 +8,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.turnAuton;
-import frc.robot.subsystems.LimeLight;
+import frc.robot.commands.autonPink;
 import frc.robot.subsystems.driveTrain;
-import frc.robot.subsystems.gyro;
 import frc.robot.subsystems.pto;
 import frc.robot.subsystems.shooter;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -33,18 +31,20 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
 
     RobotContainer.m_LimeLight.disable();
+    resetEncoder();
+    RobotContainer.m_gyro.reset();
   }
 
   public static double[] GetEncoder() {
     double[] ENCODER_LIST = new double[9];
 
     // encoider leftMaster or 0,1
-    //ENCODER_LIST[0] = driveTrain.LEFTMASTER.getSelectedSensorVelocity();
-    //ENCODER_LIST[1] = driveTrain.LEFTMASTER.getSelectedSensorPosition();
+    ENCODER_LIST[0] = driveTrain.LEFTMASTER.getSelectedSensorVelocity();
+    ENCODER_LIST[1] = driveTrain.LEFTMASTER.getSelectedSensorPosition();
 
     // encoider rightMaster or 2,3
-    //ENCODER_LIST[2] = driveTrain.RIGHTMASTER.getSelectedSensorVelocity();
-    //ENCODER_LIST[3] = driveTrain.RIGHTMASTER.getSelectedSensorPosition();
+    ENCODER_LIST[2] = driveTrain.RIGHTMASTER.getSelectedSensorVelocity();
+    ENCODER_LIST[3] = driveTrain.RIGHTMASTER.getSelectedSensorPosition();
 
     // encoider PTO master or 4,5
     //ENCODER_LIST[4] = pto.MASTER.getSelectedSensorVelocity();
@@ -117,11 +117,11 @@ public class Robot extends TimedRobot {
     //printing to SmartDashBoard
     //left motor set
     SmartDashboard.putNumber("LEFT ENCODER VOL", ENCODER_LIST[0]);
-    SmartDashboard.putNumber("RIGHT ENCODER VOL", ENCODER_LIST[3]);
+    SmartDashboard.putNumber("RIGHT ENCODER VOL", ENCODER_LIST[2]);
     //SmartDashboard.putNumber("LEFT MOTOR %", ENCODER_LIST[2]);
     //right motor set
     SmartDashboard.putNumber("LEFT ENCODER POS", ENCODER_LIST[1]);
-    SmartDashboard.putNumber("RIGHT ENCODER POS", ENCODER_LIST[4]);
+    SmartDashboard.putNumber("RIGHT ENCODER POS", -ENCODER_LIST[3]);
     //SmartDashboard.putNumber("RIGHT MOTER %", ENCODER_LIST[5]);
 
     //getting color
@@ -152,8 +152,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new turnAuton(RobotContainer.m_driveTrain, RobotContainer.m_gyro, 90);
-    
+    m_autonomousCommand = new  autonPink(RobotContainer.m_driveTrain, RobotContainer.m_LimeLight, RobotContainer.m_gyro,
+    RobotContainer.m_shooter);
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -162,7 +162,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-
+    
   }
 
   @Override
