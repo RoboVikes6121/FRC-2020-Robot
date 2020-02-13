@@ -18,9 +18,9 @@ public class limeLightAuton extends CommandBase {
   private final LimeLight m_LimeLight;
 
   // Constants: tune driving and steering control constants
-  private double m_steeringKP = 0.1;
-  private double m_targetArea = 3;
-  private double m_driveKP = 0.26;
+  private double m_steeringKP = Constants.STREEING_KP;
+  private double m_targetArea = Constants.MIN_TARGET_AREA;
+  private double m_driveKP = Constants.DRIVER_KP;
 
   public boolean FLAG;
   public int FLAGCOUNT;
@@ -34,9 +34,9 @@ public class limeLightAuton extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_DriveTrain, m_LimeLight);
 
-    SmartDashboard.putNumber("Steering KP", -.03);
-    SmartDashboard.putNumber("min TA", 3);
-    SmartDashboard.putNumber("Driving KP", .26);
+    SmartDashboard.putNumber("Steering KP", Constants.STREEING_KP);
+    SmartDashboard.putNumber("min TA", Constants.MIN_TARGET_AREA);
+    SmartDashboard.putNumber("Driving KP", Constants.DRIVER_KP);
 
     FLAG = false;
     FLAGCOUNT = 0;
@@ -59,7 +59,11 @@ public class limeLightAuton extends CommandBase {
     m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
 
     if (!m_LimeLight.isTargetValid()) {
+<<<<<<< HEAD
       m_DriveTrain.limeLightDrive(MOVE, TURN*-1); // Drive until the target is at desired distance
+=======
+      m_DriveTrain.limeLightDrive(MOVE, TURN); // Drive until the target is at desired distance
+>>>>>>> 7cc794b7f845e917afb5bf7fe0cf411b4c316a22
     } else {
       m_DriveTrain.limeLightDrive(0, 0);
       FLAGCOUNT++;

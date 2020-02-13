@@ -80,10 +80,14 @@ public final class Constants {
     //limeLight
     public static final double LIMELIGHT_SPEED_MAX = .75;
     public static final double LIMELIGHT_SPEED_MIN = -.75; 
+<<<<<<< HEAD
     public static final double STREEING_KP = .15;
+=======
+    public static final double STREEING_KP = -.15;
+>>>>>>> 7cc794b7f845e917afb5bf7fe0cf411b4c316a22
     public static final double MIN_TARGET_AREA = 3;
     public static final double DRIVER_KP = .26;
-    public static final double MAX_DRIVE = 0.7;
+    public static final double MAX_DRIVE = 1;
 
     public static final int FLAG_COUNT_MAX = 50;
 
