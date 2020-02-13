@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.driveTrain;
+import frc.robot.Constants;
 import frc.robot.subsystems.LimeLight;;
 
 public class limeLightAuton extends CommandBase {
@@ -22,6 +23,7 @@ public class limeLightAuton extends CommandBase {
   private double m_driveKP = 0.26;
 
   public boolean FLAG;
+  public int FLAGCOUNT;
 
   /**
    * Creates a new AlignWithVision.
@@ -37,6 +39,7 @@ public class limeLightAuton extends CommandBase {
     SmartDashboard.putNumber("Driving KP", .26);
 
     FLAG = false;
+    FLAGCOUNT = 0;
   }
 
   // Called when the command is initially scheduled.
@@ -54,11 +57,22 @@ public class limeLightAuton extends CommandBase {
     m_targetArea = SmartDashboard.getNumber("min TA", 0.0);
     m_driveKP = SmartDashboard.getNumber("Driving KP", 0.0);
     m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
+
     if (!m_LimeLight.isTargetValid()) {
-      m_DriveTrain.limeLightDrive(MOVE, (TURN+.2)*-1); // Drive until the target is at desired distance
+      m_DriveTrain.limeLightDrive(MOVE, TURN*-1); // Drive until the target is at desired distance
     } else {
       m_DriveTrain.limeLightDrive(0, 0);
+      FLAGCOUNT++;
+    }
+
+    if(FLAGCOUNT == Constants.FLAG_COUNT_MAX){
       FLAG = true;
+    }
+    SmartDashboard.putBoolean("FLAG", FLAG);
+    
+    if(FLAG == true){
+      end(true);
+      System.out.println("ITS DONE YOU MORON");
     }
     
   }
@@ -68,10 +82,6 @@ public class limeLightAuton extends CommandBase {
   public void end(boolean interrupted) {
     // m_LimeLight.disable();
     m_DriveTrain.limeLightDrive(0, 0); // set left and right values to 0
-    if(FLAG == true){
-      end(true);
-      System.out.println("ITS DONE YOU MORON");
-    }
   }
  
   // Returns true when the command should end.

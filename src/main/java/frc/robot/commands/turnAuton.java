@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.driveTrain;
 import frc.robot.subsystems.gyro;
@@ -19,15 +20,18 @@ public class turnAuton extends CommandBase {
   int Angle = 0;
   boolean forward;
 
+  boolean isDone;
+
   public turnAuton(driveTrain driveTrain, gyro gyro, int angle) {
-   
-    if(angle > 0){
+    isDone = false;
+
+    if(angle < 0){
       forward = true;
     }else{
       forward = false;
     }
     
-    Angle = angle;
+    Angle = Math.abs(angle);
 
     m_gyro = gyro;
     addRequirements(m_gyro);
@@ -45,7 +49,8 @@ public class turnAuton extends CommandBase {
   @Override
   public void execute() {
     m_driveTairn.autonDriveTurn(forward);
-    if(m_gyro.getAngle() >= Angle){
+    if(Math.abs(m_gyro.getAngle()) >= Angle){
+      System.out.println("ITS DONE YOU DUMB DUMB");
       end(true);
     }
   }
@@ -53,11 +58,15 @@ public class turnAuton extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    driveTrain.autonEnd();
+    Robot.resetEncoder();
+    m_gyro.reset();
+    isDone = true;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }
