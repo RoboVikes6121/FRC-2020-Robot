@@ -5,39 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Auton;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.driveTrain;
-import frc.robot.subsystems.gyro;
+import frc.robot.subsystems.shooter;
 
-public class turnAuton extends CommandBase {
-  private driveTrain m_driveTairn;
-  private gyro m_gyro; 
-
-  int Angle = 0;
-  boolean forward;
-
+public class shootAuton extends CommandBase {
+  
+  public shooter m_shooter;
   boolean isDone;
+  public shootAuton(shooter shooter) {
 
-  public turnAuton(driveTrain driveTrain, gyro gyro, int angle) {
-    isDone = false;
-
-    if(angle < 0){
-      forward = true;
-    }else{
-      forward = false;
-    }
+    m_shooter = shooter;
+    addRequirements(m_shooter);
     
-    Angle = Math.abs(angle);
-
-    m_gyro = gyro;
-    addRequirements(m_gyro);
-
-    m_driveTairn = driveTrain;
-    addRequirements(m_driveTairn);
+    isDone = false;
   }
 
   // Called when the command is initially scheduled.
@@ -48,20 +30,15 @@ public class turnAuton extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTairn.autonDriveTurn(forward);
-    if(Math.abs(m_gyro.getAngle()) >= Angle){
-      System.out.println("ITS DONE YOU DUMB DUMB");
-      end(true);
+    boolean check = m_shooter.shootAuton();
+    if(check == true){
+      isDone = true;
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.autonEnd();
-    Robot.resetEncoder();
-    m_gyro.reset();
-    isDone = true;
   }
 
   // Returns true when the command should end.

@@ -5,37 +5,37 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Auton;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.subsystems.driveTrain;
+import frc.robot.subsystems.gyro;
 
-public class moveAuton extends CommandBase {
-  double[] ENCODER_LIST;
-  double MOVE;
-  boolean forword;
+public class turnAuton extends CommandBase {
+  private driveTrain m_driveTairn;
+  private gyro m_gyro; 
+
+  int Angle = 0;
+  boolean forward;
 
   boolean isDone;
 
-  private driveTrain m_drive;
-
-  public moveAuton(driveTrain drive, int move) {
-   System.out.println("STARTING MOVING");
+  public turnAuton(driveTrain driveTrain, gyro gyro, int angle) {
     isDone = false;
 
-    Robot.resetEncoder();
-    ENCODER_LIST = Robot.GetEncoder();
-
-    MOVE = move*90;
-    if(MOVE > 0){
-      forword = false;
+    if(angle < 0){
+      forward = true;
     }else{
-      forword = true;
+      forward = false;
     }
+    
+    Angle = Math.abs(angle);
 
-    m_drive = drive;
-    addRequirements(m_drive);
+    m_gyro = gyro;
+    addRequirements(m_gyro);
+
+    m_driveTairn = driveTrain;
+    addRequirements(m_driveTairn);
   }
 
   // Called when the command is initially scheduled.
@@ -46,9 +46,9 @@ public class moveAuton extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ENCODER_LIST = Robot.GetEncoder();
-    driveTrain.autonDrive(forword);
-    if(Math.abs(ENCODER_LIST[1]) >= MOVE  ||  Math.abs(ENCODER_LIST[3]) >= MOVE){
+    m_driveTairn.autonDriveTurn(forward);
+    if(Math.abs(m_gyro.getAngle()) >= Angle-27){
+      System.out.println("ITS DONE YOU DUMB DUMB");
       end(true);
     }
   }
@@ -57,8 +57,6 @@ public class moveAuton extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     driveTrain.autonEnd();
-    System.out.println("YOU ARE DONE DUMB DUMB");
-    Robot.resetEncoder();
     isDone = true;
   }
 

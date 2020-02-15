@@ -19,20 +19,20 @@ public class driveTrain extends SubsystemBase {
   WPI_TalonSRX RIGHTSLAVE = new WPI_TalonSRX(Constants.RIGHT_DRIVE_MOTOR_2);
 
   // Creates Differential Drive
-  final DifferentialDrive drive = new DifferentialDrive(LEFTMASTER, RIGHTMASTER);
-  
+  final static DifferentialDrive drive = new DifferentialDrive(LEFTMASTER, RIGHTMASTER);
+
   public driveTrain() {
-    //Sets the slave to follow master
+    // Sets the slave to follow master
     LEFTSLAVE.follow(LEFTMASTER);
     RIGHTSLAVE.follow(RIGHTMASTER);
 
-    //set motor prefrence
+    // set motor prefrence
     LEFTMASTER.setNeutralMode(NeutralMode.Brake);
     LEFTSLAVE.setNeutralMode(NeutralMode.Brake);
     RIGHTMASTER.setNeutralMode(NeutralMode.Brake);
     RIGHTSLAVE.setNeutralMode(NeutralMode.Brake);
 
-    //set up encoders  
+    // set up encoders
     driveTrain.LEFTMASTER.configFactoryDefault();
     driveTrain.RIGHTMASTER.configFactoryDefault();
 
@@ -43,57 +43,80 @@ public class driveTrain extends SubsystemBase {
     driveTrain.RIGHTMASTER.setSensorPhase(false);
   }
 
-  public void manualDrive(double MOVE, double TURN, boolean PRECISION_BUTTON_IS_PRESSED){
+  public void manualDrive(double MOVE, double TURN, boolean PRECISION_BUTTON_IS_PRESSED) {
     // setting min and max speed
-    if(PRECISION_BUTTON_IS_PRESSED == true){ // setting speeds when the button is pressed
-      if(MOVE > Constants.PRECISION_MAX_MOVE_SPEED) MOVE = Constants.PRECISION_MAX_MOVE_SPEED;
-      if(MOVE < Constants.PRECISION_MIN_MOVE_SPEED) MOVE = Constants.PRECISION_MIN_MOVE_SPEED;
-      if(TURN > Constants.PRECISION_MAX_MOVE_SPEED) TURN = Constants.PRECISION_MAX_MOVE_SPEED+.15;
-      if(TURN < Constants.PRECISION_MIN_MOVE_SPEED) TURN = Constants.PRECISION_MIN_MOVE_SPEED-.15;
-    }else{ // setting speeds when the button is not pushed   
-      if(MOVE > Constants.MAX_MOVE_SPEED) MOVE = Constants.MAX_MOVE_SPEED;
-      if(MOVE < Constants.MIN_MOVE_SPEED) MOVE = Constants.MIN_MOVE_SPEED;
-      if(TURN > Constants.MAX_MOVE_SPEED) TURN = Constants.MAX_MOVE_SPEED;
-      if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
-      
-      //this is code it implent tyhe encoders into the drive train but i  have it comentted till we test getting information from the encoders 
-      if(TURN == 0){ //implemting the encoders into the drive train 
+    if (PRECISION_BUTTON_IS_PRESSED == true) { // setting speeds when the button is pressed
+      if (MOVE > Constants.PRECISION_MAX_MOVE_SPEED)
+        MOVE = Constants.PRECISION_MAX_MOVE_SPEED;
+      if (MOVE < Constants.PRECISION_MIN_MOVE_SPEED)
+        MOVE = Constants.PRECISION_MIN_MOVE_SPEED;
+      if (TURN > Constants.PRECISION_MAX_MOVE_SPEED)
+        TURN = Constants.PRECISION_MAX_MOVE_SPEED + .15;
+      if (TURN < Constants.PRECISION_MIN_MOVE_SPEED)
+        TURN = Constants.PRECISION_MIN_MOVE_SPEED - .15;
+    } else { // setting speeds when the button is not pushed
+      if (MOVE > Constants.MAX_MOVE_SPEED)
+        MOVE = Constants.MAX_MOVE_SPEED;
+      if (MOVE < Constants.MIN_MOVE_SPEED)
+        MOVE = Constants.MIN_MOVE_SPEED;
+      if (TURN > Constants.MAX_MOVE_SPEED)
+        TURN = Constants.MAX_MOVE_SPEED;
+      if (TURN < Constants.MIN_MOVE_SPEED)
+        TURN = Constants.MIN_MOVE_SPEED;
+
+      // this is code it implent tyhe encoders into the drive train but i have it
+      // comentted till we test getting information from the encoders
+      if (TURN == 0) { // implemting the encoders into the drive train
         double[] ENCODER_LIST = Robot.GetEncoder();
         double dif;
-        if(ENCODER_LIST[0] > ENCODER_LIST[3]){ 
+        if (ENCODER_LIST[0] > ENCODER_LIST[3]) {
           dif = ENCODER_LIST[0] - ENCODER_LIST[3];
           TURN = dif;
-          if(TURN > Constants.MAX_MOVE_SPEED) TURN = Constants.MAX_MOVE_SPEED;
-          if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
+          if (TURN > Constants.MAX_MOVE_SPEED)
+            TURN = Constants.MAX_MOVE_SPEED;
+          if (TURN < Constants.MIN_MOVE_SPEED)
+            TURN = Constants.MIN_MOVE_SPEED;
         }
-        if(ENCODER_LIST[0] < ENCODER_LIST[3]){
+        if (ENCODER_LIST[0] < ENCODER_LIST[3]) {
           dif = ENCODER_LIST[0] - ENCODER_LIST[3];
           TURN = dif;
-          if(TURN > Constants.MAX_MOVE_SPEED) TURN = Constants.MAX_MOVE_SPEED;
-          if(TURN < Constants.MIN_MOVE_SPEED) TURN = Constants.MIN_MOVE_SPEED;
+          if (TURN > Constants.MAX_MOVE_SPEED)
+            TURN = Constants.MAX_MOVE_SPEED;
+          if (TURN < Constants.MIN_MOVE_SPEED)
+            TURN = Constants.MIN_MOVE_SPEED;
         }
-      } 
+      }
     }
     drive.arcadeDrive(MOVE, TURN);
   }
 
-  public static void autonDrive(boolean forward){
-    if(forward == true){
-      LEFTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
-      RIGHTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
+  public static void autonDrive(boolean forward, boolean speed) {
+    if(speed == true){
+      if(forward == true){
+        LEFTMASTER.set(ControlMode.PercentOutput, -Constants.MAX_MOVE_SPEED);
+        RIGHTMASTER.set(ControlMode.PercentOutput, Constants.MAX_MOVE_SPEED);
+      }else{
+        LEFTMASTER.set(ControlMode.PercentOutput, Constants.MAX_MOVE_SPEED);
+        RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.MAX_MOVE_SPEED);
+      }
     }else{
-      LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
-      RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
+      if(forward == true){
+        LEFTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
+        RIGHTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
+      }else{
+        LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
+        RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
+      }
     }
   }
 
   public void autonDriveTurn(boolean forward){
     if(forward == true){
-      LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED+.2);
-      RIGHTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED+.2);
+      LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
+      RIGHTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
     }else{
-      LEFTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED-.2);
-      RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED-.2);
+      LEFTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
+      RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
     }
   }
 

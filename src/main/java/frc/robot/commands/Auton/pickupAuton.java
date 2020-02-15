@@ -5,27 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Auton;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.LimeLight;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.subsystems.driveTrain;
-import frc.robot.subsystems.gyro;
-import frc.robot.subsystems.shooter;
+import frc.robot.subsystems.intake;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class autonPink extends SequentialCommandGroup {
-
-  public autonPink(driveTrain m_driveTrain, LimeLight m_limeLight, gyro m_gyro, shooter m_shooter) {
-    System.out.println("ONE");
-    addCommands(
-      //new limeLightAuton(m_driveTrain, m_limeLight),
-      new turnAuton(m_driveTrain, m_gyro, 180), 
-      new moveAuton(m_driveTrain, 70),
-      new moveAuton(m_driveTrain, -70),
-      new turnAuton(m_driveTrain, m_gyro, -170)
-    );
+public class pickupAuton extends ParallelCommandGroup {
+  /**
+   * Creates a new pickupAuton.
+   */
+  public pickupAuton(driveTrain m_driveTrain, intake m_intake) {
+    super(new moveAuton(m_driveTrain, 100, false));
   }
 }

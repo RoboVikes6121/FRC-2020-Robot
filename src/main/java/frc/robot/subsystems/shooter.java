@@ -16,17 +16,17 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class shooter extends SubsystemBase {
-  public static TalonFX MASTER = new TalonFX(Constants.SHOOTER_MOTOR);  // encoders 6,7
+  public static TalonFX MASTER = new TalonFX(Constants.SHOOTER_MOTOR); // encoders 6,7
 
   private final double kP = 0.15;
-	private final double kI = 0.0;
-	private final double kD = 1.0;
+  private final double kI = 0.0;
+  private final double kD = 1.0;
   private final double kF = 0.0;
   private final int kTimeoutMs = 30;
 
   public shooter() {
     MASTER.setNeutralMode(NeutralMode.Brake);
-    
+
     MASTER.configFactoryDefault();
 
     MASTER.setInverted(false);
@@ -43,24 +43,35 @@ public class shooter extends SubsystemBase {
   double priError = 0;
   double deri = 0;
 
-  public boolean shoot(){
+  public boolean shoot() {
     double[] ENCODER_LIST = Robot.GetEncoder();
 
     double error = Constants.SHOOTER_SPEED_VOL - ENCODER_LIST[6];
-    sumError += error/.02;
-    deri = (error-priError)/.02;
-    double OUTPUT = (kP*error) + (kI*sumError) + (kD*deri);
+    sumError += error / .02;
+    deri = (error - priError) / .02;
+    double OUTPUT = (kP * error) + (kI * sumError) + (kD * deri);
 
     MASTER.set(ControlMode.PercentOutput, OUTPUT);
     priError = error;
 
     MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
 
-    if(ENCODER_LIST[6] >= Constants.SHOOTER_SPEED_VOL){
+    if (ENCODER_LIST[6] >= Constants.SHOOTER_SPEED_VOL) {
       return true;
-    }else{
+    } else {
       return false;
     }
+  }
+
+  int count = 0;
+  public boolean shootAuton() {
+     if(count >= 100){
+       count = 0;
+      return true;
+     }else{
+      count++;
+      return false;
+     }
   }
 
   public void end(){

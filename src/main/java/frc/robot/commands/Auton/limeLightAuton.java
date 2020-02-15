@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Auton;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -22,24 +22,23 @@ public class limeLightAuton extends CommandBase {
   private double m_targetArea = Constants.MIN_TARGET_AREA;
   private double m_driveKP = Constants.DRIVER_KP;
 
-  public boolean FLAG;
-  public int FLAGCOUNT;
+  public boolean isDone;
+  public int count;
 
   /**
    * Creates a new AlignWithVision.
    */
-  public limeLightAuton(driveTrain driveTrain, LimeLight limeLight) {
+  public limeLightAuton(driveTrain driveTrain, LimeLight limeLight, double min_ta) {
     m_DriveTrain = driveTrain;
     m_LimeLight = limeLight;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_DriveTrain, m_LimeLight);
 
     SmartDashboard.putNumber("Steering KP", Constants.STREEING_KP);
-    SmartDashboard.putNumber("min TA", Constants.MIN_TARGET_AREA);
+    SmartDashboard.putNumber("min TA", min_ta);
     SmartDashboard.putNumber("Driving KP", Constants.DRIVER_KP);
 
-    FLAG = false;
-    FLAGCOUNT = 0;
+    isDone = false;
   }
 
   // Called when the command is initially scheduled.
@@ -59,32 +58,20 @@ public class limeLightAuton extends CommandBase {
     m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
 
     if (!m_LimeLight.isTargetValid()) {
-<<<<<<< HEAD
-      m_DriveTrain.limeLightDrive(MOVE, TURN*-1); // Drive until the target is at desired distance
-=======
-      m_DriveTrain.limeLightDrive(MOVE, TURN); // Drive until the target is at desired distance
->>>>>>> 7cc794b7f845e917afb5bf7fe0cf411b4c316a22
+      m_DriveTrain.limeLightDrive(MOVE, -TURN); // Drive until the target is at desired distance
     } else {
       m_DriveTrain.limeLightDrive(0, 0);
-      FLAGCOUNT++;
     }
 
-    if(FLAGCOUNT == Constants.FLAG_COUNT_MAX){
-      FLAG = true;
+    if(MOVE < .35 && TURN < .35){
+      isDone = true;
     }
-    SmartDashboard.putBoolean("FLAG", FLAG);
-    
-    if(FLAG == true){
-      end(true);
-      System.out.println("ITS DONE YOU MORON");
-    }
-    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // m_LimeLight.disable();
+    m_LimeLight.disable();
     m_DriveTrain.limeLightDrive(0, 0); // set left and right values to 0
   }
  
@@ -93,6 +80,6 @@ public class limeLightAuton extends CommandBase {
   public boolean isFinished() {
     // don't return true ever, command will end after button is released
     
-    return false;
+    return isDone;
   }
 }
