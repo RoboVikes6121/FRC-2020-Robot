@@ -166,6 +166,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    RobotContainer.m_LimeLight.disable();
+    RobotContainer.m_gyro.reset();
+    resetEncoder();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
