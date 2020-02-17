@@ -33,10 +33,10 @@ public class shooter extends SubsystemBase {
 
     MASTER.setSensorPhase(false);
 
-    MASTER.config_kP(1, kP, kTimeoutMs);
-    MASTER.config_kI(0, kI, kTimeoutMs);
-    MASTER.config_kD(0, kD, kTimeoutMs);
-    MASTER.config_kF(0, kF, kTimeoutMs);
+    //MASTER.config_kP(1, kP, kTimeoutMs);
+    //MASTER.config_kI(0, kI, kTimeoutMs);
+    //MASTER.config_kD(0, kD, kTimeoutMs);
+    //MASTER.config_kF(0, kF, kTimeoutMs);
   }
 
   double sumError = 0;
@@ -54,8 +54,6 @@ public class shooter extends SubsystemBase {
     MASTER.set(ControlMode.PercentOutput, OUTPUT);
     priError = error;
 
-    MASTER.set(ControlMode.PercentOutput, Constants.SHOOTER_SPEED);
-
     if (ENCODER_LIST[6] >= Constants.SHOOTER_SPEED_VOL) {
       return true;
     } else {
@@ -65,7 +63,7 @@ public class shooter extends SubsystemBase {
 
   int count = 0;
   public boolean shootAuton() {
-     if(count >= 100){
+     if(count >= 450){
        count = 0;
       return true;
      }else{

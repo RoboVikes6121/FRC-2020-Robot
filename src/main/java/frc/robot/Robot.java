@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
     
     // autonomous chooser on the dashboard.
     m_chooser.setDefaultOption("Do Nothing", new endAuton());
-    m_chooser.addOption("Pink", new autonPink(RobotContainer.m_driveTrain, RobotContainer.m_LimeLight, RobotContainer.m_gyro, 
+    m_chooser.addOption("Pink", new autonPink(RobotContainer.m_drive, RobotContainer.m_LimeLight, RobotContainer.m_gyro, 
     RobotContainer.m_shooter, RobotContainer.m_intake));
     m_robotContainer = new RobotContainer();
     
@@ -179,9 +179,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    m_autonomousCommand = new  autonPink(RobotContainer. m_drive, RobotContainer.m_LimeLight, RobotContainer.m_gyro, RobotContainer.m_shooter, RobotContainer.m_intake);
     // schedule the autonomous command (example)
     m_autonomousCommand = m_chooser.getSelected();
-    m_autonomousCommand = new  autonPink(RobotContainer.m_driveTrain, RobotContainer.m_LimeLight, RobotContainer.m_gyro, RobotContainer.m_shooter, RobotContainer.m_intake);
+    m_autonomousCommand = new  autonPink(RobotContainer.m_drive, RobotContainer.m_LimeLight, RobotContainer.m_gyro, RobotContainer.m_shooter, RobotContainer.m_intake);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }

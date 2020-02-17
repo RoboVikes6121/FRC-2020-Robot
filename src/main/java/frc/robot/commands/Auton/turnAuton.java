@@ -16,20 +16,13 @@ public class turnAuton extends CommandBase {
   private gyro m_gyro; 
 
   int Angle = 0;
-  boolean forward;
 
   boolean isDone;
 
   public turnAuton(driveTrain driveTrain, gyro gyro, int angle) {
     isDone = false;
-
-    if(angle < 0){
-      forward = true;
-    }else{
-      forward = false;
-    }
     
-    Angle = Math.abs(angle);
+    Angle = angle;
 
     m_gyro = gyro;
     addRequirements(m_gyro);
@@ -46,18 +39,17 @@ public class turnAuton extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTairn.autonDriveTurn(forward);
-    if(Math.abs(m_gyro.getAngle()) >= Angle-27){
-      System.out.println("ITS DONE YOU DUMB DUMB");
-      end(true);
+    boolean check = m_driveTairn.autonDriveTurn(Angle);
+  
+    if(check == true){
+      isDone = true;
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveTrain.autonEnd();
-    isDone = true;
+    m_driveTairn.autonEnd();
   }
 
   // Returns true when the command should end.

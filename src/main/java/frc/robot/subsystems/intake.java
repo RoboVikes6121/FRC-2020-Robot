@@ -11,12 +11,13 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class intake extends SubsystemBase {
   VictorSPX MASTER = new VictorSPX(Constants.INTAKE_MOTOR);
-  DoubleSolenoid MAIN = new DoubleSolenoid(Constants.INTAKE_OUT_SOUL, Constants.INTAKE_IN_SOUL);
+  Solenoid MAIN = new Solenoid(Constants.INTAKE_SOUL);
 
   public boolean INTAKESTATE = true;
 
@@ -30,10 +31,14 @@ public class intake extends SubsystemBase {
 
   public void intakeUpDown(){
     if(INTAKESTATE == false){
-      MAIN.set(DoubleSolenoid.Value.kForward);
+      MAIN.set(true);
     }else{
-      MAIN.set(DoubleSolenoid.Value.kReverse);
+      MAIN.set(false);
     }
+  }
+
+  public boolean getIntakeStat(){
+    return INTAKESTATE;
   }
 
   public void end(){

@@ -8,18 +8,28 @@
 package frc.robot.commands.Auton;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.intake;
 import frc.robot.subsystems.shooter;
 
 public class shootAuton extends CommandBase {
   
   public shooter m_shooter;
+  public intake m_intake;
+
   boolean isDone;
-  public shootAuton(shooter shooter) {
+  public shootAuton(shooter shooter, intake intake) {
 
     m_shooter = shooter;
     addRequirements(m_shooter);
+
+    m_intake = intake;
+    addRequirements(m_intake);
     
     isDone = false;
+
+    if(m_intake.getIntakeStat() == true){
+      m_intake.intakeUpDown();
+    }
   }
 
   // Called when the command is initially scheduled.

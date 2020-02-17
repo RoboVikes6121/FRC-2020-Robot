@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public final static driveTrain m_driveTrain = new driveTrain();
+  public final static driveTrain  m_drive = new driveTrain();
   public final static intake m_intake = new intake();
   public final static LimeLight m_LimeLight = new LimeLight();
   public final static pto m_pto = new pto();
@@ -60,7 +60,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     // Configure the button bindings
-    DRIVER_A.whileHeld(new limeLightDrive(m_driveTrain, m_LimeLight));
+    DRIVER_A.whileHeld(new limeLightDrive( m_drive, m_LimeLight));
 
     // shooter
     SEC_1.whenHeld(new shoot(m_shooter, m_intake));

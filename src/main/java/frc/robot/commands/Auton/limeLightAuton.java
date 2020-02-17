@@ -14,7 +14,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.LimeLight;;
 
 public class limeLightAuton extends CommandBase {
-  private final driveTrain m_DriveTrain;
+  private final driveTrain  m_drive;
   private final LimeLight m_LimeLight;
 
   // Constants: tune driving and steering control constants
@@ -29,10 +29,10 @@ public class limeLightAuton extends CommandBase {
    * Creates a new AlignWithVision.
    */
   public limeLightAuton(driveTrain driveTrain, LimeLight limeLight, double min_ta) {
-    m_DriveTrain = driveTrain;
+     m_drive = driveTrain;
     m_LimeLight = limeLight;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_DriveTrain, m_LimeLight);
+    addRequirements( m_drive, m_LimeLight);
 
     SmartDashboard.putNumber("Steering KP", Constants.STREEING_KP);
     SmartDashboard.putNumber("min TA", min_ta);
@@ -58,9 +58,9 @@ public class limeLightAuton extends CommandBase {
     m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
 
     if (!m_LimeLight.isTargetValid()) {
-      m_DriveTrain.limeLightDrive(MOVE, TURN*-1); // Drive until the target is at desired distance
+       m_drive.limeLightDrive(MOVE, -TURN); // Drive until the target is at desired distance
     } else {
-      m_DriveTrain.limeLightDrive(0, 0);
+       m_drive.limeLightDrive(0, 0);
     }
 
     if(MOVE < .35 && TURN < .35){
@@ -72,7 +72,7 @@ public class limeLightAuton extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_LimeLight.disable();
-    m_DriveTrain.limeLightDrive(0, 0); // set left and right values to 0
+     m_drive.limeLightDrive(0, 0); // set left and right values to 0
   }
  
   // Returns true when the command should end.

@@ -40,8 +40,7 @@ public final class Constants {
     //intack                                                      SUB - DONE   COMMAND - DONE 
     public static final int INTAKE_MOTOR = 6;
 
-    public static final int INTAKE_OUT_SOUL = 3;
-    public static final int INTAKE_IN_SOUL = 4;
+    public static final int INTAKE_SOUL = 3;
 
     public static final double INDEX_SPEED = .70; // dont know speed yet
     public static final double INTAKE_SPEED = .75; // dont know speed yet
@@ -81,7 +80,7 @@ public final class Constants {
     //limeLight
     public static final double LIMELIGHT_SPEED_MAX = .75;
     public static final double LIMELIGHT_SPEED_MIN = -.75; 
-    public static final double STREEING_KP = .15;
+    public static final double STREEING_KP = -.05;
     public static final double MIN_TARGET_AREA = 3;
     public static final double DRIVER_KP = .26;
     public static final double MAX_DRIVE = 1;
