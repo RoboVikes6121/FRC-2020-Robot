@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.intakeIn;
 import frc.robot.commands.intakeOut;
+import frc.robot.commands.intakeUpDown;
 import frc.robot.commands.clime;
 import frc.robot.commands.elvDown;
 import frc.robot.commands.elvUp;
@@ -57,6 +58,7 @@ public class RobotContainer {
   public final JoystickButton SEC_7 = new JoystickButton(SEC_CONTROLER, Constants.BUTTON_WOF_UPDOWN);
   public final JoystickButton SEC_8 = new JoystickButton(SEC_CONTROLER, Constants.BUTTON_WOF);
   public final JoystickButton SEC_9 = new JoystickButton(SEC_CONTROLER, Constants.BUTTON_WOF_MANUAL);
+  public final JoystickButton SEC_10 = new JoystickButton(SEC_CONTROLER, Constants.BUTTON_INTAKE_UPDONW);
 
   public RobotContainer() {
     // Configure the button bindings
@@ -68,6 +70,7 @@ public class RobotContainer {
     // intake
     SEC_2.whenHeld(new intakeIn(m_intake));
     SEC_3.whenHeld(new intakeOut(m_intake));
+    SEC_10.whenReleased(new intakeUpDown(m_intake));
 
     //elivator
     SEC_4.whenHeld(new elvUp(m_pto));

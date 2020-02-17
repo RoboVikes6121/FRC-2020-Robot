@@ -70,6 +70,7 @@ public final class Constants {
     public static final int BUTTON_SHOOTER = 1;
     public static final int BUTTON_INTAKE_IN = 2;
     public static final int BUTTON_INTAKE_OUT = 3;
+    public static final int BUTTON_INTAKE_UPDONW = 10;
     public static final int BUTTON_CLIMB = 4;
     public static final int BUTTON_ELIVATOR_UP = 5;
     public static final int BUTTON_ELIVATOR_DOWN = 6;
