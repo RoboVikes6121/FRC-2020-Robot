@@ -151,8 +151,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new  autonPink(RobotContainer.m_driveTrain, RobotContainer.m_LimeLight, 
-    RobotContainer.m_gyro, RobotContainer.m_shooter, RobotContainer.m_intake);
+    m_autonomousCommand = new  autonPink(RobotContainer. m_drive, RobotContainer.m_LimeLight, RobotContainer.m_gyro, RobotContainer.m_shooter, RobotContainer.m_intake);
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

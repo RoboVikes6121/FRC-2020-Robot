@@ -32,7 +32,7 @@ public class driveManual extends CommandBase {
     double TURN = Robot.m_robotContainer.GetDriveRawAxis(Constants.LEFT_STICK_X);
     boolean PRECISION_BUTTON_IS_PRESSED = Robot.m_robotContainer.GetRawButton(Constants.PRECISION_BUTTON);
     //calling drive 
-    RobotContainer.m_driveTrain.manualDrive((MOVE*-1), TURN, PRECISION_BUTTON_IS_PRESSED);
+    RobotContainer. m_drive.manualDrive((MOVE*-1), TURN, PRECISION_BUTTON_IS_PRESSED);
   }
 
   // Called once the command ends or is interrupted.

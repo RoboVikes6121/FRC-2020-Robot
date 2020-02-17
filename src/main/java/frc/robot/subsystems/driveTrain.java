@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 // import com.ctre.phoenix.motorcontrol.can.TalonSRX; //Today I learned that WPI_TalonSRX just extends TalonSRX and adds in the WPI functionality - Andrew 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -63,64 +64,50 @@ public class driveTrain extends SubsystemBase {
         TURN = Constants.MAX_MOVE_SPEED;
       if (TURN < Constants.MIN_MOVE_SPEED)
         TURN = Constants.MIN_MOVE_SPEED;
-
-      // this is code it implent tyhe encoders into the drive train but i have it
-      // comentted till we test getting information from the encoders
-      if (TURN == 0) { // implemting the encoders into the drive train
-        double[] ENCODER_LIST = Robot.GetEncoder();
-        double dif;
-        if (ENCODER_LIST[0] > ENCODER_LIST[3]) {
-          dif = ENCODER_LIST[0] - ENCODER_LIST[3];
-          TURN = dif;
-          if (TURN > Constants.MAX_MOVE_SPEED)
-            TURN = Constants.MAX_MOVE_SPEED;
-          if (TURN < Constants.MIN_MOVE_SPEED)
-            TURN = Constants.MIN_MOVE_SPEED;
-        }
-        if (ENCODER_LIST[0] < ENCODER_LIST[3]) {
-          dif = ENCODER_LIST[0] - ENCODER_LIST[3];
-          TURN = dif;
-          if (TURN > Constants.MAX_MOVE_SPEED)
-            TURN = Constants.MAX_MOVE_SPEED;
-          if (TURN < Constants.MIN_MOVE_SPEED)
-            TURN = Constants.MIN_MOVE_SPEED;
-        }
-      }
     }
     drive.arcadeDrive(MOVE, TURN);
   }
 
-  public static void autonDrive(boolean forward, boolean speed) {
-    if(speed == true){
-      if(forward == true){
-        LEFTMASTER.set(ControlMode.PercentOutput, -Constants.MAX_MOVE_SPEED);
-        RIGHTMASTER.set(ControlMode.PercentOutput, Constants.MAX_MOVE_SPEED);
-      }else{
-        LEFTMASTER.set(ControlMode.PercentOutput, Constants.MAX_MOVE_SPEED);
-        RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.MAX_MOVE_SPEED);
-      }
+  public static void autonDrive(double power) {
+    double kP = .001;
+    double error = 0 - RobotContainer.m_gyro.getAngle();
+    double turn = kP * error;
+    drive.arcadeDrive(power, turn);
+  }
+
+  double sumError = 0;
+  double priError = 0;
+  double deri = 0;
+
+  public boolean autonDriveTurn(double angle) {
+
+    double kP = .05;
+    double kI = 0;
+    double kD = .001;
+
+    double error = angle - RobotContainer.m_gyro.getAngle();
+    sumError += error / .02;
+    deri = (error - priError) / .02;
+    double turn = (kP * error) + (kI * sumError) + (kD * deri);
+
+    if(turn > .6){
+      turn = .6;
+    }
+    if(turn < -.6){
+      turn = -.6;
+    }
+
+    drive.arcadeDrive(0, -turn);
+    priError = error;
+
+    if(Math.abs(turn) <= .01){
+      return true;
     }else{
-      if(forward == true){
-        LEFTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
-        RIGHTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
-      }else{
-        LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
-        RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
-      }
+      return false;
     }
   }
 
-  public void autonDriveTurn(boolean forward){
-    if(forward == true){
-      LEFTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
-      RIGHTMASTER.set(ControlMode.PercentOutput, Constants.PRECISION_MAX_MOVE_SPEED);
-    }else{
-      LEFTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
-      RIGHTMASTER.set(ControlMode.PercentOutput, -Constants.PRECISION_MAX_MOVE_SPEED);
-    }
-  }
-
-  public static void autonEnd(){
+  public void autonEnd(){
     LEFTMASTER.set(ControlMode.PercentOutput, 0);
     RIGHTMASTER.set(ControlMode.PercentOutput, 0);
   }
@@ -135,6 +122,6 @@ public class driveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    setDefaultCommand(new driveManual(RobotContainer.m_driveTrain));
+    setDefaultCommand(new driveManual(RobotContainer. m_drive));
   }
 }

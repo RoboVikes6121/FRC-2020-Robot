@@ -18,7 +18,7 @@ public class pickupAuton extends ParallelCommandGroup {
   /**
    * Creates a new pickupAuton.
    */
-  public pickupAuton(driveTrain m_driveTrain, intake m_intake) {
-    super(new moveAuton(m_driveTrain, 100, false));
+  public pickupAuton(driveTrain  m_drive, intake m_intake, int dis, double power) {
+    super(new moveAuton( m_drive, dis, power));
   }
 }
