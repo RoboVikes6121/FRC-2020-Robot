@@ -57,11 +57,7 @@ public class limeLightDrive extends CommandBase {
     
 
     if (!m_LimeLight.isTargetValid()) {
-<<<<<<< HEAD
-      m_DriveTrain.limeLightDrive(MOVE, -TURN); // Drive until the target is at desired distance
-=======
       m_DriveTrain.limeLightDrive(MOVE, TURN*-1); // Drive until the target is at desired distance
->>>>>>> 59935c29226550f2ab79df1d5f53afbf65372a0f
     } else {
       m_DriveTrain.limeLightDrive(0, 0);
     }

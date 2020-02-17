@@ -58,11 +58,7 @@ public class limeLightAuton extends CommandBase {
     m_steeringKP = SmartDashboard.getNumber("Steering KP", 0.0);
 
     if (!m_LimeLight.isTargetValid()) {
-<<<<<<< HEAD:src/main/java/frc/robot/commands/Auton/limeLightAuton.java
-      m_DriveTrain.limeLightDrive(MOVE, -TURN); // Drive until the target is at desired distance
-=======
       m_DriveTrain.limeLightDrive(MOVE, TURN*-1); // Drive until the target is at desired distance
->>>>>>> 59935c29226550f2ab79df1d5f53afbf65372a0f:src/main/java/frc/robot/commands/limeLightAuton.java
     } else {
       m_DriveTrain.limeLightDrive(0, 0);
     }
