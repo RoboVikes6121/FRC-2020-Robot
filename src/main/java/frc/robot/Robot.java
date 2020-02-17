@@ -1,14 +1,18 @@
 package frc.robot;
 
+import java.util.ArrayList;
+
 import com.ctre.phoenix.motorcontrol.Faults;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Auton.autonPink;
+import frc.robot.commands.Auton.endAuton;
 import frc.robot.subsystems.driveTrain;
 import frc.robot.subsystems.pto;
 import frc.robot.subsystems.shooter;
@@ -21,20 +25,41 @@ public class Robot extends TimedRobot {
   public static RobotContainer m_robotContainer;
   private final static I2C.Port i2cPort = I2C.Port.kOnboard;
   private final static ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+ 
 
   Faults faults = new Faults();
 
+  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  public static final boolean verbose = false;
+  private ArrayList<String> commandList;
+
   @Override
   public void robotInit() {
-    //cameras
+    // Instantiate our RobotContainer. This will perform all our button bindings,
+    
+    // Adds camra to the smart dashbord
     CameraServer.getInstance().startAutomaticCapture();
     CameraServer.getInstance().startAutomaticCapture();
-
-    //creating robot
-    m_robotContainer = new RobotContainer();
-
+    
+    // Resets the Gyro and encoders to zero
     resetEncoder();
     RobotContainer.m_gyro.reset();
+    
+    
+    // autonomous chooser on the dashboard.
+    m_chooser.setDefaultOption("Do Nothing", new endAuton());
+    m_chooser.addOption("Pink", new autonPink(RobotContainer.m_drive, RobotContainer.m_LimeLight, RobotContainer.m_gyro, 
+    RobotContainer.m_shooter, RobotContainer.m_intake));
+    m_robotContainer = new RobotContainer();
+    
+    commandList = new ArrayList<String>();
+    if (verbose) {
+      CommandScheduler.getInstance().onCommandExecute(command -> {
+        commandList.add(command.getName());
+      });
+    }
+    SmartDashboard.putData(m_chooser);
+  
   }
 
   public static double[] GetEncoder() {
@@ -156,6 +181,8 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = new  autonPink(RobotContainer. m_drive, RobotContainer.m_LimeLight, RobotContainer.m_gyro, RobotContainer.m_shooter, RobotContainer.m_intake);
     // schedule the autonomous command (example)
+    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = new  autonPink(RobotContainer.m_drive, RobotContainer.m_LimeLight, RobotContainer.m_gyro, RobotContainer.m_shooter, RobotContainer.m_intake);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
