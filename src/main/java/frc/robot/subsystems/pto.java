@@ -14,7 +14,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 
 public class pto extends SubsystemBase {
   public static TalonFX MASTER = new TalonFX(Constants.MASTER_PTO_MOTOR); // encoders 4,5
@@ -38,48 +37,18 @@ public class pto extends SubsystemBase {
   }
 
   public void climb() {
-    if(CRESETFLAG == false){
-      Robot.resetEncoder();
-    }
     MAIN.set(true);
-
-    double[] ENCODER_LIST = Robot.GetEncoder();
-
-    if(ENCODER_LIST[5] <= Constants.CLIMB_POS){
-      MASTER.set(ControlMode.PercentOutput, Constants.CLIMB_SPEED);
-    }else{
-      MASTER.set(ControlMode.PercentOutput, 0);
-    }
-
+    MASTER.set(ControlMode.PercentOutput, Constants.CLIMB_SPEED);
   }
 
   public void elvUp(){
-    if(ERESETFLAG == false){
-      Robot.resetEncoder();
-      ERESETFLAG = true;
-    }
-
     MAIN.set(false);
-
-    double[] ENCODER_LIST = Robot.GetEncoder();
-
-    if(ENCODER_LIST[5] <= Constants.ELIVATOR_POS){
-      MASTER.set(ControlMode.PercentOutput, Constants.ELIVATOR_SPEED);
-    }else{
-      MASTER.set(ControlMode.PercentOutput, 0);
-    }
+    MASTER.set(ControlMode.PercentOutput, Constants.ELIVATOR_SPEED);
   }
 
   public void elvDown(){
-    MAIN.set(true);
-    
-    double[] ENCODER_LIST = Robot.GetEncoder();
-
-    if(ENCODER_LIST[5] >= 0){
-      MASTER.set(ControlMode.PercentOutput, Constants.ELIVATOR_SPEED);
-    }else{
-      MASTER.set(ControlMode.PercentOutput, 0);
-    }
+    MAIN.set(false);
+    MASTER.set(ControlMode.PercentOutput, -Constants.ELIVATOR_SPEED);
   }
 
   public void end(){

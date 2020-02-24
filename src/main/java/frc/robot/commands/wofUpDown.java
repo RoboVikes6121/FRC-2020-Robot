@@ -14,10 +14,13 @@ import frc.robot.subsystems.wof;
 public class wofUpDown extends CommandBase {
   
   private final wof m_wof; 
+  boolean isDone;
 
   public wofUpDown(wof wof) {
     m_wof = wof;
     addRequirements(m_wof);
+
+    isDone = false;
   }
 
   // Called when the command is initially scheduled.
@@ -29,6 +32,7 @@ public class wofUpDown extends CommandBase {
   @Override
   public void execute() {
     RobotContainer.m_wof.upDown();
+    isDone = true;
   }
   // Called once the command ends or is interrupted.
   @Override
@@ -39,6 +43,6 @@ public class wofUpDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }

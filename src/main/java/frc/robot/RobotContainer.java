@@ -70,7 +70,7 @@ public class RobotContainer {
     // intake
     SEC_2.whenHeld(new intakeIn(m_intake));
     SEC_3.whenHeld(new intakeOut(m_intake));
-    SEC_10.whenReleased(new intakeUpDown(m_intake));
+    SEC_10.whenPressed(new intakeUpDown(m_intake));
 
     //elivator
     SEC_4.whenHeld(new elvUp(m_pto));
@@ -80,7 +80,7 @@ public class RobotContainer {
     //wof
     SEC_7.whenPressed(new wofUpDown(m_wof));
     SEC_8.whenPressed(new wofAuton(m_wof));
-    SEC_9.whenHeld(new wofManual(m_wof));
+    SEC_9.whenPressed(new wofManual(m_wof));
     
     configureButtonBindings();
   }

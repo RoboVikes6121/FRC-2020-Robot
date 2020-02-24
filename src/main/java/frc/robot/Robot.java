@@ -23,8 +23,7 @@ import edu.wpi.first.wpilibj.I2C;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static RobotContainer m_robotContainer;
-  private final static I2C.Port i2cPort = I2C.Port.kOnboard;
-  private final static ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+  
  
 
   Faults faults = new Faults();
@@ -78,7 +77,7 @@ public class Robot extends TimedRobot {
     //ENCODER_LIST[5] = pto.MASTER.getSelectedSensorPosition();
 
     // encoder Shooter master or 6,7
-    //ENCODER_LIST[6] = shooter.MASTER.getSelectedSensorVelocity();
+    ENCODER_LIST[6] = shooter.MASTER.getSelectedSensorVelocity();
     //ENCODER_LIST[7] = shooter.MASTER.getSelectedSensorPosition();
 
     return ENCODER_LIST;
@@ -90,6 +89,9 @@ public class Robot extends TimedRobot {
     pto.MASTER.setSelectedSensorPosition(0, 0, 10);
     shooter.MASTER.setSelectedSensorPosition(0, 0, 10);
   }
+
+  private final static I2C.Port i2cPort = I2C.Port.kOnboard;
+  private final static ColorSensorV3 m_colorSensor =  new ColorSensorV3(i2cPort);
 
   public static Color getColor() {
     Color COLOR = m_colorSensor.getColor();

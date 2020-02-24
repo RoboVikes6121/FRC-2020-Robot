@@ -25,7 +25,7 @@ public class wof extends SubsystemBase {
   boolean WOFSTATE = false; 
 
   public void spin(){
-    char INPUT = Robot.gameData();
+    char INPUT =  Robot.gameData();
     String COLOR_ONE = Robot.getColorString(Robot.getColor());
     char COLOR = Robot.getColorString(Robot.getColor()).charAt(0);
     counter = 0;
@@ -33,7 +33,6 @@ public class wof extends SubsystemBase {
 
     if(INPUT == 'n'){
       MASTER.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
-
       if(flag == 0){
         if (Robot.getColorString(Robot.getColor()) != COLOR_ONE) flag = 1;
       }else if(flag == 1){
@@ -55,20 +54,32 @@ public class wof extends SubsystemBase {
     }
   }
 
-  public void manualSpin(){
+  int time = 0;
+  public boolean manualSpin(){
     MASTER.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
+
+    if(time == 850){
+      time = 0;
+      return true;
+    }else{
+      time++;
+      return false;
+    }
   }
 
   public void upDown(){
-    if(WOFSTATE == true){
+    System.out.println(WOFSTATE);
+    if(WOFSTATE == false){
       UPDOWN.set(DoubleSolenoid.Value.kForward);
+      WOFSTATE = true;
     }else{
       UPDOWN.set(DoubleSolenoid.Value.kReverse);
+      WOFSTATE = false;
     }
   }
 
   public void end() {
-    MASTER.set(ControlMode.PercentOutput, Constants.WOF_SPEED);
+    MASTER.set(ControlMode.PercentOutput, 0);
     counter = 0;
     flag = 0;
   }
