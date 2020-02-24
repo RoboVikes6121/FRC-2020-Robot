@@ -22,18 +22,20 @@ public class intake extends SubsystemBase {
   public boolean INTAKESTATE = true;
 
   public void intakeIn(){
-    MASTER.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED);
+    MASTER.set(ControlMode.PercentOutput, -Constants.INTAKE_SPEED);
   }
 
   public void intakeOut(){
-    MASTER.set(ControlMode.PercentOutput, -Constants.INTAKE_SPEED);
+    MASTER.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED);
   }
 
   public void intakeUpDown(){
     if(INTAKESTATE == false){
       MAIN.set(true);
+      INTAKESTATE = true;
     }else{
       MAIN.set(false);
+      INTAKESTATE = false;
     }
   }
 

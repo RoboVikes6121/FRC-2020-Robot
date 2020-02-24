@@ -19,37 +19,37 @@ public final class Constants {
     public static final double AUTON_MAX_MOVE_SPEED = .75;
 
     //pto                                                         SUB - DONE 
-    public static final int MASTER_PTO_MOTOR = 4;
-    public static final int SLAVE_PTO_MOTOR = 5;
+    public static final int MASTER_PTO_MOTOR = 7;
+    public static final int SLAVE_PTO_MOTOR = 8;
 
     public static final int PTO_SOUL = 0;
 
     public static final double CLIMB_SPEED = .25; // dont know speed yet
     public static final double ELIVATOR_SPEED = .25; // dont know speed yet
-    public static final double ELIVATOR_POS = 1000; // dont know speed yet
-    public static final double CLIMB_POS = 1000; // dont know speed yet
+    public static final double ELIVATOR_POS = 100000; // dont know speed yet
+    public static final double CLIMB_POS = 100000; // dont know speed yet
 
     //WOF                                                         SUB - DONE   COMMAND - DONE   AUTO - none 
-    public static final int WOF_MOTOR = 7;
+    public static final int WOF_MOTOR = 5;
 
     public static final int WOF_OUT_SOUL = 1;
     public static final int WOF_IN_SOUL = 2;
 
-    public static final double WOF_SPEED = .25; // dont know speed yet
+    public static final double WOF_SPEED = .75; // dont know speed yet
 
     //intack                                                      SUB - DONE   COMMAND - DONE 
-    public static final int INTAKE_MOTOR = 6;
+    public static final int INTAKE_MOTOR = 4;
 
     public static final int INTAKE_SOUL = 3;
 
-    public static final double INDEX_SPEED = .70; // dont know speed yet
-    public static final double INTAKE_SPEED = .75; // dont know speed yet
+    
+    public static final double INTAKE_SPEED = .50; 
 
     //shooter                                             SUB - DONE   COMMAND - DONE 
-    public static final int SHOOTER_MOTOR = 8;
+    public static final int SHOOTER_MOTOR = 6;
 
-    public static final double SHOOTER_SPEED = .50;
-    public static final double SHOOTER_SPEED_VOL = 21000; // dont know speed yet
+    public static final double SHOOTER_SPEED = .30;
+    public static final double SHOOTER_SPEED_VOL = 5800; // dont know speed yet
 
     //joysticks
     public static final int DRIVE_CONTROLER = 0;
@@ -91,7 +91,7 @@ public final class Constants {
     //colors (r, g, b)
     public static final Color RED_TARGET = ColorMatch.makeColor(.561, .232, .114);
     public static final Color GREEN_TARGET = ColorMatch.makeColor(.197, .561, .240);
-    public static final Color BLUE_TARGET = ColorMatch.makeColor(.143, .427, .429);
+    public static final Color BLUE_TARGET = ColorMatch.makeColor(.185, .427, .329);
     public static final Color YELLOW_TARGET = ColorMatch.makeColor(.361, .524, .113);
 
     //gyro

@@ -13,7 +13,9 @@ import frc.robot.subsystems.wof;
 
 public class wofManual extends CommandBase {
   
-  private final wof m_wof; 
+  private final wof m_wof;
+
+  boolean isDone;
 
   public wofManual(wof wof) {
     m_wof = wof;
@@ -28,7 +30,7 @@ public class wofManual extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.m_wof.manualSpin();
+    isDone = RobotContainer.m_wof.manualSpin();
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +42,6 @@ public class wofManual extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }
