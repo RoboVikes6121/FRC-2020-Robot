@@ -32,9 +32,9 @@ public class shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //if(RobotContainer.m_intake.INTAKESTATE == true) {
-    //  RobotContainer.m_intake.intakeUpDown();
-    //}
+    if(RobotContainer.m_intake.INTAKESTATE == true) {
+      RobotContainer.m_intake.intakeUpDown();
+    }
 
     boolean FLAG = RobotContainer.m_shooter.shootTwo();
     if(FLAG == true){

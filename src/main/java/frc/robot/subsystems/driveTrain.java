@@ -52,9 +52,9 @@ public class driveTrain extends SubsystemBase {
       if (MOVE < Constants.PRECISION_MIN_MOVE_SPEED)
         MOVE = Constants.PRECISION_MIN_MOVE_SPEED;
       if (TURN > Constants.PRECISION_MAX_MOVE_SPEED)
-        TURN = Constants.PRECISION_MAX_MOVE_SPEED + .15;
+        TURN = Constants.PRECISION_MAX_MOVE_SPEED;
       if (TURN < Constants.PRECISION_MIN_MOVE_SPEED)
-        TURN = Constants.PRECISION_MIN_MOVE_SPEED - .15;
+        TURN = Constants.PRECISION_MIN_MOVE_SPEED;
     } else { // setting speeds when the button is not pushed
       if (MOVE > Constants.MAX_MOVE_SPEED)
         MOVE = Constants.MAX_MOVE_SPEED;
@@ -65,7 +65,7 @@ public class driveTrain extends SubsystemBase {
       if (TURN < Constants.MIN_MOVE_SPEED)
         TURN = Constants.MIN_MOVE_SPEED;
     }
-    drive.arcadeDrive(MOVE, TURN);
+    drive.arcadeDrive(-MOVE, TURN);
   }
 
   public static void autonDrive(double power) {
