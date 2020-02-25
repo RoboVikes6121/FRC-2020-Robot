@@ -39,42 +39,25 @@ public class shooter extends SubsystemBase {
 
   double max = 0;
 
-  public boolean shootTwo(){
-    
+  public boolean shoot(boolean high){
     double[] ENCODER_LIST = Robot.GetEncoder();
     double error = Constants.SHOOTER_SPEED_VOL - ENCODER_LIST[6];
     
-    if(ENCODER_LIST[6] > max){
-      max = ENCODER_LIST[6];
-    }
-
-    System.out.println("ERROR " + max);
-
-    if(error > 100){
+    if(high == true){
       MASTER.set(ControlMode.PercentOutput, .35);
+    }else{
+      MASTER.set(ControlMode.PercentOutput, .20);
+    }
+    
+    if(error > 100){
       return false;
     }else{
-      MASTER.set(ControlMode.PercentOutput, .35);
       return true;
     }
-
-    
-
-    //MASTER.set(ControlMode.PercentOutput, .30);
-    //return false;
   } 
-
-
-  int count = 0;
-  public boolean shootAuton() {
-     if(count >= 450){
-       count = 0;
-      return true;
-     }else{
-      count++;
-      return false;
-     }
-  }
+  public void shootback(){
+    MASTER.set(ControlMode.PercentOutput, -.20);
+  } 
 
   public void end(){
     MASTER.set(ControlMode.PercentOutput, 0);

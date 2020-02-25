@@ -39,10 +39,8 @@ public final class Constants {
 
     //intack                                                      SUB - DONE   COMMAND - DONE 
     public static final int INTAKE_MOTOR = 4;
-
     public static final int INTAKE_SOUL = 3;
 
-    
     public static final double INTAKE_SPEED = .50; 
 
     //shooter                                             SUB - DONE   COMMAND - DONE 
@@ -56,6 +54,8 @@ public final class Constants {
     public static final int SEC_CONTROLER = 1;
 
     //Button / axis for jostick 1 (port 0)
+    public static final int RIGHT_STICK_X = 4;
+    public static final int RIGHT_STICK_Y = 5;
     public static final int LEFT_STICK_Y = 1;
     public static final int LEFT_STICK_X = 0;
     public static final int BUTTON_B = 2;
@@ -69,14 +69,14 @@ public final class Constants {
     //Secondary controller (Thrustmaster)
     public static final int BUTTON_SHOOTER = 1;
     public static final int BUTTON_INTAKE_IN = 2;
-    public static final int BUTTON_INTAKE_OUT = 3;
-    public static final int BUTTON_INTAKE_UPDONW = 10;
-    public static final int BUTTON_CLIMB = 4;
-    public static final int BUTTON_ELIVATOR_UP = 5;
-    public static final int BUTTON_ELIVATOR_DOWN = 6;
+    public static final int BUTTON_INTAKE_OUT = 6;
+    public static final int BUTTON_INTAKE_UPDONW = 8;
+    public static final int BUTTON_CLIMB = 15;
+    public static final int BUTTON_ELIVATOR_UP = 14;
+    public static final int BUTTON_ELIVATOR_DOWN = 13;
     public static final int BUTTON_WOF_UPDOWN = 7;
-    public static final int BUTTON_WOF = 8;
-    public static final int BUTTON_WOF_MANUAL = 9;
+    public static final int BUTTON_WOF = 100;
+    public static final int BUTTON_WOF_MANUAL = 10;
 
     //limeLight
     public static final double LIMELIGHT_SPEED_MAX = .75;
