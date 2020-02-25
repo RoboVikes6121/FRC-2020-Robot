@@ -8,6 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.intake;
 import frc.robot.subsystems.shooter;
@@ -32,10 +34,13 @@ public class shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //if(RobotContainer.m_intake.INTAKESTATE == true) {
-    //  RobotContainer.m_intake.intakeUpDown();
-    //}
-
+    double[] ENCODER_LIST = Robot.GetEncoder();
+    if(ENCODER_LIST[6] >= Constants.SHOOTER_SPEED_VOL){
+      if(RobotContainer.m_intake.INTAKESTATE == true) {
+        RobotContainer.m_intake.intakeUpDown();
+       }
+    }
+  
     boolean FLAG = RobotContainer.m_shooter.shootTwo();
     if(FLAG == true){
       RobotContainer.m_intake.intakeIn();
