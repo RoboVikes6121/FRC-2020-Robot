@@ -16,6 +16,7 @@ import frc.robot.commands.Auton.endAuton;
 import frc.robot.subsystems.driveTrain;
 import frc.robot.subsystems.pto;
 import frc.robot.subsystems.shooter;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
@@ -23,8 +24,6 @@ import edu.wpi.first.wpilibj.I2C;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static RobotContainer m_robotContainer;
-  
- 
 
   Faults faults = new Faults();
 
@@ -35,10 +34,14 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer. This will perform all our button bindings,
-    
+
     // Adds camra to the smart dashbord
-    CameraServer.getInstance().startAutomaticCapture();
-    CameraServer.getInstance().startAutomaticCapture();
+    UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+    UsbCamera camera2 =CameraServer.getInstance().startAutomaticCapture();
+    camera1.setResolution(360, 240);
+    camera2.setResolution(360, 240);
+    // camera1.setFPS(15);
+    // camera2.setFPS(15);
     
     // Resets the Gyro and encoders to zero
     resetEncoder();
