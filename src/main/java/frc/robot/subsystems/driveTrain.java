@@ -52,9 +52,9 @@ public class driveTrain extends SubsystemBase {
       if (MOVE < Constants.PRECISION_MIN_MOVE_SPEED)
         MOVE = Constants.PRECISION_MIN_MOVE_SPEED;
       if (TURN > Constants.PRECISION_MAX_MOVE_SPEED)
-        TURN = Constants.PRECISION_MAX_MOVE_SPEED + .15;
+        TURN = Constants.PRECISION_MAX_MOVE_SPEED;
       if (TURN < Constants.PRECISION_MIN_MOVE_SPEED)
-        TURN = Constants.PRECISION_MIN_MOVE_SPEED - .15;
+        TURN = Constants.PRECISION_MIN_MOVE_SPEED;
     } else { // setting speeds when the button is not pushed
       if (MOVE > Constants.MAX_MOVE_SPEED)
         MOVE = Constants.MAX_MOVE_SPEED;
@@ -65,14 +65,14 @@ public class driveTrain extends SubsystemBase {
       if (TURN < Constants.MIN_MOVE_SPEED)
         TURN = Constants.MIN_MOVE_SPEED;
     }
-    drive.arcadeDrive(MOVE, TURN);
+    drive.arcadeDrive(-MOVE, TURN);
   }
 
   public static void autonDrive(double power) {
     double kP = .001;
     double error = 0 - RobotContainer.m_gyro.getAngle();
     double turn = kP * error;
-    drive.arcadeDrive(power, turn);
+    drive.arcadeDrive(-power, turn);
   }
 
   double sumError = 0;
@@ -80,27 +80,17 @@ public class driveTrain extends SubsystemBase {
   double deri = 0;
 
   public boolean autonDriveTurn(double angle) {
-
-    double kP = .05;
-    double kI = 0;
-    double kD = .001;
-
     double error = angle - RobotContainer.m_gyro.getAngle();
-    sumError += error / .02;
-    deri = (error - priError) / .02;
-    double turn = (kP * error) + (kI * sumError) + (kD * deri);
-
-    if(turn > .6){
-      turn = .6;
+    double turn = 0;
+    if(error < 0){
+      turn = .5;
     }
-    if(turn < -.6){
-      turn = -.6;
+    if(error > 0){
+      turn = -.5;
     }
-
     drive.arcadeDrive(0, -turn);
-    priError = error;
 
-    if(Math.abs(turn) <= .01){
+    if(Math.abs(error) <= 2){
       return true;
     }else{
       return false;

@@ -8,22 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.intake;
 import frc.robot.subsystems.shooter;
 
 public class shoot extends CommandBase {
   private shooter m_shooter;
-  private intake m_Intake;
+  private intake m_intake;
 
   public shoot(shooter shooter, intake intake) {
     m_shooter = shooter;
-    m_Intake = intake;
+    m_intake = intake;
 
     addRequirements(m_shooter);
-    addRequirements(m_Intake);
+    addRequirements(m_intake);
   }
 
   // Called when the command is initially scheduled.
@@ -34,24 +31,20 @@ public class shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double[] ENCODER_LIST = Robot.GetEncoder();
-    if(ENCODER_LIST[6] >= Constants.SHOOTER_SPEED_VOL){
-      if(RobotContainer.m_intake.INTAKESTATE == true) {
-        RobotContainer.m_intake.intakeUpDown();
-       }
-    }
-  
-    boolean FLAG = RobotContainer.m_shooter.shootTwo();
+    boolean FLAG = m_shooter.shoot(true);
     if(FLAG == true){
-      RobotContainer.m_intake.intakeIn();
+      if(m_intake.INTAKESTATE == true) {
+        m_intake.intakeUpDown();
+       }
+      m_intake.intakeIn();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.m_intake.end();
-    RobotContainer.m_shooter.end();
+    m_intake.end();
+    m_shooter.end();
   }
 
   // Returns true when the command should end.

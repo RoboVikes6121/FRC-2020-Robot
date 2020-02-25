@@ -29,7 +29,7 @@ public class driveManual extends CommandBase {
   public void execute() {
     //getting x and y for sticks
     double MOVE = Robot.m_robotContainer.GetDriveRawAxis(Constants.LEFT_STICK_Y);
-    double TURN = Robot.m_robotContainer.GetDriveRawAxis(Constants.LEFT_STICK_X);
+    double TURN = Robot.m_robotContainer.GetDriveRawAxis(Constants.RIGHT_STICK_X);
     boolean PRECISION_BUTTON_IS_PRESSED = Robot.m_robotContainer.GetRawButton(Constants.PRECISION_BUTTON);
     //calling drive 
     RobotContainer. m_drive.manualDrive((MOVE*-1), TURN, PRECISION_BUTTON_IS_PRESSED);
