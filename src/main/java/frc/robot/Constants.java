@@ -46,8 +46,8 @@ public final class Constants {
     //shooter                                             SUB - DONE   COMMAND - DONE 
     public static final int SHOOTER_MOTOR = 6;
 
-    public static final double SHOOTER_SPEED = .30;
-    public static final double SHOOTER_SPEED_VOL = 5800; // dont know speed yet
+    public static final double SHOOTER_SPEED = .35;
+    public static final double SHOOTER_SPEED_VOL = 5200; // dont know speed yet
 
     //joysticks
     public static final int DRIVE_CONTROLER = 0;

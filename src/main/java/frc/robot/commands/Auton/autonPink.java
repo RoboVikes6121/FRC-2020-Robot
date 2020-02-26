@@ -22,8 +22,8 @@ public class autonPink extends SequentialCommandGroup {
   public autonPink(driveTrain  m_drive, LimeLight m_limeLight, gyro m_gyro, shooter m_shooter, intake m_intake) {
     System.out.println("ONE");
     addCommands(
-      new shootAuton(m_shooter, m_intake), //shoots
-      new moveAuton(m_drive, 50, -.5)
+      new moveAuton(m_drive, 70, .5),
+      new shootAuton(m_shooter, m_intake) //shoot
     );
   }
 }

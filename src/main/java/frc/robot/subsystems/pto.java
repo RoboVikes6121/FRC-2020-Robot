@@ -42,7 +42,7 @@ public class pto extends SubsystemBase {
   }
 
   public void elvUp(){
-    MAIN.set(false);
+    MAIN.set(true);
     MASTER.set(ControlMode.PercentOutput, Constants.ELIVATOR_SPEED);
   }
 

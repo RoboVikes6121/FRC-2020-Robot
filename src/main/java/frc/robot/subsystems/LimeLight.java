@@ -32,7 +32,7 @@ public class LimeLight extends SubsystemBase {
 
   public void disable() {
     m_limelightTable.getEntry(LED_MODE).setDouble(1.0); // force off
-        // m_limelightTable.getEntry(CAM_MODE).setDouble(1.0); // driver camera (stops vision processing)
+     m_limelightTable.getEntry(CAM_MODE).setDouble(1.0); // driver camera (stops vision processing)
     }
     public void enable() {
       m_limelightTable.getEntry(LED_MODE).setDouble(3.0); // set to current pipeline mode
