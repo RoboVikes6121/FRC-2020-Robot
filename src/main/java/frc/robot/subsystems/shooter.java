@@ -34,13 +34,15 @@ public class shooter extends SubsystemBase {
 
   public boolean shoot(boolean high){
     double[] ENCODER_LIST = Robot.GetEncoder();
-    double error = Constants.SHOOTER_SPEED_VOL - ENCODER_LIST[6];
+    double error = Constants.LOW_SHOOTER_SPEED_VOL - ENCODER_LIST[6];
     
-    if(high == true){
-      MASTER.set(ControlMode.PercentOutput, .30);
+    if(high == false){
+      MASTER.set(ControlMode.PercentOutput, Constants.LOW_SHOOTER_SPEED);
     }else{
-      MASTER.set(ControlMode.PercentOutput, .20);
+      //MASTER.set(ControlMode.PercentOutput, .20);
     }
+
+    System.out.println(ENCODER_LIST[6]);
     
     if(error > 100){
       return false;

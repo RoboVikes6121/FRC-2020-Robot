@@ -39,7 +39,7 @@ public class shootAuton extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    boolean check = m_shooter.shoot(true);
+    boolean check = m_shooter.shoot(false);
     if(check == true){
 
       if(m_intake.INTAKESTATE == true) {

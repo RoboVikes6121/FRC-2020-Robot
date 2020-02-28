@@ -31,7 +31,7 @@ public class shoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    boolean FLAG = m_shooter.shoot(true);
+    boolean FLAG = m_shooter.shoot(false);
     if(FLAG == true){
       if(m_intake.INTAKESTATE == true) {
         m_intake.intakeUpDown();
